@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Das-Lab</title>
+  <title>DAS-LAB</title>
   <subtitle>一群专注安全的小伙们</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-05-09T14:44:28.000Z</updated>
+  <updated>2016-05-09T14:46:52.000Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Welcome to Das-lab</title>
-    <link href="http://das.scusec.org/2020/06/15/Welcome-to-the-das-lab/"/>
-    <id>http://das.scusec.org/2020/06/15/Welcome-to-the-das-lab/</id>
+    <title>DAS-LAB 介绍</title>
+    <link href="http://das.scusec.org/2020/06/15/das-lab/"/>
+    <id>http://das.scusec.org/2020/06/15/das-lab/</id>
     <published>2020-06-15T12:30:05.000Z</published>
-    <updated>2016-05-09T14:44:28.000Z</updated>
+    <updated>2016-05-09T14:46:52.000Z</updated>
     
-    <content type="html">&lt;!-- excerpt --&gt;&lt;/p&gt;
+    <content type="html">&lt;!-- excerpt --&gt;
 &lt;p&gt;&lt;img src=&quot;http://d1u9biwaxjngwg.cloudfront.net/showcases/showcase-v1.7.jpg&quot; alt=&quot;Tranquilpeak&quot;&gt;&lt;br&gt;Tranquilpeak is a gorgeous responsive theme for Hexo blog framework. It has many features and integrated services to improve user experience.&lt;br&gt;&lt;!-- toc --&gt;&lt;/p&gt;
 &lt;h1 id=&quot;Tranquilpeak&quot;&gt;&lt;a href=&quot;#Tranquilpeak&quot; class=&quot;headerlink&quot; title=&quot;Tranquilpeak&quot;&gt;&lt;/a&gt;Tranquilpeak&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://gitter.im/LouisBarranqueiro/hexo-theme-tranquilpeak?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&amp;amp;utm_content=badge&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;img src=&quot;https://badges.gitter.im/Join%20Chat.svg&quot; alt=&quot;Join the chat at https://gitter.im/LouisBarranqueiro/hexo-theme-tranquilpeak&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;A gorgeous responsive theme for Hexo blog framework &lt;/p&gt;
@@ -96,7 +96,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;Tranquilpeak is a gorgeous responsive theme for Hexo blog framework. It has many features and integrated services to improve user experience.&lt;br&gt;
+      &lt;p&gt;Web儿女多奇志，不爱红装爱才智。&lt;/p&gt;
+&lt;p&gt;DAS-LAB成立于2010年，专注于Web攻防相关技术研究，包括渗透测试、蜜罐技术、无线安全、Web安全、Web开发等。&lt;/p&gt;
+&lt;p&gt;如果你对未知充满好奇，让我们一起来： 将代码写成诗句，将安全融入呼吸！&lt;/p&gt;
     
     </summary>
     
