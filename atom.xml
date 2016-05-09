@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Das-Lab</title>
+  <subtitle>一群专注安全的小伙们</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://das.scusec.org/"/>
+  <updated>2016-05-09T14:15:21.000Z</updated>
+  <id>http://das.scusec.org/</id>
+  
+  <author>
+    <name>das</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Welcome to Das-lab</title>
+    <link href="http://das.scusec.org/2020/06/15/Welcome-to-the-das-lab/"/>
+    <id>http://das.scusec.org/2020/06/15/Welcome-to-the-das-lab/</id>
+    <published>2020-06-15T12:30:05.000Z</published>
+    <updated>2016-05-09T14:15:21.000Z</updated>
+    
+    <content type="html">&lt;!-- excerpt --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://d1u9biwaxjngwg.cloudfront.net/showcases/showcase-v1.7.jpg&quot; alt=&quot;Tranquilpeak&quot;&gt;&lt;br&gt;Tranquilpeak is a gorgeous responsive theme for Hexo blog framework. It has many features and integrated services to improve user experience.&lt;br&gt;&lt;!-- toc --&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Tranquilpeak&quot;&gt;&lt;a href=&quot;#Tranquilpeak&quot; class=&quot;headerlink&quot; title=&quot;Tranquilpeak&quot;&gt;&lt;/a&gt;Tranquilpeak&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://gitter.im/LouisBarranqueiro/hexo-theme-tranquilpeak?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&amp;amp;utm_content=badge&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;img src=&quot;https://badges.gitter.im/Join%20Chat.svg&quot; alt=&quot;Join the chat at https://gitter.im/LouisBarranqueiro/hexo-theme-tranquilpeak&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A gorgeous responsive theme for Hexo blog framework &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://louisbarranqueiro.github.io/hexo-theme-tranquilpeak&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;&lt;img src=&quot;http://d1u9biwaxjngwg.cloudfront.net/showcases/showcase-v1.6.jpg&quot; alt=&quot;Tranquilpeak&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Summary&quot;&gt;&lt;a href=&quot;#Summary&quot; class=&quot;headerlink&quot; title=&quot;Summary&quot;&gt;&lt;/a&gt;Summary&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#general&quot;&gt;General&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#quick-start&quot;&gt;Quick start&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#demo&quot;&gt;Demo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#documentation&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#contributing&quot;&gt;Contributing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#showcase&quot;&gt;Showcase&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#license&quot;&gt;License&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;General&quot;&gt;&lt;a href=&quot;#General&quot; class=&quot;headerlink&quot; title=&quot;General&quot;&gt;&lt;/a&gt;General&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Author&lt;/strong&gt; : Louis Barranqueiro&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Version&lt;/strong&gt; : 1.7.0&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compatibility&lt;/strong&gt; : Hexo 3.0.0 or later&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Features&quot;&gt;&lt;a href=&quot;#Features&quot; class=&quot;headerlink&quot; title=&quot;Features&quot;&gt;&lt;/a&gt;Features&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;General features :&lt;/strong&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fully responsive&lt;/li&gt;
+&lt;li&gt;Optimized for tablets &amp;amp; mobiles&lt;/li&gt;
+&lt;li&gt;Configurable menu of the sidebar&lt;/li&gt;
+&lt;li&gt;Pages to filter tags, categories and archives&lt;/li&gt;
+&lt;li&gt;Background cover image&lt;/li&gt;
+&lt;li&gt;Beautiful about page&lt;/li&gt;
+&lt;li&gt;Support Open Graph protocol&lt;/li&gt;
+&lt;li&gt;Support internationalization (i18&lt;/li&gt;
+&lt;li&gt;Easily customizable (fonts, colors, layout elements, code coloration, etc..&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Posts features :&lt;/strong&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Thumbnail image&lt;/li&gt;
+&lt;li&gt;Cover image&lt;/li&gt;
+&lt;li&gt;Responsive videos &amp;amp; images&lt;/li&gt;
+&lt;li&gt;Sharing options&lt;/li&gt;
+&lt;li&gt;Navigation menu&lt;/li&gt;
+&lt;li&gt;GitHub theme for code highlighting (customizable)&lt;/li&gt;
+&lt;li&gt;Image gallery&lt;/li&gt;
+&lt;li&gt;Tags for images (FancyBox), wide images, tabbed code blocks, highlighted text, alerts&lt;/li&gt;
+&lt;li&gt;Table of contents  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Integrated services :&lt;/strong&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Disqus&lt;/li&gt;
+&lt;li&gt;Duoshuo&lt;/li&gt;
+&lt;li&gt;Google analytics&lt;/li&gt;
+&lt;li&gt;Baidu analytics&lt;/li&gt;
+&lt;li&gt;Gravatar&lt;/li&gt;
+&lt;li&gt;Swiftype&lt;/li&gt;
+&lt;li&gt;Facebook Insights&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Quick-start&quot;&gt;&lt;a href=&quot;#Quick-start&quot; class=&quot;headerlink&quot; title=&quot;Quick start&quot;&gt;&lt;/a&gt;Quick start&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Please read &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;user documentation&lt;/a&gt;, it’s short and useful to discover all features and possibilities of the theme, especially the  &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md#writing-posts&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;writing posts&lt;/a&gt; section&lt;/strong&gt;&lt;/p&gt;
+&lt;h5 id=&quot;For-people-who-want-to-use-the-original-version-of-Tranquilpeak-without-modifications-users&quot;&gt;&lt;a href=&quot;#For-people-who-want-to-use-the-original-version-of-Tranquilpeak-without-modifications-users&quot; class=&quot;headerlink&quot; title=&quot;For people who want to use the original version of Tranquilpeak without modifications (users)&quot;&gt;&lt;/a&gt;For people who want to use the original version of Tranquilpeak without modifications (users)&lt;/h5&gt;&lt;ol&gt;
+&lt;li&gt;Download the latest version ready for production use here : &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/releases/download/v1.7.0/hexo-theme-tranquilpeak-built-for-production-1.7.0.zip&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hexo-theme-tranquilpeak-prod-1.7.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Follow &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;user documentation&lt;/a&gt; to install and configure the theme  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&quot;For-people-who-want-to-create-their-own-version-of-tranquilpeak-developers&quot;&gt;&lt;a href=&quot;#For-people-who-want-to-create-their-own-version-of-tranquilpeak-developers&quot; class=&quot;headerlink&quot; title=&quot;For people who want to create their own version of tranquilpeak (developers)&quot;&gt;&lt;/a&gt;For people who want to create their own version of tranquilpeak (developers)&lt;/h5&gt;&lt;ol&gt;
+&lt;li&gt;Run &lt;code&gt;git clone https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak.git&lt;/code&gt;  &lt;/li&gt;
+&lt;li&gt;Follow &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/developer.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;developer documentation&lt;/a&gt; to edit and build the theme  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;Demo&quot;&gt;&lt;a href=&quot;#Demo&quot; class=&quot;headerlink&quot; title=&quot;Demo&quot;&gt;&lt;/a&gt;Demo&lt;/h2&gt;&lt;p&gt;Check out Tranquilpeak theme in live : &lt;a href=&quot;http://louisbarranqueiro.github.io/hexo-theme-tranquilpeak&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;hexo-theme-tranquilpeak demo&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Showcase&quot;&gt;&lt;a href=&quot;#Showcase&quot; class=&quot;headerlink&quot; title=&quot;Showcase&quot;&gt;&lt;/a&gt;Showcase&lt;/h2&gt;&lt;p&gt;I would like to create a showcase with all blogs that use Tranquilpeak, please, add your blog into.&lt;br&gt;&lt;strong&gt;Click &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/issues/new?title=Add%20my%20blog%20into%20the%20showcase&amp;amp;body=Hey,%20add%20my%20blog%20into%20the%20showcase:&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;here&lt;/a&gt; to add your blog into the showcase.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Documentation&quot;&gt;&lt;a href=&quot;#Documentation&quot; class=&quot;headerlink&quot; title=&quot;Documentation&quot;&gt;&lt;/a&gt;Documentation&lt;/h2&gt;&lt;p&gt;If it’s your first time using Hexo, please check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo official documentation&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&quot;For-users&quot;&gt;&lt;a href=&quot;#For-users&quot; class=&quot;headerlink&quot; title=&quot;For users&quot;&gt;&lt;/a&gt;For users&lt;/h5&gt;&lt;p&gt;To install and configure the theme, consult the following documentation : &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/user.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;user documentation&lt;/a&gt;  &lt;/p&gt;
+&lt;h5 id=&quot;For-developers&quot;&gt;&lt;a href=&quot;#For-developers&quot; class=&quot;headerlink&quot; title=&quot;For developers&quot;&gt;&lt;/a&gt;For developers&lt;/h5&gt;&lt;p&gt;To understand the code, the workflow and edit the theme, consult the following documentation : &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/docs/developer.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;developer documentation&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Contributing&quot;&gt;&lt;a href=&quot;#Contributing&quot; class=&quot;headerlink&quot; title=&quot;Contributing&quot;&gt;&lt;/a&gt;Contributing&lt;/h2&gt;&lt;p&gt;All kinds of contributions (enhancements, new features, documentation &amp;amp; code improvements, issues &amp;amp; bugs reporting) are welcome.&lt;/p&gt;
+&lt;p&gt;Read &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/.github/CONTRIBUTING.md&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;guidelines for contributing&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id=&quot;License&quot;&gt;&lt;a href=&quot;#License&quot; class=&quot;headerlink&quot; title=&quot;License&quot;&gt;&lt;/a&gt;License&lt;/h2&gt;&lt;p&gt;hexo-theme-tranquilpeak is released under the terms of the &lt;a href=&quot;https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak/blob/master/LICENSE&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GNU General Public License v3.0&lt;/a&gt;&lt;/p&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Tranquilpeak is a gorgeous responsive theme for Hexo blog framework. It has many features and integrated services to improve user experience.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="team" scheme="http://das.scusec.org/categories/team/"/>
+    
+    
+      <category term="das" scheme="http://das.scusec.org/tags/das/"/>
+    
+      <category term="lab" scheme="http://das.scusec.org/tags/lab/"/>
+    
+      <category term="team" scheme="http://das.scusec.org/tags/team/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>中文測試</title>
+    <link href="http://das.scusec.org/2016/05/02/hello-world/"/>
+    <id>http://das.scusec.org/2016/05/02/hello-world/</id>
+    <published>2016-05-02T15:31:30.000Z</published>
+    <updated>2016-05-09T14:12:37.000Z</updated>
+    
+    <content type="html">&lt;p&gt;This is a chinese test post to show you how chinese is displayed.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;This is a chinese test post to show you how chinese is displayed.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="tranquilpeak" scheme="http://das.scusec.org/categories/tranquilpeak/"/>
+    
+      <category term="features" scheme="http://das.scusec.org/categories/tranquilpeak/features/"/>
+    
+    
+      <category term="chinese" scheme="http://das.scusec.org/tags/chinese/"/>
+    
+  </entry>
+  
+</feed>
