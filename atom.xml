@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-05-10T03:05:20.000Z</updated>
+  <updated>2016-05-10T03:05:26.000Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://das.scusec.org/2020/06/15/das-lab/"/>
     <id>http://das.scusec.org/2020/06/15/das-lab/</id>
     <published>2020-06-15T12:30:05.000Z</published>
-    <updated>2016-05-10T03:05:20.000Z</updated>
+    <updated>2016-05-10T03:05:26.000Z</updated>
     
     <content type="html">&lt;!-- excerpt --&gt;&lt;/p&gt;
 &lt;h3 id=&quot;DAS-LAB&quot;&gt;&lt;a href=&quot;#DAS-LAB&quot; class=&quot;headerlink&quot; title=&quot;DAS-LAB&quot;&gt;&lt;/a&gt;DAS-LAB&lt;/h3&gt;&lt;p&gt;DAS-LAB成立于2010年，名字源于「Discuss And Share」，目前专注于Web攻防相关技术研究，包括渗透测试、蜜罐技术、无线安全、Web安全、Web开发等。如果你对未知充满好奇，让我们一起来： 将代码写成诗句，将安全融入呼吸！&lt;/p&gt;
@@ -40,6 +40,61 @@
       <category term="lab" scheme="http://das.scusec.org/tags/lab/"/>
     
       <category term="team" scheme="http://das.scusec.org/tags/team/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>whctf-writeup-all</title>
+    <link href="http://das.scusec.org/2016/05/16/whctf-writeup-all/"/>
+    <id>http://das.scusec.org/2016/05/16/whctf-writeup-all/</id>
+    <published>2016-05-16T07:52:42.000Z</published>
+    <updated>2016-05-16T07:59:23.000Z</updated>
+    
+    <content type="html">&lt;!-- excerpt --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://time.xctf.org.cn/ctfs/event/19/tasks&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;地址&amp;gt;&amp;gt;请猛戳&amp;lt;&amp;lt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Web题&quot;&gt;&lt;a href=&quot;#Web题&quot; class=&quot;headerlink&quot; title=&quot;Web题&quot;&gt;&lt;/a&gt;Web题&lt;/h2&gt;&lt;p&gt;0x01. 信息&lt;/p&gt;
+&lt;p&gt;打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码&lt;code&gt;www.hust.edu.cn&lt;/code&gt;，flag在flag3.docx中&lt;/p&gt;
+&lt;p&gt;0x02. 窃取&lt;/p&gt;
+&lt;p&gt;测试地址存在union注入，利用sqlmap在&lt;strong&gt;wh_ct4_hgduyingjkhjhjg&lt;/strong&gt;库中发现flag的提示&lt;code&gt;flag is nothere,but I can tell you the flag is xor user&amp;#39;s password.&lt;/code&gt;，那么到&lt;strong&gt;web_sqli&lt;/strong&gt;库中，将user1和user2的password异或后解密，得到flag:hust&lt;/p&gt;
+&lt;p&gt;0x03. 忘了账户和密码&lt;/p&gt;
+&lt;p&gt;username: &lt;code&gt;&amp;#39; union select 1,2,3-- -&lt;/code&gt; , 三列&lt;/p&gt;
+&lt;p&gt;password: 任意&lt;/p&gt;
+&lt;p&gt;0x04. find&lt;/p&gt;
+&lt;p&gt;右键源代码，发现&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;css/[adwxhyz]&amp;#123;2&amp;#125;ctf[0-9]&amp;#123;7&amp;#125;.css&quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;前两位字符，后7位数字的正则，大胆猜测前两位是wh，后7位直到官方给了提示（），一个qq号，搜索qq的资料，发现其为1999年5月12的生日，尝试css/whctf1999512.css成功，flag就在里面&lt;code&gt;whctf{Wh3tF_H@rd}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;0x05. beat it&lt;/p&gt;
+&lt;p&gt;打开又是一个pcap的包下载，三个ipv4的协议包，尝试重组将中间的丢弃，把data组合hex两次转字符串，得到flag&lt;code&gt;whctf{000 here it is the flag 000}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;0x06. 密码忘了怎么办？&lt;/p&gt;
+&lt;p&gt;登录口sql注入，还是union的，注入发现user表有flag字段，将12,13,14,15行的flag字段组合&lt;br&gt;&lt;code&gt;whctf{hello$$##itisme&amp;amp;---&amp;amp;&amp;amp;&amp;amp;}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;0x07. 看图说话&lt;/p&gt;
+&lt;p&gt;给的提示里ctf页面脚本,猜测存在ctf.php，打开是302跳转，返回包里有张图片链接&lt;br&gt;&lt;code&gt;templates/images/xxx/ctf.jpg&lt;/code&gt;&lt;br&gt;，将图片下载下载利用notepad++打开，flag在最后&lt;code&gt;whctf{today@@isnot09#$tomorrow}&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;CRYPTO&quot;&gt;&lt;a href=&quot;#CRYPTO&quot; class=&quot;headerlink&quot; title=&quot;CRYPTO&quot;&gt;&lt;/a&gt;CRYPTO&lt;/h2&gt;&lt;p&gt;0x01 我叫李二狗（一）&lt;br&gt;直接base64解密，然后李二狗是近视，将l换成1，x换成1，md5解密&lt;/p&gt;
+&lt;p&gt;0x02 李二狗的梦中情人&lt;br&gt;将隐藏在图片末尾的链接中的图片提取出来，然后convert转换成png格式，diff下得到一个二维码，二维码黑白反转下，得到正确的二维码，扫一下，bingo&lt;/p&gt;
+&lt;p&gt;0x03 我叫李二狗（二）&lt;br&gt;给了两个RSA加密，由于其弱密钥，N太小，直接分解大数，破解&lt;/p&gt;
+&lt;p&gt;0x04 李二狗的LOL战歌&lt;br&gt;听音乐，感觉音频右声道像电报，然后翻译成摩斯编码，直接得到13位字符，然后用ROT13编码转换下，得到flag&lt;/p&gt;
+&lt;h2 id=&quot;Reverse&quot;&gt;&lt;a href=&quot;#Reverse&quot; class=&quot;headerlink&quot; title=&quot;Reverse&quot;&gt;&lt;/a&gt;Reverse&lt;/h2&gt;&lt;p&gt;0x01 直接爆破&lt;/p&gt;
+&lt;p&gt;相关代码&lt;br&gt;    &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#include &amp;#34;stdafx.h&amp;#34;&amp;#10;#include &amp;#34;stdio.h&amp;#34;&amp;#10;#include &amp;#60;string.h&amp;#62;&amp;#10;&amp;#10;int main(int argc, char* argv[])&amp;#10;&amp;#123;&amp;#10;  __int64 seeda=1;&amp;#10;  __int64 lenKey=38;&amp;#10;  __int64 count;&amp;#10;  __int64 k;&amp;#10;  __int64 j;&amp;#10;&amp;#10;&amp;#10;  char key[]=&amp;#34;Just try your best and enjoy yourself!&amp;#34;;&amp;#10;&amp;#10;  __int64 result[]=&amp;#123;157,2400,2215,1971,1732,1527,2053,1878,1988,787,1584,1856,1717,2187,1971,34,1732,1259,1669,1726,1946,1967,1369&amp;#125;;&amp;#10;  for ( count = 0; count &amp;#60; 23; ++count )&amp;#10;  &amp;#123;&amp;#10;    k = key[seeda];&amp;#10;&amp;#9;for ( j = 0; j &amp;#60; 512; ++j )&amp;#10;&amp;#9;&amp;#123;&amp;#10;&amp;#9;&amp;#9;//char s[1];&amp;#10;&amp;#9;//&amp;#9;sprintf(s, &amp;#34;%x&amp;#34;, j);&amp;#10;&amp;#9;&amp;#9;if(strchr(key,j)!=0)&amp;#10;&amp;#9;&amp;#9;&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;if(result[count] == (0x10 * j + k) % 0x9C4)&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;printf(&amp;#34;flag %I64d count-InStr %c\n&amp;#34;,count,j);&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;//printf(&amp;#34;%c&amp;#34;,j);&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;break;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;else&amp;#10;&amp;#9;&amp;#9;&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;if(result[count] == (j ^ (k &amp;#60;&amp;#60; seeda)) % 0x9C4)&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;printf(&amp;#34;flag %I64d count-OutStr %c\n&amp;#34;,count,j);&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;break;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;//printf(&amp;#34;%c&amp;#34;,j);&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#10;&amp;#9;&amp;#125;&amp;#10;&amp;#9;seeda = (seeda + 5) % lenKey;&amp;#10;  &amp;#125;&amp;#10; return 0;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;flag &lt;code&gt;whctf{you_are_the_best}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;##revserse&lt;br&gt;0x03. 定位坐标&lt;/p&gt;
+&lt;p&gt;安装Crackme_3.apk运行，发现与之前阿里的比赛题很像，任意输入后查看Log日志，打印出了table信息和pw:亡丸凡亡丸凡义义凡么么门凡广义凡之，利用这两个信息，调用apk中的解密函数aliCodeToBytes(String paramString1, String paramString2)，即可直接打印出结果：30-30-55-114-25-6，加上whctf{}就是flag了。&lt;/p&gt;
+&lt;p&gt;0x06  我讨厌数学&lt;br&gt;拿到题目首先用IDA得到反汇编代码，通过一系列的分析得出是一个纯粹的矩阵运算，矩阵为6×6的矩阵，其中有9个1，其余的26个为我们输入的FLAG。该算法就是A×AT=P（P在程序中硬编码的，可以直接得到），然后反求A矩阵，P矩阵为：&lt;br&gt;12027h,   0F296h,   0BF0Eh,   0D84Ch,   91D8h,   297h,&lt;br&gt;0F296h,   0D830h,   0A326h,   0B010h,   7627h,   230h,&lt;br&gt;0BF0Eh,   0A326h,   8FEBh,    879Dh,    70C3h,   1BDh,&lt;br&gt;0D84Ch,   0B010h,   879Dh,    0B00Dh,   6E4Fh,   1F7h,&lt;br&gt;91D8h,    7627h,    70C3h,    6E4Fh,    9BDCh,   15Ch&lt;br&gt;297h,     230h,     1BDh,     1F7h,     15Ch,    6&lt;br&gt;然后由“6”可得A中的最后一行全为“1”，再把whctf{xxx}格式转成10进制带进去可得第一行就为“whctf{”，并且根据最终的P矩阵验证正确。然后还有3个1的位置不确定，根据FLAG猜想它们就放在第五行的后三个，然后计算第五行的前两个数字为“114”，“104”。然后根据第一行和第五行的乘积的和来确定它们两个的位置就为“114”，“104”。字母为“t”,”h”。那么现在就还有三行不知道了，所以就爆破。&lt;br&gt;爆破的关键是利用已知的三行去求未知的三行，下面两行来求这三行的可能值，于是写了个脚本试了一下发现求出的结果实在太多了，想了想之后就加上第一行来验证。下面为爆破的java代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public class whctf&amp;#123;&amp;#10;&amp;#9;public static void main(String[] args )&amp;#123;&amp;#10;&amp;#9;&amp;#9;for(int i1=32; i1&amp;#60;129; i1++)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;System.out.printf(&amp;#34;new i1 is: %d\n&amp;#34;,i1);&amp;#10;&amp;#9;&amp;#9;&amp;#9;for(int i2=32; i2&amp;#60;129; i2++)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;for(int i3=32; i3&amp;#60;129; i3++)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;for(int i4=32; i4&amp;#60;129; i4++)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;for(int i5=32; i5&amp;#60;129; i5++)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;for(int i6=32; i6&amp;#60;129; i6++)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;int i7=i1+i2+i3+i4+i5+i6;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;int i8=i1*116+i2*104+i3*125+i4+i5+i6;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;int i9=i1*119+i2*104+i3*99+i4*116+i5*102+i6*123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;if(i7==560 &amp;#38;&amp;#38; i8==30247 &amp;#38;&amp;#38; i9==62102)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;System.out.printf(&amp;#34;THE TWO LINE i1,i2,i3,i4,i5,i6: %d,%d,%d,%d,%d,%d\n&amp;#34;,i1,i2,i3,i4,i5,i6);&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;if(i7==445 &amp;#38;&amp;#38; i8==28867 &amp;#38;&amp;#38; i9==48910)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;System.out.printf(&amp;#34;THE THREE LINE i1,i2,i3,i4,i5,i6: %d,%d,%d,%d,%d,%d\n&amp;#34;,i1,i2,i3,i4,i5,i6);&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;if(i7==503 &amp;#38;&amp;#38; i8==28239 &amp;#38;&amp;#38; i9==55372)&amp;#123;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;System.out.printf(&amp;#34;THE FOUR LINE i1,i2,i3,i4,i5,i6: %d,%d,%d,%d,%d,%d\n&amp;#34;,i1,i2,i3,i4,i5,i6);&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#9;&amp;#9;&amp;#125;&amp;#10;&amp;#10;&amp;#9;&amp;#125;&amp;#10;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是跑了半小时之后发现解出的结果每一行都有很多解，于是就想着人工过滤这些字符串，判断每一组的前三个字符是否可能为FLAG，于是就每一组列出一个字符串，之后发现一个字符串可能是FLAG，前三个字符为“3_g”，于是就把这组解的所有字符串列出来，得到“3_g00d”字符串，就是我们A矩阵的第三行了，然后同样的原理来过滤第四行和第二行。就得到了FLAG为：&lt;code&gt;whctf{Y0u_ar3_g00d_a7_m4th}&lt;/code&gt;。&lt;/p&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术分享" scheme="http://das.scusec.org/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+    
+      <category term="ctf" scheme="http://das.scusec.org/tags/ctf/"/>
+    
+      <category term="das" scheme="http://das.scusec.org/tags/das/"/>
+    
+      <category term="lab" scheme="http://das.scusec.org/tags/lab/"/>
     
   </entry>
   
