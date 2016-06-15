@@ -7,37 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="DAS-LAB">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <title>DAS-LAB - DAS-LAB</title>
+    <title>alictf web writeup - DAS-LAB</title>
     <meta name="author" content="das">
     
-        <meta name="keywords" content="DAS,lab,小组,安全,简介,成员">
+        <meta name="keywords" content="DAS,lab,小组,安全,">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="DAS-LAB成立于2010年，专注于Web攻防相关技术研究，包括渗透测试、蜜罐技术、无线安全、Web安全、Web开发等。如果你对未知充满好奇，让我们一起来： 将代码写成诗句，将安全融入呼吸！">
+    <meta name="description" content="Alictf参赛过程中的一些Web笔记，可以参考学习。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="DAS-LAB">
-<meta property="og:url" content="http://das.scusec.org/2020/06/15/das-lab/index.html">
+<meta property="og:title" content="alictf web writeup">
+<meta property="og:url" content="http://das.scusec.org/2016/06/15/alictf-web-writeup/index.html">
 <meta property="og:site_name" content="DAS-LAB">
-<meta property="og:description" content="DAS-LAB成立于2010年，专注于Web攻防相关技术研究，包括渗透测试、蜜罐技术、无线安全、Web安全、Web开发等。如果你对未知充满好奇，让我们一起来： 将代码写成诗句，将安全融入呼吸！">
-<meta property="og:updated_time" content="2016-05-10T03:05:26.000Z">
+<meta property="og:description" content="Alictf参赛过程中的一些Web笔记，可以参考学习。">
+<meta property="og:image" content="http://das.scusec.org/images/alictf_1.png">
+<meta property="og:image" content="http://das.scusec.org/images/alictf_2.png">
+<meta property="og:image" content="http://das.scusec.org/images/alictf_3.png">
+<meta property="og:updated_time" content="2016-06-15T03:31:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DAS-LAB">
-<meta name="twitter:description" content="DAS-LAB成立于2010年，专注于Web攻防相关技术研究，包括渗透测试、蜜罐技术、无线安全、Web安全、Web开发等。如果你对未知充满好奇，让我们一起来： 将代码写成诗句，将安全融入呼吸！">
+<meta name="twitter:title" content="alictf web writeup">
+<meta name="twitter:description" content="Alictf参赛过程中的一些Web笔记，可以参考学习。">
     
     
         
     
     
     
-        <meta property="og:image" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg" />
+        <meta property="og:image" content="http://das.scusec.org/images/alictf_left.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://das.scusec.org/images/alictf_left.jpg" />
     
-    
-        <meta property="og:image" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg" />
     
     
     <!--STYLES-->
@@ -174,49 +174,46 @@
 </nav>
 
             
-        <div class="post-header-cover
-                    text-center
-                    "
-             style="background-image:url('http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg');"
-             data-behavior="4">
-            
-                <div class="post-header main-content-wrap text-center">
-    
-        <h1 class="post-title" itemprop="headline">
-            DAS-LAB
-        </h1>
-    
-    <div class="post-meta">
-    <time itemprop="datePublished" content="Mon Jun 15 2020 20:30:05 GMT+0800">
-	
-		    6月 15, 2020
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/团队建设/">团队建设</a>
-
-
-    
-</div>
-</div>
-            
-        </div>
-
             <div id="main" data-behavior="4"
-                 class="hasCover
+                 class="
                         hasCoverMetaIn
                         ">
                 
 <article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            alictf web writeup
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Wed Jun 15 2016 11:20:07 GMT+0800">
+	
+		    6月 15, 2016
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术分享/">技术分享</a>
+
+
+    
+</div>
+</div>
+    
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt --></p>
-<h3 id="DAS-LAB"><a href="#DAS-LAB" class="headerlink" title="DAS-LAB"></a>DAS-LAB</h3><p>DAS-LAB成立于2010年，名字源于「Discuss And Share」，目前专注于Web攻防相关技术研究，包括渗透测试、蜜罐技术、无线安全、Web安全、Web开发等。如果你对未知充满好奇，让我们一起来： 将代码写成诗句，将安全融入呼吸！</p>
-<h3 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h3><p>如果你有任何问题或者交流，请联系邮箱：das#scusec.org  <a href="http://das.scusec.org/docs/pub.asc">PGP公钥</a></p>
+            <!-- excerpt -->
+<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import md5&#10;pre = &#34;5bc0&#34;&#10;for x in xrange(1, 1000000):&#10;    a = md5.md5(str(x))&#10;    m = a.hexdigest()&#10;    if m[:4] == pre:&#10;        print x&#10;        break</span><br></pre></td></tr></table></figure></p>
+<p>进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。<br><img src="/images/alictf_1.png" alt=""><br>首先根目录有三个提示文件：phpinfo.php;info.php和readme.html，其中phpinfo可以看到网站使用PHP7使用了OPcache。<br><img src="/images/alictf_2.png" alt=""></p>
+<p>php7下的OPcache，可以通过在OPcache的缓存目录下写入x.php.bin文件，请求网站目录下的x.php文件时会加载缓存文件并解析，如果bin文件中写入webshell，则php文件将加载这段webshell代码。<br>上传时文件加时间戳重命名，目录无法绕过。OPcache的目录权限非常低，因此可以用sqli写入。目录格式为<br>/OPcache path/system ID/web path/<br>使用python程序计算出的机器码后，获得当前站的文件缓存目录为<br>/tmp/OPcache/39b005ad77428c42788140c6839e6201/var/www/html/upload/<br>上传2016223565-xxx.php文件，本地生成webshell bin文件，使用into dumpfile在目录写入2016223565-xxx.php.bin getshell。</p>
+<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>获取到shell以后在phpinfo中查看到网站disable founction中禁用了php几乎所有文件的操作函数，在phpinfo中看到启用了sendmail函数库，因此可以用LD_PRELOAD绕过php disable function。<br>编译动态库上传到服务器，php调用执行动态库中的system命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php&#10;putenv(&#34;LD_PRELOAD=/path/xxx.so&#34;);&#10;mail(&#34;a@localhost&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;);&#10;?&#62;</span><br></pre></td></tr></table></figure></p>
+<p>使用echo /* &gt; /tmp/file命令获取根文件目录，找到flag文件<br><img src="/images/alictf_3.png" alt=""></p>
+<p>但是系统读文件命令都被清空了，使用c的文件读写，读到flag值。</p>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>web 100 foundpasswd<br>系统存在很多处sql注入，甚至开始时还存在一个重复注册漏洞，因此直接可以注册HHHH，登录管理后台，然后在后台用户管理处可以联合查询。<br>loadfile下载到登录口的源代码。<br>找到用户表名和字段名。<br>在查询处获取到HHHH密码则为flag。<br>后来重复注册被修复了，xss盲打管理员cookie找到后台的联合查询注入点后select管理员密码。</p>
             
         </div>
     </div>
@@ -225,7 +222,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/das/">das</a> <a class="tag tag--primary tag--small t-link" href="/tags/lab/">lab</a> <a class="tag tag--primary tag--small t-link" href="/tags/team/">team</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/ctf/">ctf</a> <a class="tag tag--primary tag--small t-link" href="/tags/das/">das</a> <a class="tag tag--primary tag--small t-link" href="/tags/lab/">lab</a>
 
             </div>
         
@@ -234,7 +231,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/06/15/das-lab/"  data-tooltip="DAS-LAB">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -242,7 +239,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/15/alictf-web-writeup/" data-tooltip="alictf web writeup">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/19/php-obj-injection/" data-tooltip="小记一次PHP对象注入">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -257,17 +254,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -291,8 +288,8 @@
 
         
             
-                <div id="ds-thread" class="ds-thread" data-thread-key="2020/06/15/das-lab/"
-     data-title="DAS-LAB" data-url="http://das.scusec.org/2020/06/15/das-lab/">
+                <div id="ds-thread" class="ds-thread" data-thread-key="2016/06/15/alictf-web-writeup/"
+     data-title="alictf web writeup" data-url="http://das.scusec.org/2016/06/15/alictf-web-writeup/">
 </div>
 
             
@@ -316,7 +313,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/06/15/das-lab/"  data-tooltip="DAS-LAB">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -324,7 +321,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/15/alictf-web-writeup/" data-tooltip="alictf web writeup">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/19/php-obj-injection/" data-tooltip="小记一次PHP对象注入">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -339,17 +336,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -375,17 +372,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="4">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2020/06/15/das-lab/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
