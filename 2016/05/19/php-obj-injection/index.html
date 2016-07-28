@@ -5,19 +5,16 @@
   
   <title>小记一次PHP对象注入 - 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 写在前面最近经常会遇到一些比较有意思的漏洞，比如PHP反序列化漏洞,PHP对象注入。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。
-2. 自动加载2.0 为什么要自动加载？在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在">
+  <meta name="description" content="1. 写在前面最近经常会遇到一些比较有意思的漏洞，比如PHP反序列化漏洞,PHP对象注入。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小记一次PHP对象注入">
 <meta property="og:url" content="http://das.scusec.org/2016/05/19/php-obj-injection/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="1. 写在前面最近经常会遇到一些比较有意思的漏洞，比如PHP反序列化漏洞,PHP对象注入。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。
-2. 自动加载2.0 为什么要自动加载？在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在">
-<meta property="og:updated_time" content="2016-07-28T07:10:09.000Z">
+<meta property="og:description" content="1. 写在前面最近经常会遇到一些比较有意思的漏洞，比如PHP反序列化漏洞,PHP对象注入。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。">
+<meta property="og:updated_time" content="2016-07-28T07:12:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小记一次PHP对象注入">
-<meta name="twitter:description" content="1. 写在前面最近经常会遇到一些比较有意思的漏洞，比如PHP反序列化漏洞,PHP对象注入。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。
-2. 自动加载2.0 为什么要自动加载？在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在">
+<meta name="twitter:description" content="1. 写在前面最近经常会遇到一些比较有意思的漏洞，比如PHP反序列化漏洞,PHP对象注入。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -86,9 +83,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h3><p>最近经常会遇到一些比较有意思的漏洞，比如<strong>PHP反序列化漏洞</strong>,<strong>PHP对象注入</strong>。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。</p>
+        <h3 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h3><p>最近经常会遇到一些比较有意思的漏洞，比如<strong>PHP反序列化漏洞</strong>,<strong>PHP对象注入</strong>。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。<a id="more"></a> </p>
 <h3 id="2-自动加载"><a href="#2-自动加载" class="headerlink" title="2. 自动加载"></a>2. 自动加载</h3><h4 id="2-0-为什么要自动加载？"><a href="#2-0-为什么要自动加载？" class="headerlink" title="2.0 为什么要自动加载？"></a>2.0 为什么要自动加载？</h4><p>在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在成百上千个类文件，如果一一包含进去，那么入口文件就会显得特别大并且不利于维护。因此，PHP5提供了一种自动加载机制。</p>
-<a id="more"></a> 
 <h4 id="2-1-autoload"><a href="#2-1-autoload" class="headerlink" title="2.1 __autoload"></a>2.1 __autoload</h4><blockquote>
 <p>index.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">__autoload</span><span class="params">(<span class="variable">$classname</span>)</span></span>&#123;</span><br><span class="line">	<span class="variable">$class_file</span> = strtolower(<span class="variable">$classname</span>).<span class="string">".php"</span>;</span><br><span class="line">	<span class="keyword">if</span>(file_exists(<span class="variable">$class_file</span>))&#123;</span><br><span class="line">		<span class="keyword">require_once</span>(<span class="string">"$class_file"</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"$class_file does not exist!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> File();</span><br></pre></td></tr></table></figure></p>
 </blockquote>

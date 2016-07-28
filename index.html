@@ -83,8 +83,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://dassec.b0.upaiyun.com/simin/pic0.png" alt="image"></p>
-<h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><p>   Q：为什么要自定义右键菜单？</p>
+        <h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><p>   Q：为什么要自定义右键菜单？</p>
 <p>   A：为了更友好的交互（呵呵）</p>
         
           <p class="article-more-link">
@@ -183,8 +182,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import md5&#10;pre = &#34;5bc0&#34;&#10;for x in xrange(1, 1000000):&#10;    a = md5.md5(str(x))&#10;    m = a.hexdigest()&#10;    if m[:4] == pre:&#10;        print x&#10;        break</span><br></pre></td></tr></table></figure></p>
-<p>进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。<br>
+        <h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。
         
           <p class="article-more-link">
             <a href="/2016/06/15/alictf-web-writeup/#more">阅读全文</a>
@@ -233,8 +231,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h3><p>最近经常会遇到一些比较有意思的漏洞，比如<strong>PHP反序列化漏洞</strong>,<strong>PHP对象注入</strong>。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。</p>
-<h3 id="2-自动加载"><a href="#2-自动加载" class="headerlink" title="2. 自动加载"></a>2. 自动加载</h3><h4 id="2-0-为什么要自动加载？"><a href="#2-0-为什么要自动加载？" class="headerlink" title="2.0 为什么要自动加载？"></a>2.0 为什么要自动加载？</h4><p>在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在成百上千个类文件，如果一一包含进去，那么入口文件就会显得特别大并且不利于维护。因此，PHP5提供了一种自动加载机制。</p>
+        <h3 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h3><p>最近经常会遇到一些比较有意思的漏洞，比如<strong>PHP反序列化漏洞</strong>,<strong>PHP对象注入</strong>。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。
         
           <p class="article-more-link">
             <a href="/2016/05/19/php-obj-injection/#more">阅读全文</a>
@@ -285,9 +282,7 @@
       
         <p><a href="https://time.xctf.org.cn/ctfs/event/19/tasks">地址&gt;&gt;请猛戳&lt;&lt;</a></p>
 <h3 id="Web题"><a href="#Web题" class="headerlink" title="Web题"></a>Web题</h3><p>0x01. 信息</p>
-<p>打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码<code>www.hust.edu.cn</code>，flag在flag3.docx中</p>
-<p>0x02. 窃取</p>
-<p>测试地址存在union注入，利用sqlmap在<strong>wh_ct4_hgduyingjkhjhjg</strong>库中发现flag的提示<code>flag is nothere,but I can tell you the flag is xor user&#39;s password.</code>，那么到<strong>web_sqli</strong>库中，将user1和user2的password异或后解密，得到flag:hust</p>
+<p>打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码<code>www.hust.edu.cn</code>，flag在flag3.docx中
         
           <p class="article-more-link">
             <a href="/2016/05/16/whctf-writeup-all/#more">阅读全文</a>

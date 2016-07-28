@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-07-28T07:09:54.000Z</updated>
+  <updated>2016-07-28T07:11:50.000Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -20,10 +20,9 @@
     <link href="http://das.scusec.org/2016/07/22/context-menu/"/>
     <id>http://das.scusec.org/2016/07/22/context-menu/</id>
     <published>2016-07-22T04:09:54.000Z</published>
-    <updated>2016-07-28T07:09:54.000Z</updated>
+    <updated>2016-07-28T07:11:50.000Z</updated>
     
-    <content type="html">&lt;p&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic0.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;【前言】&quot;&gt;&lt;a href=&quot;#【前言】&quot; class=&quot;headerlink&quot; title=&quot;【前言】&quot;&gt;&lt;/a&gt;【前言】&lt;/h3&gt;&lt;p&gt;   Q：为什么要自定义右键菜单？&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;【前言】&quot;&gt;&lt;a href=&quot;#【前言】&quot; class=&quot;headerlink&quot; title=&quot;【前言】&quot;&gt;&lt;/a&gt;【前言】&lt;/h3&gt;&lt;p&gt;   Q：为什么要自定义右键菜单？&lt;/p&gt;
 &lt;p&gt;   A：为了更友好的交互（呵呵）&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;【一般思路】&quot;&gt;&lt;a href=&quot;#【一般思路】&quot; class=&quot;headerlink&quot; title=&quot;【一般思路】&quot;&gt;&lt;/a&gt;【一般思路】&lt;/h3&gt;&lt;p&gt;  严格来讲，右键菜单应该叫上下文菜单，在html5中也新定义了这个contextmenu全局属性。&lt;br&gt;它的语法是这样的：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;contextmenu&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;supermenu&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;这个段落附加了一个名为 &quot;supermenu&quot; 的上下文菜单。&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;menu&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;supermenu&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;label&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;Step 1: Write Tutorial&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;onclick&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;doSomething()&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;label&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;Step 2: Edit Tutorial&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;onclick&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;doSomethingElse()&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;menu&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -137,8 +136,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic0.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;【前言】&quot;&gt;&lt;a href=&quot;#【前言】&quot; class=&quot;headerlink&quot; title=&quot;【前言】&quot;&gt;&lt;/a&gt;【前言】&lt;/h3&gt;&lt;p&gt;   Q：为什么要自定义右键菜单？&lt;/p&gt;
+      &lt;h3 id=&quot;【前言】&quot;&gt;&lt;a href=&quot;#【前言】&quot; class=&quot;headerlink&quot; title=&quot;【前言】&quot;&gt;&lt;/a&gt;【前言】&lt;/h3&gt;&lt;p&gt;   Q：为什么要自定义右键菜单？&lt;/p&gt;
 &lt;p&gt;   A：为了更友好的交互（呵呵）&lt;/p&gt;
     
     </summary>
@@ -213,10 +211,11 @@
     <link href="http://das.scusec.org/2016/06/15/alictf-web-writeup/"/>
     <id>http://das.scusec.org/2016/06/15/alictf-web-writeup/</id>
     <published>2016-06-15T03:20:07.000Z</published>
-    <updated>2016-07-28T07:10:22.000Z</updated>
+    <updated>2016-07-28T07:12:45.000Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h3&gt;&lt;p&gt;web 400 homework&lt;br&gt;网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;import md5&amp;#10;pre = &amp;#34;5bc0&amp;#34;&amp;#10;for x in xrange(1, 1000000):&amp;#10;    a = md5.md5(str(x))&amp;#10;    m = a.hexdigest()&amp;#10;    if m[:4] == pre:&amp;#10;        print x&amp;#10;        break&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h3&gt;&lt;p&gt;web 400 homework&lt;br&gt;网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;import md5&amp;#10;pre = &amp;#34;5bc0&amp;#34;&amp;#10;for x in xrange(1, 1000000):&amp;#10;    a = md5.md5(str(x))&amp;#10;    m = a.hexdigest()&amp;#10;    if m[:4] == pre:&amp;#10;        print x&amp;#10;        break&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/alictf_1.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;首先根目录有三个提示文件：phpinfo.php;info.php和readme.html，其中phpinfo可以看到网站使用PHP7使用了OPcache。&lt;br&gt;&lt;img src=&quot;/images/alictf_2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;php7下的OPcache，可以通过在OPcache的缓存目录下写入x.php.bin文件，请求网站目录下的x.php文件时会加载缓存文件并解析，如果bin文件中写入webshell，则php文件将加载这段webshell代码。&lt;br&gt;上传时文件加时间戳重命名，目录无法绕过。OPcache的目录权限非常低，因此可以用sqli写入。目录格式为&lt;br&gt;/OPcache path/system ID/web path/&lt;br&gt;使用python程序计算出的机器码后，获得当前站的文件缓存目录为&lt;br&gt;/tmp/OPcache/39b005ad77428c42788140c6839e6201/var/www/html/upload/&lt;br&gt;上传2016223565-xxx.php文件，本地生成webshell bin文件，使用into dumpfile在目录写入2016223565-xxx.php.bin getshell。&lt;/p&gt;
 &lt;h3 id=&quot;0x01&quot;&gt;&lt;a href=&quot;#0x01&quot; class=&quot;headerlink&quot; title=&quot;0x01&quot;&gt;&lt;/a&gt;0x01&lt;/h3&gt;&lt;p&gt;获取到shell以后在phpinfo中查看到网站disable founction中禁用了php几乎所有文件的操作函数，在phpinfo中看到启用了sendmail函数库，因此可以用LD_PRELOAD绕过php disable function。&lt;br&gt;编译动态库上传到服务器，php调用执行动态库中的system命令。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#60;?php&amp;#10;putenv(&amp;#34;LD_PRELOAD=/path/xxx.so&amp;#34;);&amp;#10;mail(&amp;#34;a@localhost&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;&amp;#34;,&amp;#34;&amp;#34;);&amp;#10;?&amp;#62;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -227,8 +226,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h3&gt;&lt;p&gt;web 400 homework&lt;br&gt;网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;import md5&amp;#10;pre = &amp;#34;5bc0&amp;#34;&amp;#10;for x in xrange(1, 1000000):&amp;#10;    a = md5.md5(str(x))&amp;#10;    m = a.hexdigest()&amp;#10;    if m[:4] == pre:&amp;#10;        print x&amp;#10;        break&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。&lt;br&gt;
+      &lt;h3 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h3&gt;&lt;p&gt;web 400 homework&lt;br&gt;网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。
     
     </summary>
     
@@ -250,11 +248,10 @@
     <link href="http://das.scusec.org/2016/05/19/php-obj-injection/"/>
     <id>http://das.scusec.org/2016/05/19/php-obj-injection/</id>
     <published>2016-05-19T01:45:20.000Z</published>
-    <updated>2016-07-28T07:10:09.000Z</updated>
+    <updated>2016-07-28T07:12:32.000Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;1-写在前面&quot;&gt;&lt;a href=&quot;#1-写在前面&quot; class=&quot;headerlink&quot; title=&quot;1. 写在前面&quot;&gt;&lt;/a&gt;1. 写在前面&lt;/h3&gt;&lt;p&gt;最近经常会遇到一些比较有意思的漏洞，比如&lt;strong&gt;PHP反序列化漏洞&lt;/strong&gt;,&lt;strong&gt;PHP对象注入&lt;/strong&gt;。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;1-写在前面&quot;&gt;&lt;a href=&quot;#1-写在前面&quot; class=&quot;headerlink&quot; title=&quot;1. 写在前面&quot;&gt;&lt;/a&gt;1. 写在前面&lt;/h3&gt;&lt;p&gt;最近经常会遇到一些比较有意思的漏洞，比如&lt;strong&gt;PHP反序列化漏洞&lt;/strong&gt;,&lt;strong&gt;PHP对象注入&lt;/strong&gt;。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
 &lt;h3 id=&quot;2-自动加载&quot;&gt;&lt;a href=&quot;#2-自动加载&quot; class=&quot;headerlink&quot; title=&quot;2. 自动加载&quot;&gt;&lt;/a&gt;2. 自动加载&lt;/h3&gt;&lt;h4 id=&quot;2-0-为什么要自动加载？&quot;&gt;&lt;a href=&quot;#2-0-为什么要自动加载？&quot; class=&quot;headerlink&quot; title=&quot;2.0 为什么要自动加载？&quot;&gt;&lt;/a&gt;2.0 为什么要自动加载？&lt;/h4&gt;&lt;p&gt;在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在成百上千个类文件，如果一一包含进去，那么入口文件就会显得特别大并且不利于维护。因此，PHP5提供了一种自动加载机制。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
 &lt;h4 id=&quot;2-1-autoload&quot;&gt;&lt;a href=&quot;#2-1-autoload&quot; class=&quot;headerlink&quot; title=&quot;2.1 __autoload&quot;&gt;&lt;/a&gt;2.1 __autoload&lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;index.php&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;__autoload&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;$classname&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;variable&quot;&gt;$class_file&lt;/span&gt; = strtolower(&lt;span class=&quot;variable&quot;&gt;$classname&lt;/span&gt;).&lt;span class=&quot;string&quot;&gt;&quot;.php&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(file_exists(&lt;span class=&quot;variable&quot;&gt;$class_file&lt;/span&gt;))&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;require_once&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;$class_file&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;$class_file does not exist!&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$obj&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; File();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -333,8 +330,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;1-写在前面&quot;&gt;&lt;a href=&quot;#1-写在前面&quot; class=&quot;headerlink&quot; title=&quot;1. 写在前面&quot;&gt;&lt;/a&gt;1. 写在前面&lt;/h3&gt;&lt;p&gt;最近经常会遇到一些比较有意思的漏洞，比如&lt;strong&gt;PHP反序列化漏洞&lt;/strong&gt;,&lt;strong&gt;PHP对象注入&lt;/strong&gt;。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。&lt;/p&gt;
-&lt;h3 id=&quot;2-自动加载&quot;&gt;&lt;a href=&quot;#2-自动加载&quot; class=&quot;headerlink&quot; title=&quot;2. 自动加载&quot;&gt;&lt;/a&gt;2. 自动加载&lt;/h3&gt;&lt;h4 id=&quot;2-0-为什么要自动加载？&quot;&gt;&lt;a href=&quot;#2-0-为什么要自动加载？&quot; class=&quot;headerlink&quot; title=&quot;2.0 为什么要自动加载？&quot;&gt;&lt;/a&gt;2.0 为什么要自动加载？&lt;/h4&gt;&lt;p&gt;在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在成百上千个类文件，如果一一包含进去，那么入口文件就会显得特别大并且不利于维护。因此，PHP5提供了一种自动加载机制。&lt;/p&gt;
+      &lt;h3 id=&quot;1-写在前面&quot;&gt;&lt;a href=&quot;#1-写在前面&quot; class=&quot;headerlink&quot; title=&quot;1. 写在前面&quot;&gt;&lt;/a&gt;1. 写在前面&lt;/h3&gt;&lt;p&gt;最近经常会遇到一些比较有意思的漏洞，比如&lt;strong&gt;PHP反序列化漏洞&lt;/strong&gt;,&lt;strong&gt;PHP对象注入&lt;/strong&gt;。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。
     
     </summary>
     
@@ -356,14 +352,13 @@
     <link href="http://das.scusec.org/2016/05/16/whctf-writeup-all/"/>
     <id>http://das.scusec.org/2016/05/16/whctf-writeup-all/</id>
     <published>2016-05-16T07:52:42.000Z</published>
-    <updated>2016-07-28T07:10:32.000Z</updated>
+    <updated>2016-07-28T07:12:24.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;https://time.xctf.org.cn/ctfs/event/19/tasks&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;地址&amp;gt;&amp;gt;请猛戳&amp;lt;&amp;lt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;Web题&quot;&gt;&lt;a href=&quot;#Web题&quot; class=&quot;headerlink&quot; title=&quot;Web题&quot;&gt;&lt;/a&gt;Web题&lt;/h3&gt;&lt;p&gt;0x01. 信息&lt;/p&gt;
-&lt;p&gt;打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码&lt;code&gt;www.hust.edu.cn&lt;/code&gt;，flag在flag3.docx中&lt;/p&gt;
+&lt;p&gt;打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码&lt;code&gt;www.hust.edu.cn&lt;/code&gt;，flag在flag3.docx中 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
 &lt;p&gt;0x02. 窃取&lt;/p&gt;
 &lt;p&gt;测试地址存在union注入，利用sqlmap在&lt;strong&gt;wh_ct4_hgduyingjkhjhjg&lt;/strong&gt;库中发现flag的提示&lt;code&gt;flag is nothere,but I can tell you the flag is xor user&amp;#39;s password.&lt;/code&gt;，那么到&lt;strong&gt;web_sqli&lt;/strong&gt;库中，将user1和user2的password异或后解密，得到flag:hust&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
 &lt;p&gt;0x03. 忘了账户和密码&lt;/p&gt;
 &lt;p&gt;username: &lt;code&gt;&amp;#39; union select 1,2,3-- -&lt;/code&gt; , 三列&lt;/p&gt;
 &lt;p&gt;password: 任意&lt;/p&gt;
@@ -394,9 +389,7 @@
     
       &lt;p&gt;&lt;a href=&quot;https://time.xctf.org.cn/ctfs/event/19/tasks&quot;&gt;地址&amp;gt;&amp;gt;请猛戳&amp;lt;&amp;lt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;Web题&quot;&gt;&lt;a href=&quot;#Web题&quot; class=&quot;headerlink&quot; title=&quot;Web题&quot;&gt;&lt;/a&gt;Web题&lt;/h3&gt;&lt;p&gt;0x01. 信息&lt;/p&gt;
-&lt;p&gt;打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码&lt;code&gt;www.hust.edu.cn&lt;/code&gt;，flag在flag3.docx中&lt;/p&gt;
-&lt;p&gt;0x02. 窃取&lt;/p&gt;
-&lt;p&gt;测试地址存在union注入，利用sqlmap在&lt;strong&gt;wh_ct4_hgduyingjkhjhjg&lt;/strong&gt;库中发现flag的提示&lt;code&gt;flag is nothere,but I can tell you the flag is xor user&amp;#39;s password.&lt;/code&gt;，那么到&lt;strong&gt;web_sqli&lt;/strong&gt;库中，将user1和user2的password异或后解密，得到flag:hust&lt;/p&gt;
+&lt;p&gt;打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码&lt;code&gt;www.hust.edu.cn&lt;/code&gt;，flag在flag3.docx中
     
     </summary>
     
