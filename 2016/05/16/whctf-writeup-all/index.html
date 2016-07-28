@@ -1,214 +1,103 @@
-
 <!DOCTYPE html>
-<html lang="zh-cn">
-    
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="DAS-LAB">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <title>whctf-writeup-all - DAS-LAB</title>
-    <meta name="author" content="das">
-    
-        <meta name="keywords" content="DAS,lab,小组,安全,">
-    
-    
-    
-        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
-    
-    <meta name="description" content="打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包。">
-<meta property="og:type" content="blog">
+  <meta charset="utf-8">
+  
+  <title>whctf-writeup-all - 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="地址&amp;gt;&amp;gt;请猛戳&amp;lt;&amp;lt;
+Web题0x01. 信息
+打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码www.hust.edu.cn，flag在flag3.docx中
+0x">
+<meta property="og:type" content="article">
 <meta property="og:title" content="whctf-writeup-all">
 <meta property="og:url" content="http://das.scusec.org/2016/05/16/whctf-writeup-all/index.html">
-<meta property="og:site_name" content="DAS-LAB">
-<meta property="og:description" content="打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包。">
-<meta property="og:updated_time" content="2016-05-16T08:00:47.000Z">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="地址&amp;gt;&amp;gt;请猛戳&amp;lt;&amp;lt;
+Web题0x01. 信息
+打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码www.hust.edu.cn，flag在flag3.docx中
+0x">
+<meta property="og:updated_time" content="2016-07-28T06:12:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="whctf-writeup-all">
-<meta name="twitter:description" content="打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包。">
-    
-    
-        
-    
-    
-    
-        <meta property="og:image" content="http://d1u9biwaxjngwg.cloudfront.net/chinese-test-post/vintage-140.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://d1u9biwaxjngwg.cloudfront.net/chinese-test-post/vintage-140.jpg" />
-    
-    
-    
-    <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-27vrduj1jopliavvnzi7ibndpmbvg7lzo4a2uswrsi4m5vwauf2qi8s1v3or.min.css" type="text/css">
-    <!--STYLES END-->
-    
-    
+<meta name="twitter:description" content="地址&amp;gt;&amp;gt;请猛戳&amp;lt;&amp;lt;
+Web题0x01. 信息
+打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码www.hust.edu.cn，flag在flag3.docx中
+0x">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
 </head>
 
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
-
-
-    
-
-<header id="header" data-behavior="4">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <h1 class="header-title">
-        <a class="header-title-link" href="/ ">DAS-LAB</a>
-    </h1>
-    
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">小黑屋</a>
+      <nav id="main-nav">
         
-            <a  class="header-right-picture "
-                href="/#about">
+          <a class="main-nav-link" href="/">首页</a>
         
+          <a class="main-nav-link" href="/archives">文档</a>
         
-        </a>
-    
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/links">链接</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://das.scusec.org"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
 </header>
+    <section id="main" class="outer"><article id="post-whctf-writeup-all" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      whctf-writeup-all
+    </h1>
+  
 
-            <!-- Define author's picture -->
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/16/whctf-writeup-all/" class="article-date">
+  <time datetime="2016-05-16T07:52:42.000Z" itemprop="datePublished">2016-05-16</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分享/">技术分享</a>
+  </div>
 
-
-<nav id="sidebar" data-behavior="4">
-    
-    
-        <ul class="sidebar-buttons">
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
-                    <span class="sidebar-button-desc">首页</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
-                    <span class="sidebar-button-desc">分类</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
-                    <span class="sidebar-button-desc">标签</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
-                    <span class="sidebar-button-desc">归档</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link st-search-show-outputs"
-                         href="/#search"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
-                    <span class="sidebar-button-desc">搜索</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/#about"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
-                    <span class="sidebar-button-desc">关于</span>
-                </a>
-        </li>
-        
-    </ul>
-    
-        <ul class="sidebar-buttons">
-        
-    </ul>
-    
-        <ul class="sidebar-buttons">
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
-                    <span class="sidebar-button-desc">RSS</span>
-                </a>
-        </li>
-        
-    </ul>
-    
-</nav>
-
-            
-            <div id="main" data-behavior="4"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
-    
-    
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title" itemprop="headline">
-            whctf-writeup-all
-        </h1>
-    
-    <div class="post-meta">
-    <time itemprop="datePublished" content="Mon May 16 2016 15:52:42 GMT+0800">
-	
-		    5月 16, 2016
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/技术分享/">技术分享</a>
-
-
-    
-</div>
-</div>
-    
-    <div class="post-content markdown" itemprop="articleBody">
-        <div class="main-content-wrap">
-            <!-- excerpt --></p>
-<p><a href="https://time.xctf.org.cn/ctfs/event/19/tasks" target="_blank" rel="external">地址&gt;&gt;请猛戳&lt;&lt;</a></p>
-<h2 id="Web题"><a href="#Web题" class="headerlink" title="Web题"></a>Web题</h2><p>0x01. 信息</p>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://time.xctf.org.cn/ctfs/event/19/tasks" target="_blank" rel="external">地址&gt;&gt;请猛戳&lt;&lt;</a></p>
+<h3 id="Web题"><a href="#Web题" class="headerlink" title="Web题"></a>Web题</h3><p>0x01. 信息</p>
 <p>打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码<code>www.hust.edu.cn</code>，flag在flag3.docx中</p>
 <p>0x02. 窃取</p>
 <p>测试地址存在union注入，利用sqlmap在<strong>wh_ct4_hgduyingjkhjhjg</strong>库中发现flag的提示<code>flag is nothere,but I can tell you the flag is xor user&#39;s password.</code>，那么到<strong>web_sqli</strong>库中，将user1和user2的password异或后解密，得到flag:hust</p>
+<a id="more"></a> 
 <p>0x03. 忘了账户和密码</p>
 <p>username: <code>&#39; union select 1,2,3-- -</code> , 三列</p>
 <p>password: 任意</p>
@@ -221,242 +110,87 @@
 <p>登录口sql注入，还是union的，注入发现user表有flag字段，将12,13,14,15行的flag字段组合<br><code>whctf{hello$$##itisme&amp;---&amp;&amp;&amp;}</code></p>
 <p>0x07. 看图说话</p>
 <p>给的提示里ctf页面脚本,猜测存在ctf.php，打开是302跳转，返回包里有张图片链接<br><code>templates/images/xxx/ctf.jpg</code><br>，将图片下载下载利用notepad++打开，flag在最后<code>whctf{today@@isnot09#$tomorrow}</code></p>
-<h2 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h2><p>0x01 我叫李二狗（一）<br>直接base64解密，然后李二狗是近视，将l换成1，x换成1，md5解密</p>
+<h3 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h3><p>0x01 我叫李二狗（一）<br>直接base64解密，然后李二狗是近视，将l换成1，x换成1，md5解密</p>
 <p>0x02 李二狗的梦中情人<br>将隐藏在图片末尾的链接中的图片提取出来，然后convert转换成png格式，diff下得到一个二维码，二维码黑白反转下，得到正确的二维码，扫一下，bingo</p>
 <p>0x03 我叫李二狗（二）<br>给了两个RSA加密，由于其弱密钥，N太小，直接分解大数，破解</p>
 <p>0x04 李二狗的LOL战歌<br>听音乐，感觉音频右声道像电报，然后翻译成摩斯编码，直接得到13位字符，然后用ROT13编码转换下，得到flag</p>
-<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><p>0x01 直接爆破</p>
+<h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><p>0x01 直接爆破</p>
 <p>相关代码<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &#34;stdafx.h&#34;&#10;#include &#34;stdio.h&#34;&#10;#include &#60;string.h&#62;&#10;&#10;int main(int argc, char* argv[])&#10;&#123;&#10;  __int64 seeda=1;&#10;  __int64 lenKey=38;&#10;  __int64 count;&#10;  __int64 k;&#10;  __int64 j;&#10;&#10;&#10;  char key[]=&#34;Just try your best and enjoy yourself!&#34;;&#10;&#10;  __int64 result[]=&#123;157,2400,2215,1971,1732,1527,2053,1878,1988,787,1584,1856,1717,2187,1971,34,1732,1259,1669,1726,1946,1967,1369&#125;;&#10;  for ( count = 0; count &#60; 23; ++count )&#10;  &#123;&#10;    k = key[seeda];&#10;&#9;for ( j = 0; j &#60; 512; ++j )&#10;&#9;&#123;&#10;&#9;&#9;//char s[1];&#10;&#9;//&#9;sprintf(s, &#34;%x&#34;, j);&#10;&#9;&#9;if(strchr(key,j)!=0)&#10;&#9;&#9;&#123;&#10;&#9;&#9;&#9;if(result[count] == (0x10 * j + k) % 0x9C4)&#10;&#9;&#9;&#9;&#123;&#10;&#9;&#9;&#9;&#9;printf(&#34;flag %I64d count-InStr %c\n&#34;,count,j);&#10;&#9;&#9;&#9;&#9;//printf(&#34;%c&#34;,j);&#10;&#9;&#9;&#9;&#9;break;&#10;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#125;&#10;&#9;&#9;else&#10;&#9;&#9;&#123;&#10;&#9;&#9;&#9;if(result[count] == (j ^ (k &#60;&#60; seeda)) % 0x9C4)&#10;&#9;&#9;&#9;&#123;&#10;&#9;&#9;&#9;&#9;printf(&#34;flag %I64d count-OutStr %c\n&#34;,count,j);&#10;&#9;&#9;&#9;&#9;break;&#10;&#9;&#9;&#9;&#9;//printf(&#34;%c&#34;,j);&#10;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#125;&#10;&#9;seeda = (seeda + 5) % lenKey;&#10;  &#125;&#10; return 0;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>flag <code>whctf{you_are_the_best}</code></p>
-<p>##revserse<br>0x03. 定位坐标</p>
+<h3 id="revserse"><a href="#revserse" class="headerlink" title="revserse"></a>revserse</h3><p>0x03. 定位坐标</p>
 <p>安装Crackme_3.apk运行，发现与之前阿里的比赛题很像，任意输入后查看Log日志，打印出了table信息和pw:亡丸凡亡丸凡义义凡么么门凡广义凡之，利用这两个信息，调用apk中的解密函数aliCodeToBytes(String paramString1, String paramString2)，即可直接打印出结果：30-30-55-114-25-6，加上whctf{}就是flag了。</p>
 <p>0x06  我讨厌数学<br>拿到题目首先用IDA得到反汇编代码，通过一系列的分析得出是一个纯粹的矩阵运算，矩阵为6×6的矩阵，其中有9个1，其余的26个为我们输入的FLAG。该算法就是A×AT=P（P在程序中硬编码的，可以直接得到），然后反求A矩阵，P矩阵为：<br>12027h,   0F296h,   0BF0Eh,   0D84Ch,   91D8h,   297h,<br>0F296h,   0D830h,   0A326h,   0B010h,   7627h,   230h,<br>0BF0Eh,   0A326h,   8FEBh,    879Dh,    70C3h,   1BDh,<br>0D84Ch,   0B010h,   879Dh,    0B00Dh,   6E4Fh,   1F7h,<br>91D8h,    7627h,    70C3h,    6E4Fh,    9BDCh,   15Ch<br>297h,     230h,     1BDh,     1F7h,     15Ch,    6<br>然后由“6”可得A中的最后一行全为“1”，再把whctf{xxx}格式转成10进制带进去可得第一行就为“whctf{”，并且根据最终的P矩阵验证正确。然后还有3个1的位置不确定，根据FLAG猜想它们就放在第五行的后三个，然后计算第五行的前两个数字为“114”，“104”。然后根据第一行和第五行的乘积的和来确定它们两个的位置就为“114”，“104”。字母为“t”,”h”。那么现在就还有三行不知道了，所以就爆破。<br>爆破的关键是利用已知的三行去求未知的三行，下面两行来求这三行的可能值，于是写了个脚本试了一下发现求出的结果实在太多了，想了想之后就加上第一行来验证。下面为爆破的java代码：</p>
 <pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class whctf&#123;&#10;&#9;public static void main(String[] args )&#123;&#10;&#9;&#9;for(int i1=32; i1&#60;129; i1++)&#123;&#10;&#9;&#9;&#9;System.out.printf(&#34;new i1 is: %d\n&#34;,i1);&#10;&#9;&#9;&#9;for(int i2=32; i2&#60;129; i2++)&#123;&#10;&#9;&#9;&#9;&#9;for(int i3=32; i3&#60;129; i3++)&#123;&#10;&#9;&#9;&#9;&#9;&#9;for(int i4=32; i4&#60;129; i4++)&#123;&#10;&#9;&#9;&#9;&#9;&#9;&#9;for(int i5=32; i5&#60;129; i5++)&#123;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;for(int i6=32; i6&#60;129; i6++)&#123;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;int i7=i1+i2+i3+i4+i5+i6;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;int i8=i1*116+i2*104+i3*125+i4+i5+i6;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;int i9=i1*119+i2*104+i3*99+i4*116+i5*102+i6*123;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;if(i7==560 &#38;&#38; i8==30247 &#38;&#38; i9==62102)&#123;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;System.out.printf(&#34;THE TWO LINE i1,i2,i3,i4,i5,i6: %d,%d,%d,%d,%d,%d\n&#34;,i1,i2,i3,i4,i5,i6);&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;if(i7==445 &#38;&#38; i8==28867 &#38;&#38; i9==48910)&#123;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;System.out.printf(&#34;THE THREE LINE i1,i2,i3,i4,i5,i6: %d,%d,%d,%d,%d,%d\n&#34;,i1,i2,i3,i4,i5,i6);&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;if(i7==503 &#38;&#38; i8==28239 &#38;&#38; i9==55372)&#123;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;System.out.printf(&#34;THE FOUR LINE i1,i2,i3,i4,i5,i6: %d,%d,%d,%d,%d,%d\n&#34;,i1,i2,i3,i4,i5,i6);&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><p>但是跑了半小时之后发现解出的结果每一行都有很多解，于是就想着人工过滤这些字符串，判断每一组的前三个字符是否可能为FLAG，于是就每一组列出一个字符串，之后发现一个字符串可能是FLAG，前三个字符为“3_g”，于是就把这组解的所有字符串列出来，得到“3_g00d”字符串，就是我们A矩阵的第三行了，然后同样的原理来过滤第四行和第二行。就得到了FLAG为：<code>whctf{Y0u_ar3_g00d_a7_m4th}</code>。</p>
-            
-        </div>
+
+      
     </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
+    
+    
+      <footer class="article-footer">
         
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
-                
-    <a class="tag tag--primary tag--small t-link" href="/tags/ctf/">ctf</a> <a class="tag tag--primary tag--small t-link" href="/tags/das/">das</a> <a class="tag tag--primary tag--small t-link" href="/tags/lab/">lab</a>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/das/">das</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lab/">lab</a></li></ul>
 
-            </div>
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/19/php-obj-injection/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
         
-        <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/19/php-obj-injection/"  data-tooltip="小记一次PHP对象注入">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/02/hello-world/" data-tooltip="中文測試">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
+          小记一次PHP对象注入
         
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#ds-thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
-    </ul>
-</div>
+      </div>
+    </a>
+  
+  
+</nav>
 
-
-        
-            
-                <div id="ds-thread" class="ds-thread" data-thread-key="2016/05/16/whctf-writeup-all/"
-     data-title="whctf-writeup-all" data-url="http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-</div>
-
-            
-        
-    </div>
+  
 </article>
 
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2016 das. All Rights Reserved.
-    </span>
-</footer>
-
-            </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/19/php-obj-injection/"  data-tooltip="小记一次PHP对象注入">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/02/hello-world/" data-tooltip="中文測試">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-        
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#ds-thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
-    <ul class="share-options">
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/05/16/whctf-writeup-all/">
-                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<div id="share-options-mask" class="share-options-mask"></div>
-            
-        </div>
-        
-
-
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-remove"></i>
-        </div>
-        
-            <h4 id="about-card-name">das</h4>
-        
-            <h5 id="about-card-bio"><p>author.bio</p>
-</h5>
-        
-        
-            <h5 id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
-
-            </h5>
-        
-        
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-whctf-writeup-all" data-title="whctf-writeup-all" data-url="http://das.scusec.org/2016/05/16/whctf-writeup-all/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 das&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
-</div>
-
-        
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
-    </body>
-    <!--SCRIPTS-->
-<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
-<!--SCRIPTS END-->
-
-    
-        <script type="text/javascript">
-            var duoshuoQuery = {short_name:'dassec'};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        </script>
+  </div>
+</footer>
     
 
+<script src="/js/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
 </html>

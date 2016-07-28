@@ -1,443 +1,164 @@
-
 <!DOCTYPE html>
-<html lang="zh-cn">
-    
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="DAS-LAB">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <title>alictf web writeup - DAS-LAB</title>
-    <meta name="author" content="das">
-    
-        <meta name="keywords" content="DAS,lab,小组,安全,">
-    
-    
-    
-        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
-    
-    <meta name="description" content="Alictf参赛过程中的一些Web笔记，可以参考学习。by ksss">
-<meta property="og:type" content="blog">
+  <meta charset="utf-8">
+  
+  <title>alictf web writeup - 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="0x00web 400 homework网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。1import md5&amp;#10;pre = &amp;#34;5bc0&amp;#34;&amp;#10;for x in xrange(1, 1000000):&amp;#10;    a = md5.md5(str(x))&amp;#10;    m = a.hexdigest()&amp;#1">
+<meta property="og:type" content="article">
 <meta property="og:title" content="alictf web writeup">
 <meta property="og:url" content="http://das.scusec.org/2016/06/15/alictf-web-writeup/index.html">
-<meta property="og:site_name" content="DAS-LAB">
-<meta property="og:description" content="Alictf参赛过程中的一些Web笔记，可以参考学习。by ksss">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="0x00web 400 homework网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。1import md5&amp;#10;pre = &amp;#34;5bc0&amp;#34;&amp;#10;for x in xrange(1, 1000000):&amp;#10;    a = md5.md5(str(x))&amp;#10;    m = a.hexdigest()&amp;#1">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_1.png">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_2.png">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_3.png">
-<meta property="og:updated_time" content="2016-06-15T03:32:13.000Z">
+<meta property="og:updated_time" content="2016-07-28T06:11:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="alictf web writeup">
-<meta name="twitter:description" content="Alictf参赛过程中的一些Web笔记，可以参考学习。by ksss">
-    
-    
-        
-    
-    
-    
-        <meta property="og:image" content="http://das.scusec.org/images/alictf_left.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://das.scusec.org/images/alictf_left.jpg" />
-    
-    
-    
-    <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style-27vrduj1jopliavvnzi7ibndpmbvg7lzo4a2uswrsi4m5vwauf2qi8s1v3or.min.css" type="text/css">
-    <!--STYLES END-->
-    
-    
+<meta name="twitter:description" content="0x00web 400 homework网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。1import md5&amp;#10;pre = &amp;#34;5bc0&amp;#34;&amp;#10;for x in xrange(1, 1000000):&amp;#10;    a = md5.md5(str(x))&amp;#10;    m = a.hexdigest()&amp;#1">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
 </head>
 
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
-
-
-    
-
-<header id="header" data-behavior="4">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <h1 class="header-title">
-        <a class="header-title-link" href="/ ">DAS-LAB</a>
-    </h1>
-    
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">小黑屋</a>
+      <nav id="main-nav">
         
-            <a  class="header-right-picture "
-                href="/#about">
+          <a class="main-nav-link" href="/">首页</a>
         
+          <a class="main-nav-link" href="/archives">文档</a>
         
-        </a>
-    
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/links">链接</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://das.scusec.org"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
 </header>
+    <section id="main" class="outer"><article id="post-alictf-web-writeup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      alictf web writeup
+    </h1>
+  
 
-            <!-- Define author's picture -->
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/06/15/alictf-web-writeup/" class="article-date">
+  <time datetime="2016-06-15T03:20:07.000Z" itemprop="datePublished">2016-06-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分享/">技术分享</a>
+  </div>
 
-
-<nav id="sidebar" data-behavior="4">
-    
-    
-        <ul class="sidebar-buttons">
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
-                    <span class="sidebar-button-desc">首页</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
-                    <span class="sidebar-button-desc">分类</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
-                    <span class="sidebar-button-desc">标签</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
-                    <span class="sidebar-button-desc">归档</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link st-search-show-outputs"
-                         href="/#search"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
-                    <span class="sidebar-button-desc">搜索</span>
-                </a>
-        </li>
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/#about"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
-                    <span class="sidebar-button-desc">关于</span>
-                </a>
-        </li>
-        
-    </ul>
-    
-        <ul class="sidebar-buttons">
-        
-    </ul>
-    
-        <ul class="sidebar-buttons">
-        
-            <li class="sidebar-button">
-                
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
-                
-                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
-                    <span class="sidebar-button-desc">RSS</span>
-                </a>
-        </li>
-        
-    </ul>
-    
-</nav>
-
-            
-            <div id="main" data-behavior="4"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
-    
-    
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title" itemprop="headline">
-            alictf web writeup
-        </h1>
-    
-    <div class="post-meta">
-    <time itemprop="datePublished" content="Wed Jun 15 2016 11:20:07 GMT+0800">
-	
-		    6月 15, 2016
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/技术分享/">技术分享</a>
-
-
-    
-</div>
-</div>
-    
-    <div class="post-content markdown" itemprop="articleBody">
-        <div class="main-content-wrap">
-            <!-- excerpt -->
-<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import md5&#10;pre = &#34;5bc0&#34;&#10;for x in xrange(1, 1000000):&#10;    a = md5.md5(str(x))&#10;    m = a.hexdigest()&#10;    if m[:4] == pre:&#10;        print x&#10;        break</span><br></pre></td></tr></table></figure></p>
-<p>进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。<br><img src="/images/alictf_1.png" alt=""><br>首先根目录有三个提示文件：phpinfo.php;info.php和readme.html，其中phpinfo可以看到网站使用PHP7使用了OPcache。<br><img src="/images/alictf_2.png" alt=""></p>
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import md5&#10;pre = &#34;5bc0&#34;&#10;for x in xrange(1, 1000000):&#10;    a = md5.md5(str(x))&#10;    m = a.hexdigest()&#10;    if m[:4] == pre:&#10;        print x&#10;        break</span><br></pre></td></tr></table></figure></p>
+<p>进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。<br><a id="more"></a> </p>
+<p><img src="/images/alictf_1.png" alt=""><br>首先根目录有三个提示文件：phpinfo.php;info.php和readme.html，其中phpinfo可以看到网站使用PHP7使用了OPcache。<br><img src="/images/alictf_2.png" alt=""></p>
 <p>php7下的OPcache，可以通过在OPcache的缓存目录下写入x.php.bin文件，请求网站目录下的x.php文件时会加载缓存文件并解析，如果bin文件中写入webshell，则php文件将加载这段webshell代码。<br>上传时文件加时间戳重命名，目录无法绕过。OPcache的目录权限非常低，因此可以用sqli写入。目录格式为<br>/OPcache path/system ID/web path/<br>使用python程序计算出的机器码后，获得当前站的文件缓存目录为<br>/tmp/OPcache/39b005ad77428c42788140c6839e6201/var/www/html/upload/<br>上传2016223565-xxx.php文件，本地生成webshell bin文件，使用into dumpfile在目录写入2016223565-xxx.php.bin getshell。</p>
-<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>获取到shell以后在phpinfo中查看到网站disable founction中禁用了php几乎所有文件的操作函数，在phpinfo中看到启用了sendmail函数库，因此可以用LD_PRELOAD绕过php disable function。<br>编译动态库上传到服务器，php调用执行动态库中的system命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php&#10;putenv(&#34;LD_PRELOAD=/path/xxx.so&#34;);&#10;mail(&#34;a@localhost&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;);&#10;?&#62;</span><br></pre></td></tr></table></figure></p>
+<h3 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h3><p>获取到shell以后在phpinfo中查看到网站disable founction中禁用了php几乎所有文件的操作函数，在phpinfo中看到启用了sendmail函数库，因此可以用LD_PRELOAD绕过php disable function。<br>编译动态库上传到服务器，php调用执行动态库中的system命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php&#10;putenv(&#34;LD_PRELOAD=/path/xxx.so&#34;);&#10;mail(&#34;a@localhost&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;);&#10;?&#62;</span><br></pre></td></tr></table></figure></p>
 <p>使用echo /* &gt; /tmp/file命令获取根文件目录，找到flag文件<br><img src="/images/alictf_3.png" alt=""></p>
 <p>但是系统读文件命令都被清空了，使用c的文件读写，读到flag值。</p>
-<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>web 100 foundpasswd<br>系统存在很多处sql注入，甚至开始时还存在一个重复注册漏洞，因此直接可以注册HHHH，登录管理后台，然后在后台用户管理处可以联合查询。<br>loadfile下载到登录口的源代码。<br>找到用户表名和字段名。<br>在查询处获取到HHHH密码则为flag。<br>后来重复注册被修复了，xss盲打管理员cookie找到后台的联合查询注入点后select管理员密码。</p>
-            
-        </div>
+<h3 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h3><p>web 100 foundpasswd<br>系统存在很多处sql注入，甚至开始时还存在一个重复注册漏洞，因此直接可以注册HHHH，登录管理后台，然后在后台用户管理处可以联合查询。<br>loadfile下载到登录口的源代码。<br>找到用户表名和字段名。<br>在查询处获取到HHHH密码则为flag。<br>后来重复注册被修复了，xss盲打管理员cookie找到后台的联合查询注入点后select管理员密码。</p>
+
+      
     </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
+    
+    
+      <footer class="article-footer">
         
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
-                
-    <a class="tag tag--primary tag--small t-link" href="/tags/ctf/">ctf</a> <a class="tag tag--primary tag--small t-link" href="/tags/das/">das</a> <a class="tag tag--primary tag--small t-link" href="/tags/lab/">lab</a>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/das/">das</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss/">ksss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lab/">lab</a></li></ul>
 
-            </div>
-        
-        <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/06/15/das-lab/"  data-tooltip="DAS-LAB">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/19/php-obj-injection/" data-tooltip="小记一次PHP对象注入">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-        
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#ds-thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
-    </ul>
-</div>
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/19/php-obj-injection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">小记一次PHP对象注入&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
 
-
-        
-            
-                <div id="ds-thread" class="ds-thread" data-thread-key="2016/06/15/alictf-web-writeup/"
-     data-title="alictf web writeup" data-url="http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-</div>
-
-            
-        
-    </div>
+  
 </article>
 
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2016 das. All Rights Reserved.
-    </span>
-</footer>
-
-            </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/06/15/das-lab/"  data-tooltip="DAS-LAB">
-                
-                    <i class="fa fa-angle-left"></i>
-                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
-                </a>
-            </li>
-            <li class="post-action">
-                
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/19/php-obj-injection/" data-tooltip="小记一次PHP对象注入">
-                
-                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
-                <i class="fa fa-share-alt"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-facebook-official"></i>
-            </a>
-        </li>
-        <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-twitter"></i>
-            </a>
-        </li>
-        
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#ds-thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#">
-            
-                <i class="fa fa-list"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
-    <ul class="share-options">
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
-            </a>
-        </li>
-        <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://das.scusec.org/2016/06/15/alictf-web-writeup/">
-                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<div id="share-options-mask" class="share-options-mask"></div>
-            
-        </div>
-        
-
-
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-remove"></i>
-        </div>
-        
-            <h4 id="about-card-name">das</h4>
-        
-            <h5 id="about-card-bio"><p>author.bio</p>
-</h5>
-        
-        
-            <h5 id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
-
-            </h5>
-        
-        
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-alictf-web-writeup" data-title="alictf web writeup" data-url="http://das.scusec.org/2016/06/15/alictf-web-writeup/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 das&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
-</div>
-
-        
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
-    </body>
-    <!--SCRIPTS-->
-<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
-<!--SCRIPTS END-->
-
-    
-        <script type="text/javascript">
-            var duoshuoQuery = {short_name:'dassec'};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        </script>
+  </div>
+</footer>
     
 
+<script src="/js/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
 </html>
