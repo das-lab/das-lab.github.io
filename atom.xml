@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-07-28T06:49:21.000Z</updated>
+  <updated>2016-07-28T07:09:54.000Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -16,11 +16,152 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>自定义右键菜单学习</title>
+    <link href="http://das.scusec.org/2016/07/22/context-menu/"/>
+    <id>http://das.scusec.org/2016/07/22/context-menu/</id>
+    <published>2016-07-22T04:09:54.000Z</published>
+    <updated>2016-07-28T07:09:54.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic0.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;【前言】&quot;&gt;&lt;a href=&quot;#【前言】&quot; class=&quot;headerlink&quot; title=&quot;【前言】&quot;&gt;&lt;/a&gt;【前言】&lt;/h3&gt;&lt;p&gt;   Q：为什么要自定义右键菜单？&lt;/p&gt;
+&lt;p&gt;   A：为了更友好的交互（呵呵）&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;【一般思路】&quot;&gt;&lt;a href=&quot;#【一般思路】&quot; class=&quot;headerlink&quot; title=&quot;【一般思路】&quot;&gt;&lt;/a&gt;【一般思路】&lt;/h3&gt;&lt;p&gt;  严格来讲，右键菜单应该叫上下文菜单，在html5中也新定义了这个contextmenu全局属性。&lt;br&gt;它的语法是这样的：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;contextmenu&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;supermenu&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;这个段落附加了一个名为 &quot;supermenu&quot; 的上下文菜单。&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;menu&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;supermenu&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;label&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;Step 1: Write Tutorial&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;onclick&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;doSomething()&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;label&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;Step 2: Edit Tutorial&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;onclick&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;doSomethingElse()&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;menu&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;contextmenu&lt;/code&gt; 属性规定元素的上下文菜单。当用户右键点击元素时，会出现上下文菜单。&lt;br&gt;&lt;code&gt;contextmenu&lt;/code&gt; 属性的值是要打开的&lt;code&gt;&amp;lt;menu&amp;gt;&lt;/code&gt;元素的 id。&lt;br&gt;在这里，我注意到浏览器支持问题：&lt;br&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic1.png&quot; alt=&quot;image&quot;&gt;&lt;br&gt;!!!但是!&lt;br&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic2.png&quot; alt=&quot;image&quot;&gt;&lt;br&gt;在Firefox中并没有出现预想中的结果！&lt;br&gt;然后我发现下面这样可以实现：&lt;br&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic4.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;所以这里要注意一下，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;①w3cschool上&lt;code&gt;&amp;lt;menu&amp;gt;&lt;/code&gt;的子标签用的是&lt;code&gt;&amp;lt;command&amp;gt;&lt;/code&gt;，是有问题的；菜鸟教程上用的是&lt;code&gt;&amp;lt;menuitem&amp;gt;&lt;/code&gt;,亲测可行。&lt;/p&gt;
+&lt;p&gt;②w3cschool上没有给&lt;code&gt;&amp;lt;menu&amp;gt;&lt;/code&gt;加一个type属性,必须要加上type=”context”才能成功实现。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic5.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;更细致的关于menu和menuitem实现上下文菜单可以参考博文&lt;a href=&quot;https://segmentfault.com/a/1190000002449360&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《利用HTML 5中的Menu和Menuitem元素快速创建菜单》&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;可能大家也发现了，这个contextmenu属性只能在原有的上下文菜单上添加，而不能对原有的上下文菜单项进行删除等操作，这样是它的局限性。这时，就需要我们自己通过js来模拟右键点击出现上下文菜单。&lt;/p&gt;
+&lt;p&gt;写过一段时间JS的都知道，我们实现这个上下文菜单大概这个思路：&lt;br&gt;写个ul列表(隐藏掉) -&amp;gt; 监听鼠标右键事件 -&amp;gt; 将ul列表显示出来&lt;/p&gt;
+&lt;p&gt;但是，实现的时候，还需要注意几个细节，于是我将这个粗糙的思路细化了一下：&lt;/p&gt;
+&lt;p&gt;(文中js代码都是基于jQuery的)&lt;/p&gt;
+&lt;h4 id=&quot;阻止浏览器默认右键菜单（上下文菜单）&quot;&gt;&lt;a href=&quot;#阻止浏览器默认右键菜单（上下文菜单）&quot; class=&quot;headerlink&quot; title=&quot;阻止浏览器默认右键菜单（上下文菜单）&quot;&gt;&lt;/a&gt;阻止浏览器默认右键菜单（上下文菜单）&lt;/h4&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;).bind(&lt;span class=&quot;string&quot;&gt;&quot;contextmenu&quot;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;; &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;定义一个ul列表&quot;&gt;&lt;a href=&quot;#定义一个ul列表&quot; class=&quot;headerlink&quot; title=&quot;定义一个ul列表&quot;&gt;&lt;/a&gt;定义一个ul列表&lt;/h4&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;display:none&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;menuitem1&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;menuitem2&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;menuitem3&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这里要注意列表的放置位置，跟上下文菜单作用的区域相关。&lt;/p&gt;
+&lt;h4 id=&quot;监听鼠标右键点击事件&quot;&gt;&lt;a href=&quot;#监听鼠标右键点击事件&quot; class=&quot;headerlink&quot; title=&quot;监听鼠标右键点击事件&quot;&gt;&lt;/a&gt;监听鼠标右键点击事件&lt;/h4&gt;&lt;p&gt;这里是根据事件对象的button值来判断的，比如mousedown的事件对象：&lt;br&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic6.png&quot; alt=&quot;image&quot;&gt;&lt;br&gt;由于click事件和mousedown事件很像，在这里将两者做一下比较：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;鼠标事件&lt;/th&gt;
+&lt;th&gt;button值&lt;/th&gt;
+&lt;th&gt;事件描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt; click&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;单击鼠标左键    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; click&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;单击鼠标中键    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; mousedown&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;鼠标左键被按下  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; mousedown&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;鼠标中键被按下  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; mousedown&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;鼠标右键被按下  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;click事件只会在单击鼠标左键和中键时触发，单击右键时不会触发&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;给ul列表定位及显示&quot;&gt;&lt;a href=&quot;#给ul列表定位及显示&quot; class=&quot;headerlink&quot; title=&quot;给ul列表定位及显示&quot;&gt;&lt;/a&gt;给ul列表定位及显示&lt;/h4&gt;&lt;p&gt;之前我们提到列表的放置位置，就是为了更准确的给它定位。一般上下文菜单是显示在鼠标稍微右下角的地方，所有首先要定位当前鼠标的坐标。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;参数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;兼容性&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;  clientX、clientY&lt;/td&gt;
+&lt;td&gt;触发点相对&lt;strong&gt;浏览器可视区域&lt;/strong&gt;左上角距离，不随页面滚动而改变&lt;/td&gt;
+&lt;td&gt;所有浏览器均支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pageX、pageY&lt;/td&gt;
+&lt;td&gt;触发点相对&lt;strong&gt;文档区域&lt;/strong&gt;左上角距离，会随着页面滚动而改变&lt;/td&gt;
+&lt;td&gt;IE6/7/8不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;offsetX、offsetY&lt;/td&gt;
+&lt;td&gt;触发点相对被&lt;strong&gt;触发dom&lt;/strong&gt;的左上角距离，不过左上角基准点在不同浏览器中有区别，其中在IE中以内容区左上角为基准点不包括边框，如果触发点在边框上会返回负值，而chrome中以边框左上角为基准点。&lt;/td&gt;
+&lt;td&gt;IE所有版本，chrome，Safari均完美支持，Firefox不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;layerX、layerY&lt;/td&gt;
+&lt;td&gt;触发点相对被&lt;strong&gt;触发dom&lt;/strong&gt;左上角的距离，数值与offsetX/Y相同，这个变量就是&lt;strong&gt;firefox&lt;/strong&gt;用来替代offsetX/Y的，基准点为边框左上角，但是有个条件就是，被触发的dom需要设置为position:relative或者position:absolute，否则会返回相对html文档区域左上角的距离&lt;/td&gt;
+&lt;td&gt;IE6/7/8不支持，opera不支持，IE9/10和Chrome、Safari均支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;screenX、screenY&lt;/td&gt;
+&lt;td&gt;触发点相对&lt;strong&gt;显示器屏幕&lt;/strong&gt;左上角的距离，不随页面滚动而改变&lt;/td&gt;
+&lt;td&gt;所有浏览器均支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic7.png&quot; alt=&quot;image&quot;&gt;&lt;br&gt;选择给鼠标定位的参数，那么就选择相应的方式给ul列表定位。&lt;/p&gt;
+&lt;p&gt;个人推荐使用pageX和pageY，因为我们最后给ul列表定位时，会用到&lt;code&gt;position:absolute&lt;/code&gt;。绝对定位是相对于 static定位以外的第一个父元素进行定位。如果两者都是body定位的话，不容易出现定位失误。然后再&lt;code&gt;display：block&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;多定义一个事件：鼠标左键点击页面，ul列表&lt;code&gt;display：none&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;【简单实现】&quot;&gt;&lt;a href=&quot;#【简单实现】&quot; class=&quot;headerlink&quot; title=&quot;【简单实现】&quot;&gt;&lt;/a&gt;【简单实现】&lt;/h3&gt;&lt;p&gt;代码：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;container&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;header&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;自定义右键菜单-example1&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;h1&lt;/span&gt;&amp;gt;&lt;/span&gt;自定义右键菜单&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;h1&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;btns&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;example-1&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;example-2&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;example-3&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;example-4&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;button&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;contextMenu&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;style&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;display:none&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;菜单一&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;菜单二&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;href&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;#&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;菜单三&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;undefined&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    $(&lt;span class=&quot;string&quot;&gt;&quot;.btns button&quot;&lt;/span&gt;).mousedown(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;params&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(params.button == &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            $(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;).bind(&lt;span class=&quot;string&quot;&gt;&#39;contextmenu&#39;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            $(&lt;span class=&quot;string&quot;&gt;&quot;#contextMenu&quot;&lt;/span&gt;).css(&amp;#123;&lt;span class=&quot;string&quot;&gt;&#39;top&#39;&lt;/span&gt;:params.pageY+&lt;span class=&quot;string&quot;&gt;&#39;px&#39;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&#39;left&#39;&lt;/span&gt;:params.pageX+&lt;span class=&quot;string&quot;&gt;&#39;px&#39;&lt;/span&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            $(&lt;span class=&quot;string&quot;&gt;&quot;#contextMenu&quot;&lt;/span&gt;).show();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    $(&lt;span class=&quot;string&quot;&gt;&quot;body&quot;&lt;/span&gt;).click(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        $(&lt;span class=&quot;string&quot;&gt;&quot;#contextMenu&quot;&lt;/span&gt;).hide();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;效果：&lt;br&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic8.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;【插件】&quot;&gt;&lt;a href=&quot;#【插件】&quot; class=&quot;headerlink&quot; title=&quot;【插件】&quot;&gt;&lt;/a&gt;【插件】&lt;/h3&gt;&lt;p&gt;事实上，大神早已为我们打造好了“神器”，请戳张鑫旭的&lt;br&gt;&lt;a href=&quot;http://www.zhangxinxu.com/wordpress/2011/05/jquery-smartmenu%E5%8F%B3%E9%94%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8F%9C%E5%8D%95%E6%8F%92%E4%BB%B6/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《jQuery smartMenu右键自定义上下文菜单插件》&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本文完&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/simin/pic0.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;【前言】&quot;&gt;&lt;a href=&quot;#【前言】&quot; class=&quot;headerlink&quot; title=&quot;【前言】&quot;&gt;&lt;/a&gt;【前言】&lt;/h3&gt;&lt;p&gt;   Q：为什么要自定义右键菜单？&lt;/p&gt;
+&lt;p&gt;   A：为了更友好的交互（呵呵）&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="开发笔记" scheme="http://das.scusec.org/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="contextmenu" scheme="http://das.scusec.org/tags/contextmenu/"/>
+    
+      <category term="simin" scheme="http://das.scusec.org/tags/simin/"/>
+    
+      <category term="上下文菜单" scheme="http://das.scusec.org/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8F%9C%E5%8D%95/"/>
+    
+      <category term="右键菜单" scheme="http://das.scusec.org/tags/%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>不常见的xss利用探索</title>
     <link href="http://das.scusec.org/2016/06/27/unusual-xss-exploit/"/>
     <id>http://das.scusec.org/2016/06/27/unusual-xss-exploit/</id>
     <published>2016-06-26T16:00:00.000Z</published>
-    <updated>2016-07-28T06:49:21.000Z</updated>
+    <updated>2016-07-28T07:10:27.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;0x01-前言&quot;&gt;&lt;a href=&quot;#0x01-前言&quot; class=&quot;headerlink&quot; title=&quot;0x01 前言&quot;&gt;&lt;/a&gt;0x01 前言&lt;/h3&gt;&lt;p&gt;反射型xss，相对于持久型xss来说比较鸡肋；需要欺骗用户点击构造好的链接，达到窃取cookie，或是进一步CSRF劫持用户操作的目的。若是get型的xss，javascript代码直接在url中，虽然有些怪异，也好歹能用，愿者上钩。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;但是若js代码是在post数据包，或者是在header里，那就更显得鸡肋了，甚至无法利用。我查阅了大量的资料，有了下面的尝试。&lt;/p&gt;
 &lt;h3 id=&quot;0x02-POST型反射xss&quot;&gt;&lt;a href=&quot;#0x02-POST型反射xss&quot; class=&quot;headerlink&quot; title=&quot;0x02 POST型反射xss&quot;&gt;&lt;/a&gt;0x02 POST型反射xss&lt;/h3&gt;&lt;p&gt;对于post反射型xss，其实已经有比较成熟的利用方法：构造post表单，利用js直接提交。表单构造如下：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;form&lt;/span&gt;  &lt;span class=&quot;attribute&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;form&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;form1&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;method&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;post&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;action&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;http://target.com/test.php&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;type&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;searchKey&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;hidden&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;true&quot;&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;value&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&#39;test&quot;&amp;gt;&amp;lt;img src=1 onerror=alert(document.domain)&amp;gt;&#39;&lt;/span&gt;/&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;form&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;javascript&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&#39;form1&#39;&lt;/span&gt;).submit();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -58,7 +199,7 @@
     
     </summary>
     
-      <category term="技术分享" scheme="http://das.scusec.org/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="安全笔记" scheme="http://das.scusec.org/categories/%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="wps2015" scheme="http://das.scusec.org/tags/wps2015/"/>
@@ -72,7 +213,7 @@
     <link href="http://das.scusec.org/2016/06/15/alictf-web-writeup/"/>
     <id>http://das.scusec.org/2016/06/15/alictf-web-writeup/</id>
     <published>2016-06-15T03:20:07.000Z</published>
-    <updated>2016-07-28T06:11:29.000Z</updated>
+    <updated>2016-07-28T07:10:22.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h3&gt;&lt;p&gt;web 400 homework&lt;br&gt;网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;import md5&amp;#10;pre = &amp;#34;5bc0&amp;#34;&amp;#10;for x in xrange(1, 1000000):&amp;#10;    a = md5.md5(str(x))&amp;#10;    m = a.hexdigest()&amp;#10;    if m[:4] == pre:&amp;#10;        print x&amp;#10;        break&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; &lt;/p&gt;
@@ -91,7 +232,7 @@
     
     </summary>
     
-      <category term="技术分享" scheme="http://das.scusec.org/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="安全笔记" scheme="http://das.scusec.org/categories/%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="ctf" scheme="http://das.scusec.org/tags/ctf/"/>
@@ -109,7 +250,7 @@
     <link href="http://das.scusec.org/2016/05/19/php-obj-injection/"/>
     <id>http://das.scusec.org/2016/05/19/php-obj-injection/</id>
     <published>2016-05-19T01:45:20.000Z</published>
-    <updated>2016-07-28T06:11:49.000Z</updated>
+    <updated>2016-07-28T07:10:09.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;1-写在前面&quot;&gt;&lt;a href=&quot;#1-写在前面&quot; class=&quot;headerlink&quot; title=&quot;1. 写在前面&quot;&gt;&lt;/a&gt;1. 写在前面&lt;/h3&gt;&lt;p&gt;最近经常会遇到一些比较有意思的漏洞，比如&lt;strong&gt;PHP反序列化漏洞&lt;/strong&gt;,&lt;strong&gt;PHP对象注入&lt;/strong&gt;。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。&lt;/p&gt;
 &lt;h3 id=&quot;2-自动加载&quot;&gt;&lt;a href=&quot;#2-自动加载&quot; class=&quot;headerlink&quot; title=&quot;2. 自动加载&quot;&gt;&lt;/a&gt;2. 自动加载&lt;/h3&gt;&lt;h4 id=&quot;2-0-为什么要自动加载？&quot;&gt;&lt;a href=&quot;#2-0-为什么要自动加载？&quot; class=&quot;headerlink&quot; title=&quot;2.0 为什么要自动加载？&quot;&gt;&lt;/a&gt;2.0 为什么要自动加载？&lt;/h4&gt;&lt;p&gt;在面向对象编程中，程序员经常会编写好类然后在一个入口文件中将它们包含进来。如果一个项目非常大，可能存在成百上千个类文件，如果一一包含进去，那么入口文件就会显得特别大并且不利于维护。因此，PHP5提供了一种自动加载机制。&lt;/p&gt;
@@ -197,7 +338,7 @@
     
     </summary>
     
-      <category term="技术分享" scheme="http://das.scusec.org/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="安全笔记" scheme="http://das.scusec.org/categories/%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="PHP" scheme="http://das.scusec.org/tags/PHP/"/>
@@ -215,7 +356,7 @@
     <link href="http://das.scusec.org/2016/05/16/whctf-writeup-all/"/>
     <id>http://das.scusec.org/2016/05/16/whctf-writeup-all/</id>
     <published>2016-05-16T07:52:42.000Z</published>
-    <updated>2016-07-28T06:12:12.000Z</updated>
+    <updated>2016-07-28T07:10:32.000Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;https://time.xctf.org.cn/ctfs/event/19/tasks&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;地址&amp;gt;&amp;gt;请猛戳&amp;lt;&amp;lt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;Web题&quot;&gt;&lt;a href=&quot;#Web题&quot; class=&quot;headerlink&quot; title=&quot;Web题&quot;&gt;&lt;/a&gt;Web题&lt;/h3&gt;&lt;p&gt;0x01. 信息&lt;/p&gt;
@@ -259,7 +400,7 @@
     
     </summary>
     
-      <category term="技术分享" scheme="http://das.scusec.org/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="安全笔记" scheme="http://das.scusec.org/categories/%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="ctf" scheme="http://das.scusec.org/tags/ctf/"/>
