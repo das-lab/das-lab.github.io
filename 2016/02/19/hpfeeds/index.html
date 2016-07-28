@@ -3,17 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>小黑屋</title>
+  <title>蜜罐中常用协议——HPFEEDS协议 - 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="将代码写成诗句，将安全融入呼吸！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小黑屋">
-<meta property="og:url" content="http://das.scusec.org/index.html">
+  <meta name="description" content="0x00 hpfeeds协议是什么？hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。
+轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蜜罐中常用协议——HPFEEDS协议">
+<meta property="og:url" content="http://das.scusec.org/2016/02/19/hpfeeds/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="将代码写成诗句，将安全融入呼吸！">
+<meta property="og:description" content="0x00 hpfeeds协议是什么？hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。
+轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/1.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/2.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/3.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/4.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/5.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/6.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/7.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/8.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/9.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/10.jpg">
+<meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/11.jpg">
+<meta property="og:updated_time" content="2016-07-28T07:34:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小黑屋">
-<meta name="twitter:description" content="将代码写成诗句，将安全融入呼吸！">
+<meta name="twitter:title" content="蜜罐中常用协议——HPFEEDS协议">
+<meta name="twitter:description" content="0x00 hpfeeds协议是什么？hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。
+轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己">
   
   
     <link rel="icon" href="/favicon.png">
@@ -55,264 +70,15 @@
     </div>
   </div>
 </header>
-    <section id="main" class="outer">
-      <article id="post-context-menu" class="article article-type-post" itemscope itemprop="blogPost">
+    <section id="main" class="outer"><article id="post-hpfeeds" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/context-menu/">自定义右键菜单学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/07/22/context-menu/" class="article-date">
-  <time datetime="2016-07-22T04:09:54.000Z" itemprop="datePublished">2016-07-22</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/开发笔记/">开发笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><p>   Q：为什么要自定义右键菜单？</p>
-<p>   A：为了更友好的交互（呵呵）</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/22/context-menu/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/contextmenu/">contextmenu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/simin/">simin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/上下文菜单/">上下文菜单</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/右键菜单/">右键菜单</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-  
-    
-      <article id="post-unusual-xss-exploit" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/27/unusual-xss-exploit/">不常见的xss利用探索</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/06/27/unusual-xss-exploit/" class="article-date">
-  <time datetime="2016-06-26T16:00:00.000Z" itemprop="datePublished">2016-06-27</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>反射型xss，相对于持久型xss来说比较鸡肋；需要欺骗用户点击构造好的链接，达到窃取cookie，或是进一步CSRF劫持用户操作的目的。若是get型的xss，javascript代码直接在url中，虽然有些怪异，也好歹能用，愿者上钩。
-        
-          <p class="article-more-link">
-            <a href="/2016/06/27/unusual-xss-exploit/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wps2015/">wps2015</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/">xss</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-  
-    
-      <article id="post-alictf-web-writeup" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/15/alictf-web-writeup/">alictf web writeup</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/06/15/alictf-web-writeup/" class="article-date">
-  <time datetime="2016-06-15T03:20:07.000Z" itemprop="datePublished">2016-06-15</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。
-        
-          <p class="article-more-link">
-            <a href="/2016/06/15/alictf-web-writeup/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/das/">das</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss/">ksss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lab/">lab</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-  
-    
-      <article id="post-php-obj-injection" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/19/php-obj-injection/">小记一次PHP对象注入</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/05/19/php-obj-injection/" class="article-date">
-  <time datetime="2016-05-19T01:45:20.000Z" itemprop="datePublished">2016-05-19</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h3><p>最近经常会遇到一些比较有意思的漏洞，比如<strong>PHP反序列化漏洞</strong>,<strong>PHP对象注入</strong>。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。
-        
-          <p class="article-more-link">
-            <a href="/2016/05/19/php-obj-injection/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/对象注入/">对象注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/该隐/">该隐</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-  
-    
-      <article id="post-whctf-writeup-all" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/16/whctf-writeup-all/">whctf-writeup-all</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/05/16/whctf-writeup-all/" class="article-date">
-  <time datetime="2016-05-16T07:52:42.000Z" itemprop="datePublished">2016-05-16</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://time.xctf.org.cn/ctfs/event/19/tasks">地址&gt;&gt;请猛戳&lt;&lt;</a></p>
-<h3 id="Web题"><a href="#Web题" class="headerlink" title="Web题"></a>Web题</h3><p>0x01. 信息</p>
-<p>打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码<code>www.hust.edu.cn</code>，flag在flag3.docx中
-        
-          <p class="article-more-link">
-            <a href="/2016/05/16/whctf-writeup-all/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/das/">das</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lab/">lab</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-  
-    
-      <article id="post-hpfeeds" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/hpfeeds/">蜜罐中常用协议——HPFEEDS协议</a>
+    <h1 class="article-title" itemprop="name">
+      蜜罐中常用协议——HPFEEDS协议
     </h1>
   
 
@@ -417,10 +183,43 @@ python setup.py install
     
   </div>
   
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/16/whctf-writeup-all/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          whctf-writeup-all
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
 </article>
 
   
-    </section>
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-hpfeeds" data-title="蜜罐中常用协议——HPFEEDS协议" data-url="http://das.scusec.org/2016/02/19/hpfeeds/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
     <footer id="footer">
   
   <div class="outer">
