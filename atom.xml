@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-08-23T02:55:37.000Z</updated>
+  <updated>2016-08-23T03:01:30.000Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>浅谈waf下的sql注入绕过</title>
+    <title>浅谈WAF下的SQL注入绕过</title>
     <link href="http://das.scusec.org/2016/08/23/waf-sql-bypass/"/>
     <id>http://das.scusec.org/2016/08/23/waf-sql-bypass/</id>
-    <published>2016-08-23T02:55:37.000Z</published>
-    <updated>2016-08-23T02:55:37.000Z</updated>
+    <published>2016-08-23T03:01:30.000Z</published>
+    <updated>2016-08-23T03:01:30.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;0x00&quot;&gt;&lt;a href=&quot;#0x00&quot; class=&quot;headerlink&quot; title=&quot;0x00&quot;&gt;&lt;/a&gt;0x00&lt;/h2&gt;&lt;p&gt;几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;结果。。。这两天聊到云waf想起这件事来。去主站看了一下，发现和上次测试区别是防御规则加上了web客户端指纹，发现恶意以后直接长时间屏蔽掉来自这个web客户端的请求。然而上次用的方法并没有被补上，本来想把payload作为绕过实例的，现在只好略过这个具体方法写思路了。正巧前段时间看到锁师兄在ali峰会上讲的waf防御的非主流技术，那记录一下测试思路和友情吹一波锁师兄。&lt;/p&gt;

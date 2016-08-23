@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>浅谈waf下的sql注入绕过 - 小黑屋</title>
+  <title>浅谈WAF下的SQL注入绕过 - 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="0x00几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈waf下的sql注入绕过">
+<meta property="og:title" content="浅谈WAF下的SQL注入绕过">
 <meta property="og:url" content="http://das.scusec.org/2016/08/23/waf-sql-bypass/index.html">
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="0x00几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。">
 <meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160818201051-1.png">
 <meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160818203051.png">
-<meta property="og:updated_time" content="2016-08-23T02:55:37.000Z">
+<meta property="og:updated_time" content="2016-08-23T03:01:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈waf下的sql注入绕过">
+<meta name="twitter:title" content="浅谈WAF下的SQL注入绕过">
 <meta name="twitter:description" content="0x00几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。">
   
   
@@ -66,7 +66,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      浅谈waf下的sql注入绕过
+      浅谈WAF下的SQL注入绕过
     </h1>
   
 
@@ -74,7 +74,7 @@
     
     <div class="article-meta">
       <a href="/2016/08/23/waf-sql-bypass/" class="article-date">
-  <time datetime="2016-08-23T02:55:37.000Z" itemprop="datePublished">2016-08-23</time>
+  <time datetime="2016-08-23T03:01:30.000Z" itemprop="datePublished">2016-08-23</time>
 </a>
       
       
@@ -128,7 +128,7 @@
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-waf-sql-bypass" data-title="浅谈waf下的sql注入绕过" data-url="http://das.scusec.org/2016/08/23/waf-sql-bypass/"></div>
+    <div class="ds-thread" data-thread-key="post-waf-sql-bypass" data-title="浅谈WAF下的SQL注入绕过" data-url="http://das.scusec.org/2016/08/23/waf-sql-bypass/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
