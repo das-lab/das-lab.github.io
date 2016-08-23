@@ -14,7 +14,7 @@
 <meta property="og:image" content="http://das.scusec.org/images/alictf_1.png">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_2.png">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_3.png">
-<meta property="og:updated_time" content="2016-07-28T07:12:45.000Z">
+<meta property="og:updated_time" content="2016-08-23T02:30:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="alictf web writeup">
 <meta name="twitter:description" content="0x00web 400 homework网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。">
@@ -94,7 +94,7 @@
 <h3 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h3><p>获取到shell以后在phpinfo中查看到网站disable founction中禁用了php几乎所有文件的操作函数，在phpinfo中看到启用了sendmail函数库，因此可以用LD_PRELOAD绕过php disable function。<br>编译动态库上传到服务器，php调用执行动态库中的system命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php&#10;putenv(&#34;LD_PRELOAD=/path/xxx.so&#34;);&#10;mail(&#34;a@localhost&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;);&#10;?&#62;</span><br></pre></td></tr></table></figure></p>
 <p>使用echo /* &gt; /tmp/file命令获取根文件目录，找到flag文件<br><img src="/images/alictf_3.png" alt=""></p>
 <p>但是系统读文件命令都被清空了，使用c的文件读写，读到flag值。</p>
-<h3 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h3><p>web 100 foundpasswd<br>系统存在很多处sql注入，甚至开始时还存在一个重复注册漏洞，因此直接可以注册HHHH，登录管理后台，然后在后台用户管理处可以联合查询。<br>loadfile下载到登录口的源代码。<br>找到用户表名和字段名。<br>在查询处获取到HHHH密码则为flag。<br>后来重复注册被修复了，xss盲打管理员cookie找到后台的联合查询注入点后select管理员密码。</p>
+<h3 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h3><p>web 100 foundpasswd<br>系统存在很多处sql注入，甚至开始时还存在一个重复注册漏洞，因此直接可以注册HHHH，登录管理后台，然后在后台用户管理处可以联合查询。<br>loadfile下载到登录口的源代码。<br>找到用户表名和字段名。<br>在查询处获取到HHHH密码则为flag。<br>后来重复注册被修复了，xss盲打管理员cookie找到后台的联合查询注入点后select管理员密码。  </p>
 
       
     </div>
