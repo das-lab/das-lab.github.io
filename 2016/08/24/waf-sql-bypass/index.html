@@ -8,7 +8,7 @@
   <meta name="description" content="0x00几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈WAF下的SQL注入绕过">
-<meta property="og:url" content="http://das.scusec.org/2016/08/23/waf-sql-bypass/index.html">
+<meta property="og:url" content="http://das.scusec.org/2016/08/24/waf-sql-bypass/index.html">
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="0x00几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。">
 <meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160818201051-1.png">
@@ -73,8 +73,8 @@
       </header>
     
     <div class="article-meta">
-      <a href="/2016/08/23/waf-sql-bypass/" class="article-date">
-  <time datetime="2016-08-23T03:01:30.000Z" itemprop="datePublished">2016-08-23</time>
+      <a href="/2016/08/24/waf-sql-bypass/" class="article-date">
+  <time datetime="2016-08-24T09:49:05.100Z" itemprop="datePublished">2016-08-24</time>
 </a>
       
       
@@ -115,8 +115,16 @@
     
 <nav id="article-nav">
   
+    <a href="/2016/08/24/ksss/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          当提起Blind XXE时候会想到什么
+        
+      </div>
+    </a>
   
-    <a href="/2016/08/23/easy-to-SSRF-1/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2016/08/24/easy-to-SSRF-1/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">从入门到精通SSRF（1）&nbsp;<span>&gt;</span></div>
     </a>
   
@@ -128,7 +136,7 @@
   
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-waf-sql-bypass" data-title="浅谈WAF下的SQL注入绕过" data-url="http://das.scusec.org/2016/08/23/waf-sql-bypass/"></div>
+    <div class="ds-thread" data-thread-key="post-waf-sql-bypass" data-title="浅谈WAF下的SQL注入绕过" data-url="http://das.scusec.org/2016/08/24/waf-sql-bypass/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

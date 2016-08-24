@@ -56,6 +56,52 @@
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-ksss" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/ksss/">当提起Blind XXE时候会想到什么</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/24/ksss/" class="article-date">
+  <time datetime="2016-08-24T09:50:36.358Z" itemprop="datePublished">2016-08-24</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://dassec.b0.upaiyun.com/ksss/xml-2016-08-24.jpg" alt="enter description here"></p>
+<p>XXE（XML实体注入漏洞）顾名思义，漏洞的关键点在于服务器对外部实体的解析。外部实体中可以请求他域资源，也许在包括我之内的很多人在漏洞利用时会习惯的把XXE问题转换成SSRF的问题。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/24/ksss/#more">阅读全文</a>
+          </p>
+        
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss-blind-XXE-实体注入/">ksss,blind XXE,实体注入</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+  
+    
       <article id="post-waf-sql-bypass" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -64,15 +110,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/23/waf-sql-bypass/">浅谈WAF下的SQL注入绕过</a>
+      <a class="article-title" href="/2016/08/24/waf-sql-bypass/">浅谈WAF下的SQL注入绕过</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2016/08/23/waf-sql-bypass/" class="article-date">
-  <time datetime="2016-08-23T03:01:30.000Z" itemprop="datePublished">2016-08-23</time>
+      <a href="/2016/08/24/waf-sql-bypass/" class="article-date">
+  <time datetime="2016-08-24T09:49:05.100Z" itemprop="datePublished">2016-08-24</time>
 </a>
       
       
@@ -82,7 +128,7 @@
         <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。
         
           <p class="article-more-link">
-            <a href="/2016/08/23/waf-sql-bypass/#more">阅读全文</a>
+            <a href="/2016/08/24/waf-sql-bypass/#more">阅读全文</a>
           </p>
         
       
@@ -109,15 +155,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/23/easy-to-SSRF-1/">从入门到精通SSRF（1）</a>
+      <a class="article-title" href="/2016/08/24/easy-to-SSRF-1/">从入门到精通SSRF（1）</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2016/08/23/easy-to-SSRF-1/" class="article-date">
-  <time datetime="2016-08-23T02:55:14.000Z" itemprop="datePublished">2016-08-23</time>
+      <a href="/2016/08/24/easy-to-SSRF-1/" class="article-date">
+  <time datetime="2016-08-24T09:49:05.092Z" itemprop="datePublished">2016-08-24</time>
 </a>
       
       
@@ -127,7 +173,7 @@
         <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。<br>
         
           <p class="article-more-link">
-            <a href="/2016/08/23/easy-to-SSRF-1/#more">阅读全文</a>
+            <a href="/2016/08/24/easy-to-SSRF-1/#more">阅读全文</a>
           </p>
         
       
@@ -492,55 +538,9 @@
 
   
     
-      <article id="post-hpfeeds" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/hpfeeds/">蜜罐中常用协议——HPFEEDS协议</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/02/19/hpfeeds/" class="article-date">
-  <time datetime="2016-02-19T09:13:55.000Z" itemprop="datePublished">2016-02-19</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
-  </div>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="0x00-hpfeeds协议是什么？"><a href="#0x00-hpfeeds协议是什么？" class="headerlink" title="0x00 hpfeeds协议是什么？"></a>0x00 hpfeeds协议是什么？</h2><p>hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。</p>
-<p>轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己的状态。它是为了解决这样一种情况的发生，一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象需要改变。我的理解，这就类似于发传单，目标发送通知，没有指定特定的对象，通知会自动传播，观察者自己决定是否需要看传单，发送者对于传单是否被看一无所知。
-        
-          <p class="article-more-link">
-            <a href="/2016/02/19/hpfeeds/#more">阅读全文</a>
-          </p>
-        
-      
-    </div>
-    
-    
-      <footer class="article-footer">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/das/">das</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hpfeeds/">hpfeeds</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lab/">lab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/phantom/">phantom</a></li></ul>
-
-      </footer>
-    
-  </div>
-  
-</article>
-
-  
+      <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+      </nav>
     </section>
     <footer id="footer">
   

