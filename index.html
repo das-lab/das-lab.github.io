@@ -56,7 +56,7 @@
   </div>
 </header>
     <section id="main" class="outer">
-      <article id="post-ksss" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-easy-to-SSRF-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -64,26 +64,25 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/24/ksss/">当提起Blind XXE时候会想到什么</a>
+      <a class="article-title" href="/2016/08/24/easy-to-SSRF-1/">从入门到精通SSRF（1）</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2016/08/24/ksss/" class="article-date">
-  <time datetime="2016-08-24T09:50:36.358Z" itemprop="datePublished">2016-08-24</time>
+      <a href="/2016/08/24/easy-to-SSRF-1/" class="article-date">
+  <time datetime="2016-08-24T13:12:55.470Z" itemprop="datePublished">2016-08-24</time>
 </a>
       
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://dassec.b0.upaiyun.com/ksss/xml-2016-08-24.jpg" alt="enter description here"></p>
-<p>XXE（XML实体注入漏洞）顾名思义，漏洞的关键点在于服务器对外部实体的解析。外部实体中可以请求他域资源，也许在包括我之内的很多人在漏洞利用时会习惯的把XXE问题转换成SSRF的问题。<br>
+        <p><img src="http://dassec.b0.upaiyun.com/ksss/ssrf-1.jpg" alt=""><br>很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。<br>
         
           <p class="article-more-link">
-            <a href="/2016/08/24/ksss/#more">阅读全文</a>
+            <a href="/2016/08/24/easy-to-SSRF-1/#more">阅读全文</a>
           </p>
         
       
@@ -92,7 +91,7 @@
     
       <footer class="article-footer">
         
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss-blind-XXE-实体注入/">ksss,blind XXE,实体注入</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSRF/">SSRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gopher/">gopher</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss/">ksss</a></li></ul>
 
       </footer>
     
@@ -147,7 +146,7 @@
 
   
     
-      <article id="post-easy-to-SSRF-1" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-blind-xxe" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -155,25 +154,30 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/24/easy-to-SSRF-1/">从入门到精通SSRF（1）</a>
+      <a class="article-title" href="/2016/08/24/blind-xxe/">当提起Blind XXE时候会想到什么</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2016/08/24/easy-to-SSRF-1/" class="article-date">
-  <time datetime="2016-08-24T09:49:05.092Z" itemprop="datePublished">2016-08-24</time>
+      <a href="/2016/08/24/blind-xxe/" class="article-date">
+  <time datetime="2016-08-23T16:00:00.000Z" itemprop="datePublished">2016-08-24</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
+  </div>
+
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。<br>
+        <p><img src="http://dassec.b0.upaiyun.com/ksss/XXEA.png" alt=""></p>
+<p>XXE（XML实体注入漏洞）顾名思义，漏洞的关键点在于服务器对外部实体的解析。外部实体中可以请求他域资源，也许在包括我之内的很多人在漏洞利用时会习惯的把XXE问题转换成SSRF的问题。<br>
         
           <p class="article-more-link">
-            <a href="/2016/08/24/easy-to-SSRF-1/#more">阅读全文</a>
+            <a href="/2016/08/24/blind-xxe/#more">阅读全文</a>
           </p>
         
       
@@ -182,7 +186,7 @@
     
       <footer class="article-footer">
         
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSRF/">SSRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gopher/">gopher</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss/">ksss</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blind-XXE/">blind XXE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss/">ksss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实体注入/">实体注入</a></li></ul>
 
       </footer>
     
@@ -219,7 +223,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>接上一篇 <a href="http://wps2015.org/2016/08/05/code%20audit%20of%20zcncms/">代码审计——zcncms后台SQL注入(一)</a>， 继续挖掘出zcncms的几处漏洞.
+        <p><img src="http://dassec.b0.upaiyun.com/wps2015/zcncms-bugs.jpg" alt=""></p>
+<p>接上一篇 <a href="http://wps2015.org/2016/08/05/code%20audit%20of%20zcncms/">代码审计——zcncms后台SQL注入(一)</a>， 继续挖掘出zcncms的几处漏洞.<br>
         
           <p class="article-more-link">
             <a href="/2016/08/23/code-audit-of-zcncms2/#more">阅读全文</a>
@@ -268,7 +273,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>由于是后台注入，比较鸡肋，发上来供大家相互参考学习。zcncms版本1.2.14，官方网站地址：<br><a href="http://www.zcncms.com/">zcncms</a>
+        <p><img src="http://dassec.b0.upaiyun.com/wps2015/zcncms-sql.jpg" alt=""><br>由于是后台注入，比较鸡肋，发上来供大家相互参考学习。zcncms版本1.2.14，官方网站地址：<br><a href="http://www.zcncms.com/">zcncms</a>
         
           <p class="article-more-link">
             <a href="/2016/08/23/code-audit-of-zcncms1/#more">阅读全文</a>
@@ -317,7 +322,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><p>   Q：为什么要自定义右键菜单？</p>
+        <p><img src="http://dassec.b0.upaiyun.com/simin/pic0.png" alt="image"></p>
+<h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><p>   Q：为什么要自定义右键菜单？</p>
 <p>   A：为了更友好的交互（呵呵）</p>
         
           <p class="article-more-link">
@@ -367,7 +373,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="0x01-前言"><a href="#0x01-前言" class="headerlink" title="0x01 前言"></a>0x01 前言</h3><p>反射型xss，相对于持久型xss来说比较鸡肋；需要欺骗用户点击构造好的链接，达到窃取cookie，或是进一步CSRF劫持用户操作的目的。若是get型的xss，javascript代码直接在url中，虽然有些怪异，也好歹能用，愿者上钩。
+        <p><img src="http://dassec.b0.upaiyun.com/wps2015/xss.jpg" alt=""><br>反射型xss，相对于持久型xss来说比较鸡肋；需要欺骗用户点击构造好的链接，达到窃取cookie，或是进一步CSRF劫持用户操作的目的。<br>
         
           <p class="article-more-link">
             <a href="/2016/06/27/unusual-xss-exploit/#more">阅读全文</a>
@@ -416,7 +422,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。
+        <p><img src="http://dassec.b0.upaiyun.com/ksss/alictf.jpg" alt=""><br>
         
           <p class="article-more-link">
             <a href="/2016/06/15/alictf-web-writeup/#more">阅读全文</a>
@@ -465,7 +471,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h3><p>最近经常会遇到一些比较有意思的漏洞，比如<strong>PHP反序列化漏洞</strong>,<strong>PHP对象注入</strong>。这些漏洞可能在平时很难遇到，但是在CTF以及一些CMS倒是经常看到他们的背影。今天刚刚好手上看到了某CTF的代码，但是并没有获取所有源码，因此修改了部分代码进行分析。
+        <p><img src="http://dassec.b0.upaiyun.com/cain/php.jpg" alt=""><br>最近经常会遇到一些比较有意思的漏洞，比如<strong>PHP反序列化漏洞</strong>,<strong>PHP对象注入</strong>。<br>
         
           <p class="article-more-link">
             <a href="/2016/05/19/php-obj-injection/#more">阅读全文</a>
@@ -514,9 +520,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://time.xctf.org.cn/ctfs/event/19/tasks">地址&gt;&gt;请猛戳&lt;&lt;</a></p>
-<h3 id="Web题"><a href="#Web题" class="headerlink" title="Web题"></a>Web题</h3><p>0x01. 信息</p>
-<p>打开是一个代码下载链接，下载下来是wireshark抓的cap包，打开包分析发现两个http的包，get请求下载了zip的压缩包，利用wireshark导出zip包-File-Export Objects-HTTP。发现需要密码打开，官方提示华科官网，解压密码<code>www.hust.edu.cn</code>，flag在flag3.docx中
+        <p><img src="http://dassec.b0.upaiyun.com/das/whctf.png" alt=""><br><a href="https://time.xctf.org.cn/ctfs/event/19/tasks">地址&gt;&gt;请猛戳&lt;&lt;</a><br>
         
           <p class="article-more-link">
             <a href="/2016/05/16/whctf-writeup-all/#more">阅读全文</a>

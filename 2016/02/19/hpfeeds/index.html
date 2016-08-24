@@ -5,14 +5,13 @@
   
   <title>蜜罐中常用协议——HPFEEDS协议 - 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0x00 hpfeeds协议是什么？hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。
-轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己">
+  <meta name="description" content="hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="蜜罐中常用协议——HPFEEDS协议">
 <meta property="og:url" content="http://das.scusec.org/2016/02/19/hpfeeds/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="0x00 hpfeeds协议是什么？hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。
-轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己">
+<meta property="og:description" content="hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/phantom/honeypot.png">
 <meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/1.jpg">
 <meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/2.jpg">
 <meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/3.jpg">
@@ -24,11 +23,10 @@
 <meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/9.jpg">
 <meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/10.jpg">
 <meta property="og:image" content="http://7xr3oj.com1.z0.glb.clouddn.com/11.jpg">
-<meta property="og:updated_time" content="2016-07-28T07:35:34.000Z">
+<meta property="og:updated_time" content="2016-08-24T13:55:06.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="蜜罐中常用协议——HPFEEDS协议">
-<meta name="twitter:description" content="0x00 hpfeeds协议是什么？hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。
-轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己">
+<meta name="twitter:description" content="hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -97,8 +95,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="0x00-hpfeeds协议是什么？"><a href="#0x00-hpfeeds协议是什么？" class="headerlink" title="0x00 hpfeeds协议是什么？"></a>0x00 hpfeeds协议是什么？</h2><p>hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。</p>
-<p>轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己的状态。它是为了解决这样一种情况的发生，一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象需要改变。我的理解，这就类似于发传单，目标发送通知，没有指定特定的对象，通知会自动传播，观察者自己决定是否需要看传单，发送者对于传单是否被看一无所知。 <a id="more"></a></p>
+        <p><img src="http://dassec.b0.upaiyun.com/phantom/honeypot.png" alt=""><br>hpfeeds是一个轻量级的验证发布-订阅协议(authenticated publish-subscribe protocol)。<br><a id="more"></a></p>
+<h2 id="0x00-hpfeeds协议是什么？"><a href="#0x00-hpfeeds协议是什么？" class="headerlink" title="0x00 hpfeeds协议是什么？"></a>0x00 hpfeeds协议是什么？</h2><p>轻量级好理解，就是代码量相对较少，功能相对不复杂。那什么是发布-订阅协议呢？订阅发布协议定义了一种一对多的依赖关系，让多个订阅者对象同时监听某一个主题对象。这个主题对象在自身状态变化时，会通知所有订阅者对象，使它们能够自动更新自己的状态。它是为了解决这样一种情况的发生，一个对象的改变需要同时改变其他对象，而且它不知道具体有多少对象需要改变。我的理解，这就类似于发传单，目标发送通知，没有指定特定的对象，通知会自动传播，观察者自己决定是否需要看传单，发送者对于传单是否被看一无所知。</p>
 <p>详细的发布订阅者介绍可以戳这里：</p>
 <p><a href="https://msdn.microsoft.com/en-us/library/ff649664.aspx" target="_blank" rel="external">https://msdn.microsoft.com/en-us/library/ff649664.aspx</a></p>
 <p>线路协议组成如下：</p>
@@ -120,9 +118,8 @@ payload
 <pre><code>length | opcode | next | identifier | next | channelname|payload
 ----------------------------------------------------------------
 85       3        9       b4aa2@hp1   9      mwcapture      137941a3d8589f6728924c08561070bceb5d72b8,http://1.2.3.4/calc.exe
-</code></pre><p>消息有了，整个消息的认证过程就是以下的几个步骤：</p>
+</code></pre><p>消息有了，整个消息的认证过程就是以下的几个步骤：<br>-</p>
 <ul>
-<li></li>
 <li>服务器为每一个连接生成一个标志</li>
 <li>客户端发送id 和 标志+authkey组成的sha1</li>
 <li>服务器检查id和sha1</li>

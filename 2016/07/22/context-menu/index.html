@@ -13,6 +13,7 @@
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="【前言】   Q：为什么要自定义右键菜单？
    A：为了更友好的交互（呵呵）">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/simin/pic0.png">
 <meta property="og:image" content="http://dassec.b0.upaiyun.com/simin/pic1.png">
 <meta property="og:image" content="http://dassec.b0.upaiyun.com/simin/pic2.png">
 <meta property="og:image" content="http://dassec.b0.upaiyun.com/simin/pic4.png">
@@ -20,7 +21,7 @@
 <meta property="og:image" content="http://dassec.b0.upaiyun.com/simin/pic6.png">
 <meta property="og:image" content="http://dassec.b0.upaiyun.com/simin/pic7.png">
 <meta property="og:image" content="http://dassec.b0.upaiyun.com/simin/pic8.png">
-<meta property="og:updated_time" content="2016-07-28T07:11:50.000Z">
+<meta property="og:updated_time" content="2016-08-24T13:56:52.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义右键菜单学习">
 <meta name="twitter:description" content="【前言】   Q：为什么要自定义右键菜单？
@@ -93,7 +94,8 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><p>   Q：为什么要自定义右键菜单？</p>
+        <p><img src="http://dassec.b0.upaiyun.com/simin/pic0.png" alt="image"></p>
+<h3 id="【前言】"><a href="#【前言】" class="headerlink" title="【前言】"></a>【前言】</h3><p>   Q：为什么要自定义右键菜单？</p>
 <p>   A：为了更友好的交互（呵呵）</p>
 <a id="more"></a>
 <h3 id="【一般思路】"><a href="#【一般思路】" class="headerlink" title="【一般思路】"></a>【一般思路】</h3><p>  严格来讲，右键菜单应该叫上下文菜单，在html5中也新定义了这个contextmenu全局属性。<br>它的语法是这样的：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">contextmenu</span>=<span class="value">"supermenu"</span>&gt;</span>这个段落附加了一个名为 "supermenu" 的上下文菜单。<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">menu</span> <span class="attribute">id</span>=<span class="value">"supermenu"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">command</span> <span class="attribute">label</span>=<span class="value">"Step 1: Write Tutorial"</span> <span class="attribute">onclick</span>=<span class="value">"doSomething()"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">command</span> <span class="attribute">label</span>=<span class="value">"Step 2: Edit Tutorial"</span> <span class="attribute">onclick</span>=<span class="value">"doSomethingElse()"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">menu</span>&gt;</span></span><br></pre></td></tr></table></figure></p>

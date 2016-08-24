@@ -5,20 +5,21 @@
   
   <title>从入门到精通SSRF（1） - 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0x00很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。">
+  <meta name="description" content="很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从入门到精通SSRF（1）">
 <meta property="og:url" content="http://das.scusec.org/2016/08/24/easy-to-SSRF-1/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="0x00很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。">
+<meta property="og:description" content="很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/ksss/ssrf-1.jpg">
 <meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151540.png">
 <meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151520.png">
 <meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151400-1024x674.png">
 <meta property="og:image" content="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151428-1024x433.png">
-<meta property="og:updated_time" content="2016-08-23T02:55:14.000Z">
+<meta property="og:updated_time" content="2016-08-24T13:12:55.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从入门到精通SSRF（1）">
-<meta name="twitter:description" content="0x00很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。">
+<meta name="twitter:description" content="很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -76,19 +77,20 @@
     
     <div class="article-meta">
       <a href="/2016/08/24/easy-to-SSRF-1/" class="article-date">
-  <time datetime="2016-08-24T09:49:05.092Z" itemprop="datePublished">2016-08-24</time>
+  <time datetime="2016-08-24T13:12:55.470Z" itemprop="datePublished">2016-08-24</time>
 </a>
       
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。<br><a id="more"></a></p>
+        <p><img src="http://dassec.b0.upaiyun.com/ksss/ssrf-1.jpg" alt=""><br>很早就看到别人对这个漏洞的研究，但是完全没有预想到它能有这么大的能量。<br><a id="more"></a></p>
+<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>最初觉得请求他域资源如果限制不严格，可能导致安全边界穿越。然而边界穿越导致内网信息泄露并不是重点，最近的redis未授权、struts2命令执行等等存放在安全位置而忽略了安全配置的机器则把这个漏洞的能量放大了很多倍。<br><!--more--></p>
 <h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>先在php上写了一个ssrf简单环境。</p>
 <p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151540.png" alt="读取远程图片"></p>
 <p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151520.png" alt="使用其他协议"></p>
 <p>对比上面两张图，本来这个功能在头像功能也许大家都见过，可以直接填入图片的url地址设定它为自己的头像。然而如果对填入的url地址没有处理，就可能导致本机etc/passed或者内网文件被这个功能直接读取出来。<br>在开启其他脑洞，进行内网端口探测以后，假设内网存在 struts2命令执行 这种可以把exp通过get参数简单传入的漏洞 ，利用从这个ssrf点传入攻击代码反弹一个shell。。。那么这把钥匙则可以直接打开内网的大门。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php &#10;if (isset($_GET[&#39;url&#39;]))  &#123;  &#10;$content = file_get_contents($_GET[&#39;url&#39;]);  &#10;$filename =&#39;./images/&#39;.rand().&#39;img1.jpg&#39;;  &#10;file_put_contents($filename, $content);  &#10;$img = &#34;&#60;img src=\&#34;&#34;.$filename.&#34;\&#34;/&#62;&#34;;  &#10;&#125;  &#10;echo $img;  &#10;?&#62;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php&#10;if (isset($_GET[&#39;url&#39;]))  &#123;  &#10;$content = file_get_contents($_GET[&#39;url&#39;]);  &#10;$filename =&#39;./images/&#39;.rand().&#39;img1.jpg&#39;;  &#10;file_put_contents($filename, $content);  &#10;$img = &#34;&#60;img src=\&#34;&#34;.$filename.&#34;\&#34;/&#62;&#34;;  &#10;&#125;  &#10;echo $img;  &#10;?&#62;</span><br></pre></td></tr></table></figure>
 <p>这个是简单测试代码，从代码上看，除了file_get_content()还有fsockopen()、curl_exec()等等资源获取的函数都可能存在这个漏洞。从黑盒来看，用户控制点作为资源地址传到函数中进行资源请求还是比较明显的，甚至有些vpn产品把这个当成一个正常的功能来使人员在外界可以访问到内网的系统。</p>
 <p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151400-1024x674.png" alt="做映射的vpn设备"></p>
 <p><img src="http://www.mauu.me/wp-content/uploads/2016/07/QQ%E6%88%AA%E5%9B%BE20160727151428-1024x433.png" alt="ssrf请求其他资源"></p>
@@ -113,17 +115,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/08/24/waf-sql-bypass/" id="article-nav-newer" class="article-nav-link-wrap">
-      <div class="article-nav-title"><span>&lt;</span>&nbsp;
-        
-          浅谈WAF下的SQL注入绕过
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/23/code-audit-of-zcncms2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">代码审计——zcncms几处漏洞合集(二)&nbsp;<span>&gt;</span></div>
+    <a href="/2016/08/24/waf-sql-bypass/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅谈WAF下的SQL注入绕过&nbsp;<span>&gt;</span></div>
     </a>
   
 </nav>

@@ -5,19 +5,20 @@
   
   <title>alictf web writeup - 小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0x00web 400 homework网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。">
+  <meta name="description">
 <meta property="og:type" content="article">
 <meta property="og:title" content="alictf web writeup">
 <meta property="og:url" content="http://das.scusec.org/2016/06/15/alictf-web-writeup/index.html">
 <meta property="og:site_name" content="小黑屋">
-<meta property="og:description" content="0x00web 400 homework网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。">
+<meta property="og:description">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/ksss/alictf.jpg">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_1.png">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_2.png">
 <meta property="og:image" content="http://das.scusec.org/images/alictf_3.png">
-<meta property="og:updated_time" content="2016-08-23T02:30:16.000Z">
+<meta property="og:updated_time" content="2016-08-24T13:19:13.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="alictf web writeup">
-<meta name="twitter:description" content="0x00web 400 homework网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。">
+<meta name="twitter:description">
   
   
     <link rel="icon" href="/favicon.png">
@@ -86,15 +87,16 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h3><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。<a id="more"></a> </p>
+        <p><img src="http://dassec.b0.upaiyun.com/ksss/alictf.jpg" alt=""><br><a id="more"></a></p>
+<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>web 400 homework<br>网站是一个提交作业的网站，登录验证码是输入字符的md5前四位一致则能通过验证，数字跑一下可以得到正确验证码。<!--more --></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import md5&#10;pre = &#34;5bc0&#34;&#10;for x in xrange(1, 1000000):&#10;    a = md5.md5(str(x))&#10;    m = a.hexdigest()&#10;    if m[:4] == pre:&#10;        print x&#10;        break</span><br></pre></td></tr></table></figure>
 <p>进入后有一个作业提交点，可以上传任意文件，但是php文件内容会被改为badmen，在查看自己历史提交处存在SQL注入，看了一下数据库中没有敏感数据，支持union可以读写文件。</p>
 <p><img src="/images/alictf_1.png" alt=""><br>首先根目录有三个提示文件：phpinfo.php;info.php和readme.html，其中phpinfo可以看到网站使用PHP7使用了OPcache。<br><img src="/images/alictf_2.png" alt=""></p>
 <p>php7下的OPcache，可以通过在OPcache的缓存目录下写入x.php.bin文件，请求网站目录下的x.php文件时会加载缓存文件并解析，如果bin文件中写入webshell，则php文件将加载这段webshell代码。<br>上传时文件加时间戳重命名，目录无法绕过。OPcache的目录权限非常低，因此可以用sqli写入。目录格式为<br>/OPcache path/system ID/web path/<br>使用python程序计算出的机器码后，获得当前站的文件缓存目录为<br>/tmp/OPcache/39b005ad77428c42788140c6839e6201/var/www/html/upload/<br>上传2016223565-xxx.php文件，本地生成webshell bin文件，使用into dumpfile在目录写入2016223565-xxx.php.bin getshell。</p>
-<h3 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h3><p>获取到shell以后在phpinfo中查看到网站disable founction中禁用了php几乎所有文件的操作函数，在phpinfo中看到启用了sendmail函数库，因此可以用LD_PRELOAD绕过php disable function。<br>编译动态库上传到服务器，php调用执行动态库中的system命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php&#10;putenv(&#34;LD_PRELOAD=/path/xxx.so&#34;);&#10;mail(&#34;a@localhost&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;);&#10;?&#62;</span><br></pre></td></tr></table></figure></p>
+<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>获取到shell以后在phpinfo中查看到网站disable founction中禁用了php几乎所有文件的操作函数，在phpinfo中看到启用了sendmail函数库，因此可以用LD_PRELOAD绕过php disable function。<br>编译动态库上传到服务器，php调用执行动态库中的system命令。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?php&#10;putenv(&#34;LD_PRELOAD=/path/xxx.so&#34;);&#10;mail(&#34;a@localhost&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;,&#34;&#34;);&#10;?&#62;</span><br></pre></td></tr></table></figure></p>
 <p>使用echo /* &gt; /tmp/file命令获取根文件目录，找到flag文件<br><img src="/images/alictf_3.png" alt=""></p>
 <p>但是系统读文件命令都被清空了，使用c的文件读写，读到flag值。</p>
-<h3 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h3><p>web 100 foundpasswd<br>系统存在很多处sql注入，甚至开始时还存在一个重复注册漏洞，因此直接可以注册HHHH，登录管理后台，然后在后台用户管理处可以联合查询。<br>loadfile下载到登录口的源代码。<br>找到用户表名和字段名。<br>在查询处获取到HHHH密码则为flag。<br>后来重复注册被修复了，xss盲打管理员cookie找到后台的联合查询注入点后select管理员密码。  </p>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>web 100 foundpasswd<br>系统存在很多处sql注入，甚至开始时还存在一个重复注册漏洞，因此直接可以注册HHHH，登录管理后台，然后在后台用户管理处可以联合查询。<br>loadfile下载到登录口的源代码。<br>找到用户表名和字段名。<br>在查询处获取到HHHH密码则为flag。<br>后来重复注册被修复了，xss盲打管理员cookie找到后台的联合查询注入点后select管理员密码。  </p>
 
       
     </div>
