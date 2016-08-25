@@ -762,17 +762,6 @@ a.article-title:hover,
   border: 1px solid #333;
   padding: 5px 12px;
 }
-#main article:nth-child(-n+3) .article-header h1 a:after {
-  content: 'new';
-  font-size: 8px;
-  color: #fff;
-  vertical-align: text-top;
-  background-color: #65b38b;
-  -webkit-border-radius: 5px 5px;
-  border-radius: 5px 5px;
-  padding: 2px 5px;
-  margin-left: 3px;
-}
 #comments {
   margin: 50px 0;
 }
