@@ -384,7 +384,7 @@ a.article-title:hover,
   float: left;
   font-size: 14px;
   background: none;
-  color: #111;
+  color: #fff;
   outline: none;
 }
 .search-form-input::-webkit-search-results-decoration,
