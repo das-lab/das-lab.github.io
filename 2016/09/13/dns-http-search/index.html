@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>手把手教你DIY一个DNS/HTTP带外查询工具 - 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你DIY一个DNS/HTTP带外查询工具">
+<meta property="og:url" content="http://das.scusec.org/2016/09/13/dns-http-search/index.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search.jpg">
+<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472203712768.png">
+<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472203815519.png">
+<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472204002058.png">
+<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472204448769.png">
+<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472215133913.png">
+<meta property="og:updated_time" content="2016-12-16T03:06:42.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你DIY一个DNS/HTTP带外查询工具">
+<meta name="twitter:description">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">小黑屋</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/links">链接</a>
+        
+          <a class="main-nav-link" href="/share">分享</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://das.scusec.org"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-dns-http-search" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手把手教你DIY一个DNS/HTTP带外查询工具
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/09/13/dns-http-search/" class="article-date">
+  <time datetime="2016-09-13T02:22:42.000Z" itemprop="datePublished">2016-09-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search.jpg" alt=""><br><a id="more"></a></p>
+<blockquote>
+<p>前段时间，cloadeye炒的沸沸扬扬，听说邀请码还挺贵的。算求了，花了一天时间自己DIY了一个简洁版，经过测试还是能用的。下面是具体的操作方法:</p>
+</blockquote>
+<h3 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h3><ul>
+<li>一个二级域名</li>
+<li>一个VPS</li>
+</ul>
+<h3 id="二、HTTP带外数据记录"><a href="#二、HTTP带外数据记录" class="headerlink" title="二、HTTP带外数据记录"></a>二、HTTP带外数据记录</h3><blockquote>
+<p>默认情况下，Apache的日志是不入库的。需要修改httpd.conf，在LogFormat位置的地方添加如下代码:</p>
+</blockquote>
+<ul>
+<li>设置日志格式以及处理方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LogFormat &#34;INSERT INTO apachelog (ID, dateTime, IP, URL, code, host, userAgent, size, request) VALUES ( NULL , \&#34;%&#123;%Y-%m-%d %H:%M:%S&#125;t\&#34;, \&#34;%a\&#34;, \&#34;%U\&#34;, \&#34;%&#62;s\&#34;, \&#34; %&#123;Host&#125;i\&#34;, \&#34;%&#123;User-Agent&#125;i\&#34;, %b, %T);&#34; sqlcomm&#10; &#10;CustomLog &#34;| /usr/bin/mysql --user=root --password=&#39;******&#39; --database=dns_http&#34; sqlcomm</span><br></pre></td></tr></table></figure>
+<p><img src="http://ecma.io/wp-content/uploads/2016/09/1472203712768.png" alt=""></p>
+<ul>
+<li>设计数据库</li>
+</ul>
+<p><img src="http://ecma.io/wp-content/uploads/2016/09/1472203815519.png" alt=""></p>
+<ul>
+<li>重启服务服务器之后，即可在数据库之中查看到访问日志</li>
+</ul>
+<p><img src="http://ecma.io/wp-content/uploads/2016/09/1472204002058.png" alt=""></p>
+<h3 id="三、DNS带外数据记录"><a href="#三、DNS带外数据记录" class="headerlink" title="三、DNS带外数据记录"></a>三、DNS带外数据记录</h3><h4 id="3-1-设置DNS记录"><a href="#3-1-设置DNS记录" class="headerlink" title="3.1 设置DNS记录"></a>3.1 设置DNS记录</h4><p><img src="http://ecma.io/wp-content/uploads/2016/09/1472204448769.png" alt=""></p>
+<blockquote>
+<p>为什么要这么设置？因为我只有一台VPS，上面的意思就是为ns.xssyou.com添加一条A记录；为test.xssyou.com添加一条ns记录；上面的结果就是，当我查询.test.xssyou.com的DNS记录的时候，本地DNS服务器回到ns.xssyou.com去查询</p>
+</blockquote>
+<h4 id="3-2-VPS搭建DNS权威服务器"><a href="#3-2-VPS搭建DNS权威服务器" class="headerlink" title="3.2 VPS搭建DNS权威服务器"></a>3.2 VPS搭建DNS权威服务器</h4><ul>
+<li><p>安装bindDNS服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum -y install bind caching-nameserver</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件/etc/named.conf如下图<br><img src="http://ecma.io/wp-content/uploads/2016/09/1472215133913.png" alt=""></p>
+</li>
+<li>添加配置信息/etc/named.rfc1912.zone</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zone &#34;test.xssyou.com&#34; in &#123;&#10;      type master;&#10;      file &#34;test.xssyou.com.zone&#34;;&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加test.xssyou.com.zone文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$TTL 0&#10;       IN SOA  @ ns.xssyou.com. (&#10;                                        0       ; serial&#10;                                        0       ; refresh&#10;                                        0       ; retry&#10;                                        0       ; expire&#10;                                        0 )     ; minimum&#10; &#10;       IN      NS      ns.xssyou.com.&#10;ns      IN      A       182.254.146.228&#10;@       IN      A       1.1.1.1&#10;a       IN      A       1.1.1.2&#10;*       IN      A       8.8.8.8</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-数据监控入库"><a href="#3-3-数据监控入库" class="headerlink" title="3.3 数据监控入库"></a>3.3 数据监控入库</h4><blockquote>
+<p>此时已经能够正常获取DNS的日志了，但是此时是获取不到日志的，需要进行如下操作</p>
+</blockquote>
+<ul>
+<li>rndc status查看状态</li>
+<li>rndc querylog开启日志</li>
+<li>tail -f /var/log/messages动态查看DNS查询日志</li>
+</ul>
+<blockquote>
+<p>最后，我写了一个Python脚本，动态捕获日志并入库。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DNS/">DNS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/das/">das</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/查询工具/">查询工具</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/02/python-chardet/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python中编码二三事&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-dns-http-search" data-title="手把手教你DIY一个DNS/HTTP带外查询工具" data-url="http://das.scusec.org/2016/09/13/dns-http-search/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 das&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>，<a href="http://das.scusec.org/atom.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
