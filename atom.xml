@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://das.scusec.org/"/>
-  <updated>2016-12-16T03:06:42.898Z</updated>
+  <updated>2016-12-16T03:10:01.352Z</updated>
   <id>http://das.scusec.org/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://das.scusec.org/2016/09/13/dns-http-search/"/>
     <id>http://das.scusec.org/2016/09/13/dns-http-search/</id>
     <published>2016-09-13T02:22:42.000Z</published>
-    <updated>2016-12-16T03:06:42.898Z</updated>
+    <updated>2016-12-16T03:10:01.352Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search.jpg" alt=""><br><a id="more"></a></p>
 <blockquote>
@@ -85,13 +85,15 @@
       <category term="安全笔记" scheme="http://das.scusec.org/categories/%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="DNS" scheme="http://das.scusec.org/tags/DNS/"/>
+      <category term="DNS带外数据" scheme="http://das.scusec.org/tags/DNS%E5%B8%A6%E5%A4%96%E6%95%B0%E6%8D%AE/"/>
     
-      <category term="HTTP" scheme="http://das.scusec.org/tags/HTTP/"/>
+      <category term="DNS服务器" scheme="http://das.scusec.org/tags/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
-      <category term="das" scheme="http://das.scusec.org/tags/das/"/>
+      <category term="HTTP带外数据" scheme="http://das.scusec.org/tags/HTTP%E5%B8%A6%E5%A4%96%E6%95%B0%E6%8D%AE/"/>
     
-      <category term="查询工具" scheme="http://das.scusec.org/tags/%E6%9F%A5%E8%AF%A2%E5%B7%A5%E5%85%B7/"/>
+      <category term="bind" scheme="http://das.scusec.org/tags/bind/"/>
+    
+      <category term="盲注" scheme="http://das.scusec.org/tags/%E7%9B%B2%E6%B3%A8/"/>
     
   </entry>
   
