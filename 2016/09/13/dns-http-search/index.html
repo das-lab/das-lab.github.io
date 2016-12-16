@@ -11,13 +11,13 @@
 <meta property="og:url" content="http://das.scusec.org/2016/09/13/dns-http-search/index.html">
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description">
-<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search.jpg">
-<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472203712768.png">
-<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472203815519.png">
-<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472204002058.png">
-<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472204448769.png">
-<meta property="og:image" content="http://ecma.io/wp-content/uploads/2016/09/1472215133913.png">
-<meta property="og:updated_time" content="2016-12-16T03:10:01.352Z">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search/dns-http-search.jpg">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search/img1.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search/img2.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search/img3.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search/img4.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/cain/dns-http-search/img5.png">
+<meta property="og:updated_time" content="2016-12-16T06:34:35.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手把手教你DIY一个DNS/HTTP带外查询工具">
 <meta name="twitter:description">
@@ -91,7 +91,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search.jpg" alt=""><br><a id="more"></a></p>
+        <p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search/dns-http-search.jpg" alt=""><br><a id="more"></a></p>
 <blockquote>
 <p>前段时间，cloadeye炒的沸沸扬扬，听说邀请码还挺贵的。算求了，花了一天时间自己DIY了一个简洁版，经过测试还是能用的。下面是具体的操作方法:</p>
 </blockquote>
@@ -106,16 +106,16 @@
 <li>设置日志格式以及处理方式</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LogFormat &#34;INSERT INTO apachelog (ID, dateTime, IP, URL, code, host, userAgent, size, request) VALUES ( NULL , \&#34;%&#123;%Y-%m-%d %H:%M:%S&#125;t\&#34;, \&#34;%a\&#34;, \&#34;%U\&#34;, \&#34;%&#62;s\&#34;, \&#34; %&#123;Host&#125;i\&#34;, \&#34;%&#123;User-Agent&#125;i\&#34;, %b, %T);&#34; sqlcomm&#10; &#10;CustomLog &#34;| /usr/bin/mysql --user=root --password=&#39;******&#39; --database=dns_http&#34; sqlcomm</span><br></pre></td></tr></table></figure>
-<p><img src="http://ecma.io/wp-content/uploads/2016/09/1472203712768.png" alt=""></p>
+<p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search/img1.png" alt=""></p>
 <ul>
 <li>设计数据库</li>
 </ul>
-<p><img src="http://ecma.io/wp-content/uploads/2016/09/1472203815519.png" alt=""></p>
+<p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search/img2.png" alt=""></p>
 <ul>
 <li>重启服务服务器之后，即可在数据库之中查看到访问日志</li>
 </ul>
-<p><img src="http://ecma.io/wp-content/uploads/2016/09/1472204002058.png" alt=""></p>
-<h3 id="三、DNS带外数据记录"><a href="#三、DNS带外数据记录" class="headerlink" title="三、DNS带外数据记录"></a>三、DNS带外数据记录</h3><h4 id="3-1-设置DNS记录"><a href="#3-1-设置DNS记录" class="headerlink" title="3.1 设置DNS记录"></a>3.1 设置DNS记录</h4><p><img src="http://ecma.io/wp-content/uploads/2016/09/1472204448769.png" alt=""></p>
+<p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search/img3.png" alt=""></p>
+<h3 id="三、DNS带外数据记录"><a href="#三、DNS带外数据记录" class="headerlink" title="三、DNS带外数据记录"></a>三、DNS带外数据记录</h3><h4 id="3-1-设置DNS记录"><a href="#3-1-设置DNS记录" class="headerlink" title="3.1 设置DNS记录"></a>3.1 设置DNS记录</h4><p><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search/img4.png" alt=""></p>
 <blockquote>
 <p>为什么要这么设置？因为我只有一台VPS，上面的意思就是为ns.xssyou.com添加一条A记录；为test.xssyou.com添加一条ns记录；上面的结果就是，当我查询.test.xssyou.com的DNS记录的时候，本地DNS服务器回到ns.xssyou.com去查询</p>
 </blockquote>
@@ -123,7 +123,7 @@
 <li><p>安装bindDNS服务器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum -y install bind caching-nameserver</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>修改配置文件/etc/named.conf如下图<br><img src="http://ecma.io/wp-content/uploads/2016/09/1472215133913.png" alt=""></p>
+<li><p>修改配置文件/etc/named.conf如下图<br><img src="http://dassec.b0.upaiyun.com/cain/dns-http-search/img5.png" alt=""></p>
 </li>
 <li>添加配置信息/etc/named.rfc1912.zone</li>
 </ul>
