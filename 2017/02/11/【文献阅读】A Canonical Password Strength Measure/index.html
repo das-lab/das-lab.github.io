@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【文献阅读】A Canonical Password Strength Measure - 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;lt;!-- 这里是文章头部的图片 大小为800px*200px左右--&amp;gt;
+&amp;lt;!-- 这里是简单的介绍，50-100字 --&amp;gt;
+最近看了一篇关于密码安全的文章：A Canonical Password Strength Measure. 论文作者：Eugene Panferov
+我大体梳理了下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【文献阅读】A Canonical Password Strength Measure">
+<meta property="og:url" content="http://das.scusec.org/2017/02/11/【文献阅读】A Canonical Password Strength Measure/index.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="&amp;lt;!-- 这里是文章头部的图片 大小为800px*200px左右--&amp;gt;
+&amp;lt;!-- 这里是简单的介绍，50-100字 --&amp;gt;
+最近看了一篇关于密码安全的文章：A Canonical Password Strength Measure. 论文作者：Eugene Panferov
+我大体梳理了下：">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/chuancy/password.png">
+<meta property="og:updated_time" content="2017-02-17T09:20:09.109Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【文献阅读】A Canonical Password Strength Measure">
+<meta name="twitter:description" content="&amp;lt;!-- 这里是文章头部的图片 大小为800px*200px左右--&amp;gt;
+&amp;lt;!-- 这里是简单的介绍，50-100字 --&amp;gt;
+最近看了一篇关于密码安全的文章：A Canonical Password Strength Measure. 论文作者：Eugene Panferov
+我大体梳理了下：">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">小黑屋</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/links">链接</a>
+        
+          <a class="main-nav-link" href="/share">分享</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://das.scusec.org"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-【文献阅读】A Canonical Password Strength Measure" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【文献阅读】A Canonical Password Strength Measure
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/02/11/【文献阅读】A Canonical Password Strength Measure/" class="article-date">
+  <time datetime="2017-02-11T01:51:39.000Z" itemprop="datePublished">2017-02-11</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/文献阅读/">文献阅读</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- 这里是文章头部的图片 大小为800px*200px左右-->
+<p><img src="http://dassec.b0.upaiyun.com/chuancy/password.png" alt=""><br><!-- 这里是简单的介绍，50-100字 --></p>
+<p>最近看了一篇关于密码安全的文章：A Canonical Password Strength Measure. 论文作者：Eugene Panferov</p>
+<p>我大体梳理了下：<br><a id="more"></a></p>
+<h4 id="论文主要思路"><a href="#论文主要思路" class="headerlink" title="论文主要思路"></a>论文主要思路</h4><p>该论文主要是介绍一种典型的密码强度度测方法。其中，论文分别从攻击者的猜测攻击策略和防御者的防御策略入手分析，给出了一个基于密码序列猜测攻击的有效性评估的密码强度的定义，并给出计算方法。</p>
+<h4 id="论文结构"><a href="#论文结构" class="headerlink" title="论文结构"></a>论文结构</h4><ul>
+<li><p>摘要</p>
+<p>作者介绍了论文研究方向，提出密码安全研究领域中缺乏对密码强度这个基本的概念的正确定义。并提出论文对密码强度定义与度测的研究情况。</p>
+</li>
+<li><p>简介</p>
+<p> 提出关于密码强度相关的两个问题：什么是密码强调？什么是猜测攻击？然后给出一个观点：密码强度不是密码的特征，而是攻击的特征。提出从攻击者与防御者两个方面的策略考虑的密码强度的度测思路。</p>
+</li>
+<li><p>当前研究现状</p>
+<p>尽管安全问题的重要性随着电子通信技术的发展而日趋提高，密码安全也有很多文献描述。但是大都没有实际的分析证明或者直接论据来论证密码强度。到论文发表为止，现有的文献并没有提供一个满意的回答如何精确(准确)度量一个给定的密码序列集的密码强度这一问题的答案，有一个流行的网站给出了一个空而华丽的非正式的定义：密码强度是一个密码抵抗猜测攻击和爆破攻击的有效性的度量，在任何形式下，它是评估一个攻击者在不知道密码的情况下，正确猜中密码的尝试次数的一个平均值，一个的密码强度是密码长度，复杂性，不可预测性的函数。显然这个问题的关键是：什么是“有效性”，“抵抗攻击能力”，“复杂性”以及“不可预测行”。</p>
+<p>然而密码强度的定义的缺失并不会妨碍一些网络互联网公司在用户创建密码时，提供密码强度度量的服务。如：google给定的创建密码必须遵循的规则。</p>
+<p>另外的一个例子是很多在线的密码轻度度量计，它们对于同一个密码，给出的强度也有时相互冲突。这就缺乏密码强度定义的结果。</p>
+<p>与公司和大众想法不同的是，一些论文开始经验主义的去试图分析密码的弱点。这些论文一致同意广泛认为的“最佳实践”在密码安全的研究上具有很小的意义。</p>
+<p>尽管香农信息熵理论被普遍运用到密码强度的研究和一些流行的网站密码服务中，但是仍没有一个明确的密码强度的定义。</p>
+</li>
+<li><p>问题的研究过程</p>
+<p>论文从攻击模型的建立，到给出密码强度的度测方法，再到攻击者角度和防御者角度分析了密码强度与攻击策略有关。最后得出结论</p>
+</li>
+<li><p>结论</p>
+<p>提出密码强度不是密码的特征，而是攻击的特征。给出了基于攻击字典序列的密码的计算方法。密码强度是与攻击字典序列顺序有关，当攻击者攻击字典序列顺序确定时，即攻击策略确定时，密码强度才能计算。</p>
+</li>
+</ul>
+<h4 id="自己观点"><a href="#自己观点" class="headerlink" title="自己观点"></a>自己观点</h4><p>作者从攻击者的角度利用香农信息理论去建立猜测攻击模型，从攻击字典序列顺序入手定义攻击长度这个概念。之后利用攻击长度来代表攻击者攻击一个密码的代价。从而推导出当攻击序列顺序确定时一个密码的强度。作者只从单纯的信息理论角度入手评估一个给定密码在确定攻击序列顺序的情况下的密码强度，并没有考虑在多种攻击策略的情况下的密码强度的评估。这里的多种攻击策略包括目前已知的如：键盘序列，用户自己的私人信息以及网络常用语等等策略。</p>
+<p>本人以为要想确定一个给定密码的密码强度，还需要考虑该密码是对于谁。不同的用户，对于同一个密码，密码强度也应该有所不同，毕竟还要考虑用户个人信息对密码的攻击策略制定的影响。所以，密码强度定义还应考虑更灵活与全面一些。</p>
+<h4 id="精彩句子"><a href="#精彩句子" class="headerlink" title="精彩句子"></a>精彩句子</h4><ol>
+<li>we demonstrate that “password strength” (in any practical sense) is a function of an attack;</li>
+<li>We offer to the reader a non-orthodox perspective: the password’s strength is NOT a characteristic of a password,<br>but a characteristic of an attack.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cryptography-and-Security/">Cryptography and Security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scc/">scc</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/13/dns-http-search/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">手把手教你DIY一个DNS/HTTP带外查询工具&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-【文献阅读】A Canonical Password Strength Measure" data-title="【文献阅读】A Canonical Password Strength Measure" data-url="http://das.scusec.org/2017/02/11/【文献阅读】A Canonical Password Strength Measure/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 das&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>，<a href="http://das.scusec.org/atom.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
