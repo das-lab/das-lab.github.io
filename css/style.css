@@ -899,6 +899,9 @@ a.article-title:hover,
 .article-entry pre .highlight {
   padding: 0;
 }
+.article-entry .highlight {
+  margin: 10px 0;
+}
 .article-entry .highlight pre {
   border: none;
   margin: 0;
