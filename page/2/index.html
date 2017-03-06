@@ -58,7 +58,7 @@
   </div>
 </header>
     <section id="main" class="outer">
-      <article id="post-code-audit-of-zcncms1" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-blind-xxe" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -66,15 +66,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/23/code-audit-of-zcncms1/">代码审计——zcncms后台SQL注入(一)</a>
+      <a class="article-title" href="/2016/08/24/blind-xxe/">当提起Blind XXE时候会想到什么</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/2016/08/23/code-audit-of-zcncms1/" class="article-date">
-  <time datetime="2016-08-22T16:00:00.000Z" itemprop="datePublished">2016-08-23</time>
+      <a href="/2016/08/24/blind-xxe/" class="article-date">
+  <time datetime="2016-08-23T16:00:00.000Z" itemprop="datePublished">2016-08-24</time>
 </a>
       
   <div class="article-category">
@@ -85,20 +85,21 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://dassec.b0.upaiyun.com/wps2015/zcncms-sql.jpg" alt=""><br>由于是后台注入，比较鸡肋，发上来供大家相互参考学习。zcncms版本1.2.14，官方网站地址：<br><a href="http://www.zcncms.com/">zcncms</a>
+        <p><img src="http://dassec.b0.upaiyun.com/ksss/XXEA.png" alt=""></p>
+<p>XXE（XML实体注入漏洞）顾名思义，漏洞的关键点在于服务器对外部实体的解析。外部实体中可以请求他域资源，也许在包括我之内的很多人在漏洞利用时会习惯的把XXE问题转换成SSRF的问题。<br>
         
       
     </div>
     
     
           <p class="article-more-link">
-            <a href="/2016/08/23/code-audit-of-zcncms1/#more">阅读全文 »</a>
+            <a href="/2016/08/24/blind-xxe/#more">阅读全文 »</a>
           </p>
         
     
       <footer class="article-footer">
         
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wps2015/">wps2015</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blind-XXE/">blind XXE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ksss/">ksss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实体注入/">实体注入</a></li></ul>
 
       </footer>
     
@@ -144,6 +145,56 @@
     
           <p class="article-more-link">
             <a href="/2016/08/23/code-audit-of-zcncms2/#more">阅读全文 »</a>
+          </p>
+        
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wps2015/">wps2015</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+  
+    
+      <article id="post-code-audit-of-zcncms1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/23/code-audit-of-zcncms1/">代码审计——zcncms后台SQL注入(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/23/code-audit-of-zcncms1/" class="article-date">
+  <time datetime="2016-08-22T16:00:00.000Z" itemprop="datePublished">2016-08-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/安全笔记/">安全笔记</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://dassec.b0.upaiyun.com/wps2015/zcncms-sql.jpg" alt=""><br>由于是后台注入，比较鸡肋，发上来供大家相互参考学习。zcncms版本1.2.14，官方网站地址：<br><a href="http://www.zcncms.com/">zcncms</a>
+        
+      
+    </div>
+    
+    
+          <p class="article-more-link">
+            <a href="/2016/08/23/code-audit-of-zcncms1/#more">阅读全文 »</a>
           </p>
         
     
