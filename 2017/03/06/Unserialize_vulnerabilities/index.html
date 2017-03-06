@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://das.scusec.org/2017/03/06/Unserialize_vulnerabilities/index.html">
 <meta property="og:site_name" content="小黑屋">
 <meta property="og:description" content="很多JAVA应用反序列化时并没有限制实例化对象的类型，导致可以任意构造应用中已经包含的对象利用反序列化操作进行实例化，比如任意命令执行等。">
-<meta property="og:image" content="http://p1.bqimg.com/567571/2224a823829b8146.png">
+<meta property="og:image" content="http://p1.bpimg.com/567571/87e3e6e05ca78561.jpg">
 <meta property="og:image" content="http://p1.bqimg.com/567571/2224a823829b8146.png">
 <meta property="og:image" content="https://foxglovesecurity.files.wordpress.com/2015/10/objectexample.png">
 <meta property="og:image" content="http://p1.bqimg.com/4851/05a5b0e02164fed3.png">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://i1.piimg.com/567571/1f8730f4aa1d8a62.png">
 <meta property="og:image" content="http://i1.piimg.com/567571/fdc0940aee863e9d.png">
 <meta property="og:image" content="http://p1.bqimg.com/567571/c966099afbe860de.png">
-<meta property="og:updated_time" content="2017-03-06T08:53:51.358Z">
+<meta property="og:updated_time" content="2017-03-06T09:20:12.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVA反序列化漏洞">
 <meta name="twitter:description" content="很多JAVA应用反序列化时并没有限制实例化对象的类型，导致可以任意构造应用中已经包含的对象利用反序列化操作进行实例化，比如任意命令执行等。">
@@ -87,7 +87,7 @@
     
     <div class="article-meta">
       <a href="/2017/03/06/Unserialize_vulnerabilities/" class="article-date">
-  <time datetime="2017-03-06T08:53:51.358Z" itemprop="datePublished">2017-03-06</time>
+  <time datetime="2017-03-06T09:20:12.038Z" itemprop="datePublished">2017-03-06</time>
 </a>
       
   <div class="article-category">
@@ -98,7 +98,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://p1.bqimg.com/567571/2224a823829b8146.png" alt="image"><br>很多JAVA应用反序列化时并没有限制实例化对象的类型，导致可以任意构造应用中已经包含的对象利用反序列化操作进行实例化，比如任意命令执行等。<br><a id="more"></a></p>
+        <p><img src="http://p1.bpimg.com/567571/87e3e6e05ca78561.jpg" alt="image"><br>很多JAVA应用反序列化时并没有限制实例化对象的类型，导致可以任意构造应用中已经包含的对象利用反序列化操作进行实例化，比如任意命令执行等。<br><a id="more"></a></p>
 <h2 id="0x00-原理"><a href="#0x00-原理" class="headerlink" title="0x00 原理"></a>0x00 原理</h2><p>序列化就是把对象转换成字节流，便于保存在内存、文件、数据库中，也便于进行网络传输；反序列化即逆过程，由字节流还原成对象。大多数编程语言都提供内置的方法来实现这两个过程。Java中的ObjectOutputStream类的writeObject()方法可以实现序列化，类ObjectInputStream类的readObject()方法用于反序列化。<br><img src="http://p1.bqimg.com/567571/2224a823829b8146.png" alt="image"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializeTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">//用来序列化的对象</span></span><br><span class="line">        String name = <span class="string">"bob"</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//把序列化数据写到"name.ser"这个文件里</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"name.ser"</span>);</span><br><span class="line">        ObjectOutputStream os = <span class="keyword">new</span> ObjectOutputStream(fos);</span><br><span class="line">        os.writeObject(name);</span><br><span class="line">        os.close();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//从"name.ser"里读取序列化数据</span></span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"name.ser"</span>);</span><br><span class="line">        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(fis);</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//从数据流里读取对象，把它恢复为字符串</span></span><br><span class="line">        String nameFromDisk = (String)ois.readObject();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//打印字符串</span></span><br><span class="line">        System.out.println(nameFromDisk);</span><br><span class="line">        ois.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">breens@us<span class="operator">-l</span>-breens:~/Desktop/SerialTest$ java SerializeTest</span><br><span class="line">bob</span><br><span class="line">breens@us<span class="operator">-l</span>-breens:~/Desktop/SerialTest$ xxd name.ser</span><br><span class="line"><span class="number">0000000</span>: aced <span class="number">0005</span> <span class="number">7400</span> <span class="number">0362</span> <span class="number">6</span>f62 ....t..bob</span><br></pre></td></tr></table></figure>
@@ -156,9 +156,17 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/03/06/Reverse_Shell/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          linux反弹shell姿势
+        
+      </div>
+    </a>
   
-    <a href="/2017/03/06/Reverse_Shell/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">linux反弹shell姿势&nbsp;<span>&gt;</span></div>
+  
+    <a href="/2017/02/20/WP-content-Injection/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WordPress REST API内容注入漏洞复现&nbsp;<span>&gt;</span></div>
     </a>
   
 </nav>
