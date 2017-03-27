@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://123.207.68.169/achiveimg/20170324171322.jpg">
 <meta property="og:image" content="http://123.207.68.169/achiveimg/20170324204233.jpg">
 <meta property="og:image" content="http://123.207.68.169/achiveimg/20170324204343.jpg">
-<meta property="og:updated_time" content="2017-03-27T03:30:42.343Z">
+<meta property="og:updated_time" content="2017-03-27T03:35:00.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python与它的opcode">
 <meta name="twitter:description" content="0CTF中有一道opcode修改的题，当时觉得除了暴力尝试还原外没有什么更好的思路，结果后来看到了别人的write up，还真是暴力尝试~~">
@@ -92,54 +92,13 @@
         <p><img src="http://dassec.b0.upaiyun.com/phantom/opcode.jpg" alt=""></p>
 <p>0CTF中有一道opcode修改的题，当时觉得除了暴力尝试还原外没有什么更好的思路，结果后来看到了别人的write up，还真是暴力尝试~~</p>
 <a id="more"></a>
-<h2 id="0x01-PyCodeObject"><a href="#0x01-PyCodeObject" class="headerlink" title="0x01 PyCodeObject"></a>0x01 PyCodeObject</h2><p>Python代码在运行时，将我们写的源码转换成字节码，再由python解释器来执行字节码。而字节码就是一个PyCodeObject对象。一个相应的对象如下：文件在/include/code.h</p>
-<pre><code>/* Bytecode object */
-typedef struct {
-    PyObject_HEAD
-    int co_argcount;        /* #arguments, except *args */
-    int co_nlocals;        /* #local variables */
-    int co_stacksize;        /* #entries needed for evaluation stack */
-    int co_flags;        /* CO_..., see below */
-    PyObject *co_code;        /* 编译所得的字节码指令序列 */
-    PyObject *co_consts;    /* Block中所有常量的元组 */
-    PyObject *co_names;        /* 所有名字的元组 */
-    PyObject *co_varnames;    /* 在本代码段中赋值，但没有被内层代码引用的变量*/
-    PyObject *co_freevars;    /* 在本层引用，在外层赋值的变量*/
-    PyObject *co_cellvars;      /* 本层赋值，且被内层代码段引用的变量*/
-    /* The rest doesn&apos;t count for hash/cmp */
-    PyObject *co_filename;    /* python文件路径*/
-    PyObject *co_name;        /* 函数名或类名*/
-    int co_firstlineno;        /* Block所在的起始行*/
-    PyObject *co_lnotab;    /* 字节码指令与pyc文件中的source code对应关系*/
-    void *co_zombieframe;     /* 优化(see frameobject.c) */
-    PyObject *co_weakreflist;   /* to support weakrefs to code objects */
-} PyCodeObject;
-</code></pre><p>从这个定义中，我们可以简单了解一下，该对象有哪些参数组成：</p>
+<h2 id="0x01-PyCodeObject"><a href="#0x01-PyCodeObject" class="headerlink" title="0x01 PyCodeObject"></a>0x01 PyCodeObject</h2><p>Python代码在运行时，将我们写的源码转换成字节码，再由python解释器来执行字节码。而字节码就是一个PyCodeObject对象。一个相应的对象如下：文件在/include/code.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/* Bytecode object */&#10;typedef struct &#123;&#10;   &#9;PyObject_HEAD&#10;   &#9;int co_argcount;&#9;&#9;/* #arguments, except *args */&#10;   &#9;int co_nlocals;&#9;&#9;/* #local variables */&#10;   &#9;int co_stacksize;&#9;&#9;/* #entries needed for evaluation stack */&#10;   &#9;int co_flags;&#9;&#9;/* CO_..., see below */&#10;   &#9;PyObject *co_code;&#9;&#9;/* &#32534;&#35793;&#25152;&#24471;&#30340;&#23383;&#33410;&#30721;&#25351;&#20196;&#24207;&#21015; */&#10;   &#9;PyObject *co_consts;&#9;/* Block&#20013;&#25152;&#26377;&#24120;&#37327;&#30340;&#20803;&#32452; */&#10;   &#9;PyObject *co_names;&#9;&#9;/* &#25152;&#26377;&#21517;&#23383;&#30340;&#20803;&#32452; */&#10;   &#9;PyObject *co_varnames;&#9;/* &#22312;&#26412;&#20195;&#30721;&#27573;&#20013;&#36171;&#20540;&#65292;&#20294;&#27809;&#26377;&#34987;&#20869;&#23618;&#20195;&#30721;&#24341;&#29992;&#30340;&#21464;&#37327;*/&#10;   &#9;PyObject *co_freevars;&#9;/* &#22312;&#26412;&#23618;&#24341;&#29992;&#65292;&#22312;&#22806;&#23618;&#36171;&#20540;&#30340;&#21464;&#37327;*/&#10;   &#9;PyObject *co_cellvars;      /* &#26412;&#23618;&#36171;&#20540;&#65292;&#19988;&#34987;&#20869;&#23618;&#20195;&#30721;&#27573;&#24341;&#29992;&#30340;&#21464;&#37327;*/&#10;   &#9;/* The rest doesn&#39;t count for hash/cmp */&#10;   &#9;PyObject *co_filename;&#9;/* python&#25991;&#20214;&#36335;&#24452;*/&#10;   &#9;PyObject *co_name;&#9;&#9;/* &#20989;&#25968;&#21517;&#25110;&#31867;&#21517;*/&#10;   &#9;int co_firstlineno;&#9;&#9;/* Block&#25152;&#22312;&#30340;&#36215;&#22987;&#34892;*/&#10;   &#9;PyObject *co_lnotab;&#9;/* &#23383;&#33410;&#30721;&#25351;&#20196;&#19982;pyc&#25991;&#20214;&#20013;&#30340;source code&#23545;&#24212;&#20851;&#31995;*/&#10;   &#9;void *co_zombieframe;     /* &#20248;&#21270;(see frameobject.c) */&#10;   &#9;PyObject *co_weakreflist;   /* to support weakrefs to code objects */&#10;&#125; PyCodeObject;</span><br></pre></td></tr></table></figure></p>
+<p>从这个定义中，我们可以简单了解一下，该对象有哪些参数组成：</p>
 <p>1 co_argcount，一个Code Bloack的参数计数。</p>
 <p>作为萌新，这里再多提一下python中的几种参数形式,python中的参数形式可以分成位置参数和关键字参数两类，位置参数即参数所在的位置影响它被处理的逻辑，关键字参数即参数所在的位置与它的处理逻辑无关。</p>
 <p>另一个概念是，Code Block，这个概念是说我们所写的Python代码中的每一个名字空间在编译时都会对应一个Code Block，每一个Block会创建一个PyCodeObject对象</p>
-<p>那么这样的话，我们就可以理解这个参数做了什么，我们写一段代码来做个测试，看这样一段代码：</p>
-<pre><code>def co_arg(fn):
-    print fn.__name__,fn.__code__.co_argcount
-@co_arg
-def f1():
-    pass
-@co_arg
-def f2(a):
-    pass
-@co_arg
-def f3(a,b):
-    pass
-@co_arg
-def f4(a,b=1):
-    pass
-@co_arg
-def f5(a,b,*c):
-    pass
-@co_arg
-def f6(a,b,*c,**d):
-    pass
-</code></pre><p>执行结果如下：</p>
+<p>那么这样的话，我们就可以理解这个参数做了什么，我们写一段代码来做个测试，看这样一段代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">co_arg</span><span class="params">(fn)</span>:</span></span><br><span class="line">	<span class="keyword">print</span> fn.__name__,fn.__code__.co_argcount</span><br><span class="line"><span class="decorator">@co_arg</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="decorator">@co_arg</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(a)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="decorator">@co_arg</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span><span class="params">(a,b)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="decorator">@co_arg</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f4</span><span class="params">(a,b=<span class="number">1</span>)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="decorator">@co_arg</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f5</span><span class="params">(a,b,*c)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="decorator">@co_arg</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f6</span><span class="params">(a,b,*c,**d)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
+<p>执行结果如下：</p>
 <pre><code>&gt;&gt;f1 0
 &gt;&gt;f2 1
 &gt;&gt;f3 2
@@ -148,22 +107,8 @@ def f6(a,b,*c,**d):
 &gt;&gt;f6 2
 </code></pre><p>OK，我们可以看到这个变量记录了函数的参数个数，但不记录tuple参数和dict参数</p>
 <p>2 co_nlocals，一个Code Bloack的局部变量计数，包括所有参数和局部变量。</p>
-<p>同样看如下代码：</p>
-<pre><code>def co_nlo(fn):
-    print fn.__name__,fn.__code__.co_nlocals
-@co_nlo
-def f1():
-    pass
-@co_nlo
-def f2(a):
-    pass
-@co_nlo
-def f3(a):
-    b=1
-@co_nlo
-def f4(a,*b,**c):
-    d=1
-</code></pre><p>执行结果：</p>
+<p>同样看如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">co_nlo</span><span class="params">(fn)</span>:</span></span><br><span class="line">	<span class="keyword">print</span> fn.__name__,fn.__code__.co_nlocals</span><br><span class="line"><span class="decorator">@co_nlo</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="decorator">@co_nlo</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(a)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line"><span class="decorator">@co_nlo</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span><span class="params">(a)</span>:</span></span><br><span class="line">	b=<span class="number">1</span></span><br><span class="line"><span class="decorator">@co_nlo</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f4</span><span class="params">(a,*b,**c)</span>:</span></span><br><span class="line">	d=<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>执行结果：</p>
 <pre><code>&gt;&gt;f1 0
 &gt;&gt;f2 1
 &gt;&gt;f3 2
@@ -172,14 +117,8 @@ def f4(a,*b,**c):
 <p>剩下的解释就直接标注在上面的type结构中。</p>
 <p>了解过PyCodeObject后，我们就可以来看看pyc，一般情况下，翻译的字节码会写入内存中，当程序结束后，会根据程序运行的方式来决定是否将字节码写入pyc或者其他格式的存储文件中。</p>
 <p>我们来看一下一个简单的pyc文件。</p>
-<h2 id="0x02-pyc"><a href="#0x02-pyc" class="headerlink" title="0x02 pyc"></a>0x02 pyc</h2><p>我们编译如下代码到pyc来进行学习：</p>
-<pre><code>def foo():
-    print 1
-if __name__ == &apos;__main__&apos;:
-    foo()
-</code></pre><blockquote>
-<p>python -m py_compile hello.py</p>
-</blockquote>
+<h2 id="0x02-pyc"><a href="#0x02-pyc" class="headerlink" title="0x02 pyc"></a>0x02 pyc</h2><p>我们编译如下代码到pyc来进行学习：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">print</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	foo()</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#62; python -m py_compile hello.py</span><br></pre></td></tr></table></figure>
 <p>编译后的代码如下：</p>
 <p><img src="http://123.207.68.169/achiveimg/20170324171322.jpg" alt=""></p>
 <p>看上述pyc图，头4个字节，<em>03f3 0d0a</em> 是pyc的MAGIC数，用来表示python的版本。接下来的4个字节是时间。头声明完后的是一个Block的开头，即为63，后面的4个字节是PyObject中的argument数，这里为0，接着4个字节是nlocals，这里还是0。接着是4个字节的栈空间<em>，0200 0000</em>。</p>
