@@ -177,6 +177,7 @@ a.article-title,
 .archive-category-wrap a,
 .archive-tag-wrap a,
 .archive-article-title,
+.archive-article-author,
 #page-nav a,
 #footer a,
 .article-entry .gist .gist-file .gist-meta a,
@@ -195,6 +196,7 @@ a.article-title:hover,
 .archive-category-wrap a:hover,
 .archive-tag-wrap a:hover,
 .archive-article-title:hover,
+.archive-article-author:hover,
 #page-nav a:hover,
 #footer a:hover,
 .article-entry .gist .gist-file .gist-meta a:hover,
@@ -402,6 +404,10 @@ a.article-title:hover,
 .article {
   margin: 50px 0;
   border-bottom: 1px solid #ddd;
+}
+.con-article {
+  margin-bottom: 20px;
+  border-bottom-color: transparent;
 }
 .article-inner {
   margin-bottom: 15px;
@@ -765,6 +771,9 @@ a.article-title:hover,
 #comments {
   margin: 50px 0;
 }
+.contribute-wrap a:hover {
+  border-color: transparent !important;
+}
 .archives-wrap {
   margin: 50px 0;
 }
@@ -793,6 +802,12 @@ a.article-title:hover,
 }
 .archive-article-inner:hover {
   border-left-color: #000;
+}
+.archive-article-author {
+  display: block;
+  font-size: 0.85em;
+  color: #333;
+  margin-top: 0.5em;
 }
 .archive-article-footer {
   margin-top: 1em;
